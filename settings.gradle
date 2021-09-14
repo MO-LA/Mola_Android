@@ -1,0 +1,2 @@
+rootProject.name = "Mola School Project"
+include ':app'

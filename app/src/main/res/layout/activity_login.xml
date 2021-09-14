@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="160dp">
+
+        <EditText
+            android:id="@+id/edit_id"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint=" 아이디를 입력해주세요." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <EditText
+            android:id="@+id/edit_pw"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:hint=" 비밀번호를 입력해주세요." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="344dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_round_login"
+            android:text="로그인"
+            android:fontFamily="@font/nexon_lv1_gothic"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="아직 계정이 없으신가요? 회원가입 >"
+        android:textColor="#000000"
+        android:fontFamily="@font/nexon_lv1_gothic"
+        android:textSize="18dp" />
+
+</LinearLayout>
