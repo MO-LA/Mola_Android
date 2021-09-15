@@ -1,12 +1,14 @@
 package com.example.molaschoolproject
 
 import android.app.Activity
-import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,44 +16,49 @@ import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
-    lateinit var user_id: EditText
-    lateinit var user_pw: EditText
-    lateinit var user_age: EditText
-    lateinit var user_pw_check: EditText
-    lateinit var user_radiogroup: RadioGroup
-    lateinit var btn_signup: Button
+    var isExistBlank = false
+    lateinit var userId: EditText
+    lateinit var userPw: EditText
+    lateinit var userAge: EditText
+    lateinit var userPwCheck: EditText
+    lateinit var userRadiogroup: RadioGroup
+    lateinit var btnSignup: Button
     lateinit var sex: String
-    lateinit var btn_overlap: Button
+    lateinit var btnOverlap: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
         initView(this@SignUpActivity)
-        registerListenr()
+        registerInit()
 
-        btn_overlap.setOnClickListener {
+        btnOverlap.setOnClickListener {
             overlapID(this@SignUpActivity)
         }
 
-        user_radiogroup.setOnCheckedChangeListener { radioGroup, i ->
+        userRadiogroup.setOnCheckedChangeListener { radioGroup, i ->
             val radioButton = radioGroup.findViewById<RadioButton>(i)
             sex = radioButton.text.toString()
         }
     }
 
-    fun signup(activity: Activity) {
-        if(user_pw.getText().toString().equals(user_pw_check.getText().toString())){
+    fun signUp(activity: Activity) {
+        if(userPw.getText().toString().equals(userPwCheck.getText().toString())){
             val userSex = if(sex == "남") "M" else "W"
-            val userId = user_id.text.toString()
-            val userPassword = user_pw.text.toString()
-            val userAge = user_age.text.toString().toInt()
+            val userId =userId.text.toString()
+            val userPassword = userPw.text.toString()
+            val userAge = userAge.text.toString().toInt()
             (application as MasterApplication).service.signup(SignUp(userId, userPassword, userAge, userSex))
                 .enqueue(object : Callback<Any?> {
                     override fun onFailure(call: Call<Any?>, t: Throwable) { t.printStackTrace()
-                        Toast.makeText(activity, "가입에 실패하였습니다.", Toast.LENGTH_LONG).show()
+                        if(isExistBlank) {
+                            dialog("blank")
+                        }
+                        else {
+                            dialog("not same")
+                        }
                     }
-
                     override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                         if (response.isSuccessful) {
                             Toast.makeText(activity, "가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
@@ -68,19 +75,25 @@ class SignUpActivity : AppCompatActivity() {
                     }
                 })
         }
-        else
-            Toast.makeText(activity, "비밀번호 불일치", Toast.LENGTH_SHORT).show()
     }
 
-    fun registerListenr() {
-        btn_signup.setOnClickListener {
-            signup(this@SignUpActivity)
+    fun registerInit() {
+        btnSignup.setOnClickListener {
+            signUp(this@SignUpActivity)
             filter(this@SignUpActivity)
+            registerValidation()
+        }
+    }
+
+    fun registerValidation() {
+        if(userId.toString().isEmpty()||userPw.toString().isEmpty()||userPwCheck.toString().isEmpty()||
+            userAge.toString().isEmpty()||userRadiogroup.toString().isEmpty()) {
+             isExistBlank = true
         }
     }
 
     fun overlapID(activity: Activity) {
-        val userId = user_id.text.toString()
+        val userId =userId.text.toString()
         (application as MasterApplication).service.overlapID(userId)
             .enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
@@ -92,8 +105,34 @@ class SignUpActivity : AppCompatActivity() {
             })
     }
 
+    fun dialog(type: String){
+        val dialog = AlertDialog.Builder(this)
+
+        // 작성 안한 항목이 있을 경우
+        if(type.equals("blank")) {
+            dialog.setTitle("회원가입 실패")
+            dialog.setMessage("입력란을 모두 작성해주세요")
+        }
+        // 입력한 비밀번호가 다를 경우
+        else if(type.equals("not same")) {
+            dialog.setTitle("회원가입 실패")
+            dialog.setMessage("비밀번호가 다릅니다")
+        }
+
+        val dialogListener = object: DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                when(which){
+                    DialogInterface.BUTTON_POSITIVE ->
+                        Log.d("dialog", "다이얼로그")
+                }
+            }
+        }
+        dialog.setPositiveButton("확인",dialogListener)
+        dialog.show()
+    }
+
     fun filter(activity: Activity) {
-        user_id.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+        userId.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val ps: Pattern =
                 Pattern.compile("^[a-zA-Z0-9\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$")
             if (source == "" || ps.matcher(source).matches()) {
@@ -103,7 +142,7 @@ class SignUpActivity : AppCompatActivity() {
             ""
         }, InputFilter.LengthFilter(10))
 
-        user_pw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+        userPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val ps: Pattern =
                 Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,15}.\$\n")
             if (source == "" || ps.matcher(source).matches()) {
@@ -115,13 +154,13 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     fun initView(activity: Activity) {
-        user_id = activity.findViewById(R.id.signup_edit_id)
-        user_pw = activity.findViewById(R.id.signup_edit_pw)
-        user_age = activity.findViewById(R.id.signup_edit_age)
-        user_pw_check = activity.findViewById(R.id.signup_edit_pw_check)
-        user_radiogroup = activity.findViewById(R.id.sign_radiogroup)
-        btn_signup = activity.findViewById(R.id.btn_signup)
-        btn_overlap = activity.findViewById(R.id.btn_overlap)
+        userId= activity.findViewById(R.id.signup_edit_id)
+        userPw = activity.findViewById(R.id.signup_edit_pw)
+        userAge = activity.findViewById(R.id.signup_edit_age)
+        userPwCheck = activity.findViewById(R.id.signup_edit_pw_check)
+        userRadiogroup = activity.findViewById(R.id.sign_radiogroup)
+        btnSignup = activity.findViewById(R.id.btn_signup)
+        btnOverlap = activity.findViewById(R.id.btn_overlap)
     }
 
 
