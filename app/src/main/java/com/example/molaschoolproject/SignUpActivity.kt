@@ -31,18 +31,18 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         initView(this@SignUpActivity)
-        registerInit()
+        registerListener() // 회원 가입 버튼 실행 함수
 
-        btnOverlap.setOnClickListener {
-            overlapID(this@SignUpActivity)
+        btnOverlap.setOnClickListener { // 중복확인 버튼
+            overlapID(this@SignUpActivity) // 중복을 확인해주는 함수 실행
         }
-
+        // 남, 여 체크박스
         userRadiogroup.setOnCheckedChangeListener { radioGroup, i ->
             val radioButton = radioGroup.findViewById<RadioButton>(i)
             sex = radioButton.text.toString()
         }
     }
-
+    // 회원가입 함수
     fun signUp(activity: Activity) {
         if(userPw.getText().toString().equals(userPwCheck.getText().toString())){
             val userSex = if(sex == "남") "M" else "W"
@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    fun registerInit() {
+    fun registerListener() { // 회원가입 버튼 함수
         btnSignup.setOnClickListener {
             signUp(this@SignUpActivity)
             filter(this@SignUpActivity)
@@ -85,14 +85,14 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    fun registerValidation() {
+    fun registerValidation() { // 회원가입 예외처리
         if(userId.toString().isEmpty()||userPw.toString().isEmpty()||userPwCheck.toString().isEmpty()||
             userAge.toString().isEmpty()||userRadiogroup.toString().isEmpty()) {
              isExistBlank = true
         }
     }
 
-    fun overlapID(activity: Activity) {
+    fun overlapID(activity: Activity) { // 아이디 중복체크
         val userId =userId.text.toString()
         (application as MasterApplication).service.overlapID(userId)
             .enqueue(object : Callback<Any?> {
@@ -105,7 +105,7 @@ class SignUpActivity : AppCompatActivity() {
             })
     }
 
-    fun dialog(type: String){
+    fun dialog(type: String) { // dialog 함수
         val dialog = AlertDialog.Builder(this)
 
         // 작성 안한 항목이 있을 경우
@@ -131,7 +131,7 @@ class SignUpActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun filter(activity: Activity) {
+    fun filter(activity: Activity) { // 회원가입 정규식
         userId.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val ps: Pattern =
                 Pattern.compile("^[a-zA-Z0-9\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$")
@@ -162,6 +162,4 @@ class SignUpActivity : AppCompatActivity() {
         btnSignup = activity.findViewById(R.id.btn_signup)
         btnOverlap = activity.findViewById(R.id.btn_overlap)
     }
-
-
 }
