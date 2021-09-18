@@ -43,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
                             dialog("blank")
                         }
                     }
-
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         if (response.isSuccessful) {
                             (application as MasterApplication).createRetrofit()

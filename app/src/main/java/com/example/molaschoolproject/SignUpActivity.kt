@@ -68,9 +68,7 @@ class SignUpActivity : AppCompatActivity() {
                             intent.putExtra("pw", userPassword)
                             intent.putExtra("age", userAge)
                             intent.putExtra("sex", userSex)
-                            startActivity(
-                                intent
-                            )
+                            startActivity(intent)
                         }
                     }
                 })
