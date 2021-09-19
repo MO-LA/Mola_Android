@@ -20,9 +20,11 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ProfileAdapter.CustomViewHolder, position: Int) {
+        var cnt = profileList.get(position).count.toString()
+        cnt = "($cnt+)"
         holder.schoolName.text = profileList.get(position).schoolName
         holder.point.text = profileList.get(position).point.toString()
-        holder.count.text = profileList.get(position).count.toString()
+        holder.count.text = cnt
         holder.schoolType.text = profileList.get(position).schoolType
         holder.profile.setImageResource(profileList.get(position).profile)
 
