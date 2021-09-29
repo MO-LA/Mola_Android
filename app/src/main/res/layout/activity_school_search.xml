@@ -68,45 +68,48 @@
             android:text="자신이 현재 다니고있는 중학교나\n    다녔던 중학교를 입력하세요."
             android:textColor="#3A3A3A"
             android:textSize="18dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edit_school_name"
+            android:id="@+id/search_main"
             android:layout_width="344dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:hint=" 학교 이름" />
-
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="344dp"
-            android:layout_height="60dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@drawable/btn_round_login"
-            android:fontFamily="@font/nexon_lv1_gothic"
-            android:text="다음"
-            android:textColor="#ffffff"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            android:background="@drawable/border"
+            android:drawableEnd="@drawable/search_icon"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
+            android:hint=" 학교이름" />
 
-        <TextView
-            android:id="@+id/text_skip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/nexon_lv1_gothic"
-            android:text="건너뛰기 >"
-            android:textColor="#5A5A5A"
-            android:textSize="18dp" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="322.5dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/text_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/nexon_lv1_gothic"
+        android:text="건너뛰기 >"
+        android:textColor="#5A5A5A"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="415dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_next_color"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
+        android:text="다음"
+        android:textColor="#ffffff"
+        android:textSize="22dp" />
 
 </LinearLayout>
