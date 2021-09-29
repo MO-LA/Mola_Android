@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="32dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="40dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="학교 유형을 선택해 주세요"
+        android:textColor="#008d62"
+        android:gravity="center"
+        android:textSize="24dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="일반고"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#808080"-->
+<!--        android:layout_marginBottom="0dp"/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="자율고"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#808080"-->
+<!--        android:layout_marginBottom="0dp"/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="특성화고"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#808080"-->
+<!--        android:layout_marginBottom="0dp"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="특수목적고"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#808080"
+        android:layout_marginBottom="20dp"/>-->
+    <Button
+        android:id="@+id/button_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1c9d9e"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:text="뒤로가기" />
+</LinearLayout>
