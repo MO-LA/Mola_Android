@@ -96,16 +96,16 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemBackground="@android:color/white"
-        app:itemIconTint="#000000"
-        app:itemTextColor="#000000"
-        app:menu="@menu/menu"
-        tools:layout_editor_absoluteX="16dp" />
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavi"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:itemBackground="@android:color/white"-->
+<!--        app:itemIconTint="#000000"-->
+<!--        app:itemTextColor="#000000"-->
+<!--        app:menu="@menu/menu"-->
+<!--        tools:layout_editor_absoluteX="16dp" />-->
 
 
 </LinearLayout>
