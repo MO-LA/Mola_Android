@@ -1,5 +1,6 @@
 package com.example.molaschoolproject
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -17,14 +18,16 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     var isExistBlank = false
-    val userId: EditText = findViewById(R.id.edit_id)
-    val userPw: EditText = findViewById(R.id.edit_pw)
-    val btn_login: Button = findViewById(R.id.btn_login)
-    val text_signup: TextView = findViewById(R.id.text_signup)
+    lateinit var userId: EditText
+    lateinit var userPw: EditText
+    lateinit var btn_login: Button
+    lateinit var text_signup: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        initView(this@LoginActivity)
 
         text_signup.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
@@ -81,5 +84,12 @@ class LoginActivity : AppCompatActivity() {
         }
         dialog.setPositiveButton("확인",dialogListener)
         dialog.show()
+    }
+
+    fun initView(activity: Activity) {
+        userId= activity.findViewById(R.id.signup_edit_id)
+        userPw = activity.findViewById(R.id.signup_edit_pw)
+        btn_login = activity.findViewById(R.id.btn_login)
+        text_signup = activity.findViewById(R.id.text_signup)
     }
 }
