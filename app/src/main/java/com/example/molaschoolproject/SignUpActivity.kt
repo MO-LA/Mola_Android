@@ -149,6 +149,16 @@ class SignUpActivity : AppCompatActivity() {
             Toast.makeText( this, " 숫자, 문자, 특수문자 모두 포함하여야 합니다.", Toast.LENGTH_SHORT).show()
             ""
         }, InputFilter.LengthFilter(15))
+
+        userAge.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+            val ps: Pattern =
+                Pattern.compile("^(?=.*[0-9]).{1,3}.\$\n")
+            if (source == "" || ps.matcher(source).matches()) {
+                return@InputFilter source
+            }
+            Toast.makeText( this, " 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
+            ""
+        }, InputFilter.LengthFilter(3))
     }
 
     fun initView(activity: Activity) {
