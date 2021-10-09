@@ -13,14 +13,13 @@ class MainActivity : AppCompatActivity() {
 
         val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
 
-        val profileList = arrayListOf(
+        val profileList = arrayListOf( // 더미데이터
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
-
         )
         val rv_main = findViewById<RecyclerView>(R.id.rv_main)
         rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -31,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         schoolcategory.setOnClickListener{
             val bottomSheet = SchoolCategoryBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+
+            bottomSheet.setOnClickedListener(object :SchoolCategoryBottomSheet.textClickListener {
+                override fun onClicked(typetext: String) {
+                    schoolcategory.text = typetext
+                }
+            })
         }
     }
 }
