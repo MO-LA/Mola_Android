@@ -53,8 +53,8 @@ class MasterApplication : Application() {
         //DB 써서 로그인 됐는지 안됐는지 확인하는 함수
         val sp = getSharedPreferences("login_sp", Context.MODE_PRIVATE)
         val token = sp.getString("login_sp", "null")
-        if (token != "null") return true
-        else return false
+        if (token != "null") return false
+        else return true
     }
 
     fun getUserToken(): String? {
