@@ -1,12 +1,15 @@
 package com.example.molaschoolproject
 
+import android.content.Intent
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.coroutines.coroutineContext
 
 class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.Adapter<ProfileAdapter.CustomViewHolder>(){
 
@@ -20,6 +23,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ProfileAdapter.CustomViewHolder, position: Int) {
+
         var cnt = profileList.get(position).count.toString()
         cnt = "($cnt+)"
         holder.schoolName.text = profileList.get(position).schoolName
@@ -28,6 +32,10 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.schoolType.text = profileList.get(position).schoolType
         holder.profile.setImageResource(profileList.get(position).profile)
 
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
+            ContextCompat.startActivity(holder.itemView.context,intent,null)
+        }
     }
 
     override fun getItemCount(): Int {

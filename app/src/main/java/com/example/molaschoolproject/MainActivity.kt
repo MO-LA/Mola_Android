@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
             SchoolProfiles("대소고", 5.0, 10, "마이스터", R.drawable.img_dgsw),
         )
-        val rv_main = findViewById<RecyclerView>(R.id.rv_main)
-        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_main.setHasFixedSize(true)
+        val rvMain = findViewById<RecyclerView>(R.id.rv_main)
+        rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvMain.setHasFixedSize(true)
 
-        rv_main.adapter = ProfileAdapter(profileList)
+        rvMain.adapter = ProfileAdapter(profileList)
 
         schoolcategory.setOnClickListener{
             val bottomSheet = SchoolCategoryBottomSheet()
