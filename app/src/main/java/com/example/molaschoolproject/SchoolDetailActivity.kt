@@ -11,5 +11,7 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val ivBack: ImageView = findViewById(R.id.iv_back)
         ivBack.setOnClickListener { finish() }
+
+
     }
 }
