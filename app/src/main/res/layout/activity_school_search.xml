@@ -70,7 +70,7 @@
             android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/search_main"
+            android:id="@+id/edit_school_name"
             android:layout_width="344dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
