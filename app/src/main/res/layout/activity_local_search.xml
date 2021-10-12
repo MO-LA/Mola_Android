@@ -70,7 +70,7 @@
 
 
         <EditText
-            android:id="@+id/edit_school_name"
+            android:id="@+id/edit_local_name"
             android:layout_width="344dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
