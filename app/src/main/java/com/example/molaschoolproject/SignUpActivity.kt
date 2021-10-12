@@ -51,14 +51,6 @@ class SignUpActivity : AppCompatActivity() {
             val userAge = userAge.text.toString().toInt()
             (application as MasterApplication).service.signup(SignUp(userId, userPassword, userAge, userSex))
                 .enqueue(object : Callback<Any?> {
-                    override fun onFailure(call: Call<Any?>, t: Throwable) { t.printStackTrace()
-                        if(isExistBlank) {
-                            dialog("blank")
-                        }
-                        else {
-                            dialog("not same")
-                        }
-                    }
                     override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                         if (response.isSuccessful) {
                             Toast.makeText(activity, "가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
@@ -69,6 +61,14 @@ class SignUpActivity : AppCompatActivity() {
                             intent.putExtra("age", userAge)
                             intent.putExtra("sex", userSex)
                             startActivity(intent)
+                        }
+                    }
+                    override fun onFailure(call: Call<Any?>, t: Throwable) { t.printStackTrace()
+                        if(isExistBlank) {
+                            dialog("blank")
+                        }
+                        else {
+                            dialog("not same")
                         }
                     }
                 })
