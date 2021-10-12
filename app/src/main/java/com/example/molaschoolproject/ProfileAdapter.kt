@@ -30,7 +30,6 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.point.text = profileList.get(position).point.toString()
         holder.count.text = cnt
         holder.schoolType.text = profileList.get(position).schoolType
-        holder.profile.setImageResource(profileList.get(position).profile)
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
@@ -46,7 +45,6 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         val point = itemView.findViewById<TextView>(R.id.tv_point) // 평점
         val count = itemView.findViewById<TextView>(R.id.tv_pick_count) // 평가한 유저 수
         val schoolType = itemView.findViewById<TextView>(R.id.school_type) // 학교 유형
-        val profile = itemView.findViewById<ImageView>(R.id.img_school) // 학교 사진
     }
 
 }
