@@ -2,6 +2,7 @@ package com.example.molaschoolproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,13 +22,13 @@ class MainActivity : AppCompatActivity() {
             SchoolProfiles("대소고", 5.0, 10, "마이스터"),
             SchoolProfiles("대소고", 5.0, 10, "마이스터")
         )
-        val rvMain = findViewById<RecyclerView>(R.id.rv_main)
+        val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
 
         rvMain.adapter = ProfileAdapter(profileList)
 
-        schoolcategory.setOnClickListener{
+        schoolcategory.setOnClickListener{ // 학교 유형 선택 카테고리
             val bottomSheet = SchoolCategoryBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
@@ -37,5 +38,10 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
+        val searchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
+        val searchText: String = searchMain.text.toString()
+
+
     }
 }
