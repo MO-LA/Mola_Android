@@ -45,8 +45,7 @@ class LocalSearchActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<Any?>, t: Throwable) {
                     if (isExistBlank) {
                         dialog("blank")
-                    }
-                    else{
+                    } else {
                         dialog("failure")
                     }
                 }
@@ -67,10 +66,9 @@ class LocalSearchActivity : AppCompatActivity() {
         }
     }
 
-        fun init(activity: Activity) {
-            localName = activity.findViewById(R.id.edit_local_name)
-            btnNext = activity.findViewById(R.id.btn_next)
-            textSkip = activity.findViewById(R.id.text_skip)
-        }
+    fun init(activity: Activity) {
+        localName = activity.findViewById(R.id.edit_local_name)
+        btnNext = activity.findViewById(R.id.btn_next)
+        textSkip = activity.findViewById(R.id.text_skip)
     }
 }
