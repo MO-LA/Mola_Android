@@ -17,7 +17,7 @@ interface RetrofitService {
 
     @POST("auth/DV/")
     fun overlapID(
-        @Query("id") id:String
+        @Query("id") id: String
     ): Call<Any?>
 
 }
