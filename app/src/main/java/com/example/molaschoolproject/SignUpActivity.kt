@@ -25,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var btnSignup: Button
     lateinit var sex: String
     lateinit var btnOverlap: Button
+    lateinit var imgBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,11 @@ class SignUpActivity : AppCompatActivity() {
 
         initView(this@SignUpActivity)
         registerListener() // 회원 가입 버튼 실행 함수
+
+        imgBack.setOnClickListener {
+            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         btnOverlap.setOnClickListener { // 중복확인 버튼
             overlapID(this@SignUpActivity) // 중복을 확인해주는 함수 실행
@@ -169,5 +175,6 @@ class SignUpActivity : AppCompatActivity() {
         userRadiogroup = activity.findViewById(R.id.sign_radiogroup)
         btnSignup = activity.findViewById(R.id.btn_signup)
         btnOverlap = activity.findViewById(R.id.btn_overlap)
+        imgBack = activity.findViewById(R.id.img_back)
     }
 }

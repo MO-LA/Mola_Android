@@ -16,14 +16,15 @@ class LocalSearchActivity : AppCompatActivity() {
     lateinit var btnNext: Button
     lateinit var textSkip: TextView
     lateinit var localName: EditText
+    lateinit var imgBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_search)
 
-        val btn_back: ImageView = findViewById(R.id.btn_back)
+        init(this@LocalSearchActivity)
 
-        btn_back.setOnClickListener {
+        imgBack.setOnClickListener {
             val intent = Intent(this@LocalSearchActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
@@ -70,5 +71,6 @@ class LocalSearchActivity : AppCompatActivity() {
         localName = activity.findViewById(R.id.edit_local_name)
         btnNext = activity.findViewById(R.id.btn_next)
         textSkip = activity.findViewById(R.id.text_skip)
+        imgBack = activity.findViewById(R.id.img_back)
     }
 }
