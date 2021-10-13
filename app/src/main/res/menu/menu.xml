@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/btv_item_home"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/icon_home"
+        android:title="홈"/>
+    <item android:id="@+id/btv_item_mypick"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/icon_mypick"
+        android:title="찜"/>
+    <item android:id="@+id/btv_item_wordsearch"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/icon_search"
+        android:title="용어검색"/>
+    <item android:id="@+id/btv_item_mypage"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/icon_mypage"
+        android:title="마이페이지"/>
+
+
+
+
+</menu>
