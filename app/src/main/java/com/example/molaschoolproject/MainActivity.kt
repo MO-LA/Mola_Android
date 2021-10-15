@@ -1,11 +1,14 @@
 package com.example.molaschoolproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         val searchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
         val searchText: String = searchMain.text.toString()
+
+        val btnvMain = findViewById<BottomNavigationView>(R.id.btnv_main)
+        btnvMain.findViewById<View>(R.id.btv_item_wordsearch).setOnClickListener{
+            val intent = Intent(this@MainActivity,WordSearchActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
