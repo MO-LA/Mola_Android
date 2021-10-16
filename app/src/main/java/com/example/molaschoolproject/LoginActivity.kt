@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun initView(activity: Activity) {
-        userId= activity.findViewById(R.id.signup_edit_id)
+        userId= activity.findViewById(R.id.edit_id)
         userPw = activity.findViewById(R.id.signup_edit_pw)
         btn_login = activity.findViewById(R.id.btn_login)
         text_signup = activity.findViewById(R.id.text_signup)
