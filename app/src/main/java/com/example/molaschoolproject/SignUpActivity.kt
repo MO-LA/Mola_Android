@@ -32,6 +32,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         initView(this@SignUpActivity)
+
+
         registerListener() // 회원 가입 버튼 실행 함수
 
         imgBack.setOnClickListener {
