@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val searchText: String = searchMain.text.toString()
 
         val btnvMain = findViewById<BottomNavigationView>(R.id.btnv_main)
-        btnvMain.findViewById<View>(R.id.btv_item_wordsearch).setOnClickListener{
+        btnvMain.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{
             val intent = Intent(this@MainActivity,WordSearchActivity::class.java)
             startActivity(intent)
         }
