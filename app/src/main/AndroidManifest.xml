@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MolaSchoolProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WordSearchActivity"></activity>
+        <activity android:name=".MyPageActivity"></activity>
+        <activity android:name=".WordSearchActivity" />
         <activity android:name=".SchoolDetailActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -25,7 +26,7 @@
         <activity android:name=".LocalSearchActivity" />
         <activity android:name=".SchoolSearchActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
