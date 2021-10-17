@@ -60,6 +60,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:background="#E8EAED">
 
         <androidx.recyclerview.widget.RecyclerView
