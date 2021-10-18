@@ -1,19 +1,21 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.molaschoolproject.R
+import com.example.molaschoolproject.data_type.Word
 
 class WordAdapter(val wordList: ArrayList<Word>) : RecyclerView.Adapter<WordAdapter.CustomViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.wordsearch_list_item, parent, false)
         return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: WordAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.wordName.text = wordList.get(position).wordName
         holder.wordContents.text = wordList.get(position).wordcontents
     }

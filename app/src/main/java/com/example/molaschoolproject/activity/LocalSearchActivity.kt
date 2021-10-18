@@ -1,4 +1,4 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.molaschoolproject.MasterApplication
+import com.example.molaschoolproject.R
+import com.example.molaschoolproject.data_type.SignUp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

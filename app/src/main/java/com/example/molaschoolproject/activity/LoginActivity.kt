@@ -1,4 +1,4 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import android.app.Activity
 import android.content.DialogInterface
@@ -11,6 +11,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.molaschoolproject.*
+import com.example.molaschoolproject.data_type.Login
+import com.example.molaschoolproject.data_type.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

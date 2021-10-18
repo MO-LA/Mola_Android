@@ -1,4 +1,4 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.data_type
 
 import java.io.Serializable
 

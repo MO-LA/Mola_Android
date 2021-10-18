@@ -1,7 +1,8 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.molaschoolproject.R
 
 class MyPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

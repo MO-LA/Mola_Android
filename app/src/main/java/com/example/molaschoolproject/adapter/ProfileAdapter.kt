@@ -1,15 +1,15 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.adapter
 
 import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.coroutines.coroutineContext
+import com.example.molaschoolproject.R
+import com.example.molaschoolproject.activity.SchoolDetailActivity
+import com.example.molaschoolproject.data_type.SchoolProfiles
 
 class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.Adapter<ProfileAdapter.CustomViewHolder>(){
 
@@ -17,12 +17,12 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProfileAdapter.CustomViewHolder {
+    ): CustomViewHolder {
         val view =  LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProfileAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
         var cnt = profileList.get(position).count.toString()
         cnt = "($cnt+)"

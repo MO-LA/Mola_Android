@@ -1,5 +1,8 @@
 package com.example.molaschoolproject
 
+import com.example.molaschoolproject.data_type.Login
+import com.example.molaschoolproject.data_type.SignUp
+import com.example.molaschoolproject.data_type.User
 import retrofit2.Call
 import retrofit2.http.*
 

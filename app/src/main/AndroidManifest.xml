@@ -13,20 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MolaSchoolProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyPageActivity"></activity>
-        <activity android:name=".WordSearchActivity" />
-        <activity android:name=".SchoolDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MyPageActivity"></activity>
+        <activity android:name=".activity.WordSearchActivity" />
+        <activity android:name=".activity.SchoolDetailActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LocalSearchActivity" />
-        <activity android:name=".SchoolSearchActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activity.LocalSearchActivity" />
+        <activity android:name=".activity.SchoolSearchActivity" />
+        <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.LoginActivity" />
     </application>
 
 </manifest>

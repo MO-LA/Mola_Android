@@ -1,12 +1,14 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.molaschoolproject.R
+import com.example.molaschoolproject.data_type.Word
+import com.example.molaschoolproject.adapter.WordAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WordSearchActivity : AppCompatActivity() {

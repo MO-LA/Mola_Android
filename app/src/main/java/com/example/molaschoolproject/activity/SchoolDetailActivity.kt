@@ -1,8 +1,9 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.example.molaschoolproject.R
 
 class SchoolDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

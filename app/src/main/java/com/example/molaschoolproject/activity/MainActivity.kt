@@ -1,4 +1,4 @@
-package com.example.molaschoolproject
+package com.example.molaschoolproject.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.molaschoolproject.*
+import com.example.molaschoolproject.adapter.ProfileAdapter
+import com.example.molaschoolproject.data_type.SchoolProfiles
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             val bottomSheet = SchoolCategoryBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
-            bottomSheet.setOnClickedListener(object :SchoolCategoryBottomSheet.textClickListener {
+            bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
                 override fun onClicked(typetext: String) {
                     schoolcategory.text = typetext
                 }
@@ -47,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnvMain = findViewById<BottomNavigationView>(R.id.btnv_main)
         btnvMain.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{
-            val intent = Intent(this@MainActivity,WordSearchActivity::class.java)
+            val intent = Intent(this@MainActivity, WordSearchActivity::class.java)
             startActivity(intent)
         }
 
