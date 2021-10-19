@@ -8,11 +8,11 @@
         android:icon="@drawable/icon_home"
         android:title="홈"
         android:fontFamily="@font/nexon_lv1_gothic_bold"/>
-    <item android:id="@+id/btnv_item_mypick"
+    <item android:id="@+id/btnv_item_community"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/icon_mypick"
-        android:title="찜"
+        android:icon="@drawable/icon_community"
+        android:title="커뮤니티"
         android:fontFamily="@font/nexon_lv1_gothic_bold"/>
     <item android:id="@+id/btnv_item_wordsearch"
         app:showAsAction="ifRoom"
