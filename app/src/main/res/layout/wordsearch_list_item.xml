@@ -32,19 +32,42 @@
             android:textColor="@color/black"
             android:textSize="30dp" />
 
-        <TextView
-            android:id="@+id/tv_wordcontents"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/nexon_lv1_gothic"
-            android:text="content"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_wordcontents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/nexon_lv1_gothic"
+                android:text="content"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+
+                />
+            <TextView
+                android:id="@+id/tv_word_weblink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/nexon_lv1_gothic"
+                android:text="link"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:linksClickable="true"
+                android:autoLink="web"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 
