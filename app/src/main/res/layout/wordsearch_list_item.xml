@@ -56,7 +56,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/nexon_lv1_gothic"

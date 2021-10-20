@@ -23,21 +23,21 @@ class WordSearchActivity : AppCompatActivity() {
         btnvWordsearch.findViewById<View>(R.id.btnv_item_wordsearch).performClick() // WordSearchActivity 로 이동시 item wordsearch 클릭보여주기
 
         val wordList = arrayListOf( // 용어 데이터 리스트
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("일반고", "다양한 분야에 걸쳐 일반적인 교육을 실시하는 고등학교이다.",
+                "링크 : https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("자율형\n공립고", "진보한 형태의 공교육 모델을 만드는 것이 목표인 학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("자율형\n사립고", "다양하고 특성화된 교육과정과 학사운영 등을 자율적으로 운영하는 학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("특성화고", "특정 분야 인재 및 전문 직업인 양성을 위한 특성화 교육과정을 운영하는 학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("특수목적고", "특수분야의 전문적인 교육을 위해 설립된 고등학교의 한 형태이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("과학고", "과학 및 수학에 중점을 둔 특수목적 고등학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
+            Word("마이스터고", "유망분야의 특화된 예비 마이스터를 양성하는 고등학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            Word("예고", "대한민국의 특수목적 고등학교 로",
-                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
-            
+
         )
 
         val rv_wordsearch: RecyclerView = findViewById(R.id.rv_wordsearch) // 용어 설명 리사이클러뷰
