@@ -17,7 +17,8 @@ class WordAdapter(val wordList: ArrayList<Word>) : RecyclerView.Adapter<WordAdap
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.wordName.text = wordList.get(position).wordName
-        holder.wordContents.text = wordList.get(position).wordcontents
+        holder.wordContents.text = wordList.get(position).wordContents
+        holder.wordLink.text = wordList.get(position).wordLink
     }
 
     override fun getItemCount(): Int {
@@ -26,7 +27,7 @@ class WordAdapter(val wordList: ArrayList<Word>) : RecyclerView.Adapter<WordAdap
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wordName = itemView.findViewById<TextView>(R.id.tv_wordname) // 용어 이름
         val wordContents = itemView.findViewById<TextView>(R.id.tv_wordcontents) // 용어 설명 내용
-
+        val wordLink = itemView.findViewById<TextView>(R.id.tv_word_weblink)
     }
 
 

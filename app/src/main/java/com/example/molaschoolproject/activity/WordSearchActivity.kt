@@ -23,15 +23,21 @@ class WordSearchActivity : AppCompatActivity() {
         btnvWordsearch.findViewById<View>(R.id.btnv_item_wordsearch).performClick() // WordSearchActivity 로 이동시 item wordsearch 클릭보여주기
 
         val wordList = arrayListOf( // 용어 데이터 리스트
-            Word("초등학교", "초등학생들이 다니는 학교 입니다."),
-            Word("중학교", "중학생들이 다니는 학교 입니다."),
-            Word("고등학교", "고등학생들이 다니는 학교 입니다."),
-            Word("초등학교", "초등학생들이 다니는 학교 입니다."),
-            Word("중학교", "중학생들이 다니는 학교 입니다."),
-            Word("고등학교", "고등학생들이 다니는 학교 입니다."),
-            Word("초등학교", "초등학생들이 다니는 학교 입니다."),
-            Word("중학교", "중학생들이 다니는 학교 입니다."),
-            Word("고등학교", "고등학생들이 다니는 학교 입니다.")
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            Word("예고", "대한민국의 특수목적 고등학교 로",
+                "https://www.youtube.com/watch?v=9DJWt3crhWE"),
+            
         )
 
         val rv_wordsearch: RecyclerView = findViewById(R.id.rv_wordsearch) // 용어 설명 리사이클러뷰
