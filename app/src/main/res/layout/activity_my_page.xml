@@ -11,19 +11,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:background="@drawable/btn_next_color"
-        android:orientation="vertical">
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/backarrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/nexon_lv1_gothic_bold"
+            android:layout_marginLeft="100dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
             android:text="마이페이지"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="28dp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E8EAED" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E8EAED"
+        android:elevation="15dp"
+        android:outlineSpotShadowColor="#494949" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,48 +50,128 @@
         android:background="#ffffff"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="55dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/icon_pink_mypick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="55dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexon_lv1_gothic"
+                android:text="대구소프트웨어고등학교"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexon_lv1_gothic_bold"
+                android:text="조주영님"
+                android:textColor="#000000"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexon_lv1_gothic"
+                android:text="환영합니다."
+                android:textColor="#000000"
+                android:textSize="25dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
-    <Button
+    <LinearLayout
+        android:id="@+id/layout_mypick"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_marginTop="5dp"
-        android:drawableRight="@drawable/icon_next"
-        android:drawableLeft="@drawable/img_size"
-        android:text="찜"
-        android:textSize="25dp"
-        android:background="#ffffff" />
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/img_mypick" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
+            android:text="찜"
+            android:textColor="#000000"
+            android:textSize="27dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="265dp"
+            android:background="@drawable/img_back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_logout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="3dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
+            android:text="로그아웃"
+            android:textColor="#000000"
+            android:textSize="27dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="240dp"
+            android:background="@drawable/img_back" />
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="5dp"
-        android:background="#ffffff"
-        android:orientation="horizontal">
+        android:layout_height="fill_parent">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btnv_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/menu_selector_color"
+            app:itemTextColor="@color/black"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu"
+            tools:layout_editor_absoluteX="16dp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="5dp"
-        android:background="#ffffff"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/btnv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="143dp"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/menu_selector_color"
-        app:itemTextColor="@color/black"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu"
-        tools:layout_editor_absoluteX="16dp" />
-
 
 </LinearLayout>
