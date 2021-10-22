@@ -23,4 +23,10 @@ interface RetrofitService {
         @Query("id") id: String
     ): Call<Any?>
 
+    @GET("")
+    fun myPage(
+        @Query("id") id: String,
+        @Query("school") school:String
+    ): Call<Any?>
+
 }
