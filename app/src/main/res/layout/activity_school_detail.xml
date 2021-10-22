@@ -51,7 +51,7 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:src="@drawable/img_dgsw" />
 
     <TextView
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:text=" 홈페이지"
             android:fontFamily="@font/nexon_lv1_gothic_bold"
-            android:textColor="@color/black"
+            android:textColor="#fff100"
             android:textStyle="bold"
             android:textSize="23dp"/>
     </LinearLayout>
@@ -134,11 +134,26 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=" 학교 상세 설명"
+        android:layout_height="250dp"
         android:fontFamily="@font/nexon_lv1_gothic_bold"
-        android:textStyle="bold"
+        android:text=" 학교 상세 설명"
         android:textColor="@color/black"
-        android:textSize="23dp"/>
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:background="#808080"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="500dp"
+            android:text="123"/>
+
+    </LinearLayout>
 
 </LinearLayout>
