@@ -75,7 +75,7 @@ class SignUpActivity : AppCompatActivity() {
                         }
                     }
                     override fun onFailure(call: Call<Any?>, t: Throwable) { t.printStackTrace()
-                        if(isExistBlank) {
+                        if(isExistBlank == true) {
                             dialog("blank")
                         }
                         else {
@@ -170,6 +170,8 @@ class SignUpActivity : AppCompatActivity() {
             Toast.makeText( this, " 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
             ""
         }, InputFilter.LengthFilter(3))
+
+
     }
 
     fun initView(activity: Activity) {
@@ -182,4 +184,6 @@ class SignUpActivity : AppCompatActivity() {
         btnOverlap = activity.findViewById(R.id.btn_overlap)
         imgBack = activity.findViewById(R.id.img_back)
     }
+
+
 }
