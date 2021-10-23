@@ -71,6 +71,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic"
@@ -79,6 +80,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
