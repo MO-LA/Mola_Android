@@ -3,7 +3,12 @@ package com.example.molaschoolproject.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.adapter.CommentAdapter
+import com.example.molaschoolproject.data_type.Comment
 
 class SchoolDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +18,20 @@ class SchoolDetailActivity : AppCompatActivity() {
         val ivBack: ImageView = findViewById(R.id.iv_back)
         ivBack.setOnClickListener { finish() }
 
+        val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
+
+        val commentList = arrayListOf(
+            Comment("홍길동","대소고","대소고 좋습니다"),
+            Comment("조주영","머소고","대소고 싫습니다"),
+            Comment("서민교","대소마고","대소고 좋습니다"),
+            Comment("허새찬","대구소프트웨어고","대소고 좋아요"),
+            Comment("이민욱","대구소프트웨어마이스터고","대소고 좋습니다"),
+        )
+
+        rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rv_comment.setHasFixedSize(true)
+
+        rv_comment.adapter = CommentAdapter(commentList)
 
     }
 }
