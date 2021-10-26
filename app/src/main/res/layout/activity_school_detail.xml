@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_weight="0"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,30 +140,30 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="match_parent"
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text=" 학교 상세 설명"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold" />
-
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="bottom"
-            android:background="#808080"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_comment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-
-        </LinearLayout>
-
+            android:layout_height="2dp"
+            android:background="#CDCDCD"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
+            android:text=" textArea"
+            android:textSize="25dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_comment"
+            android:background="#CDCDCD"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            />
+        
     </LinearLayout>
-
-
 
 </ScrollView>

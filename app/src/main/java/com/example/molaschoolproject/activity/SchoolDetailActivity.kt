@@ -26,6 +26,12 @@ class SchoolDetailActivity : AppCompatActivity() {
             Comment("서민교","대소마고","대소고 좋습니다"),
             Comment("허새찬","대구소프트웨어고","대소고 좋아요"),
             Comment("이민욱","대구소프트웨어마이스터고","대소고 좋습니다"),
+            Comment("서민교","대소마고","대소고 좋습니다"),
+            Comment("허새찬","대구소프트웨어고","대소고 좋아요"),
+            Comment("이민욱","대구소프트웨어마이스터고","대소고 좋습니다"),
+            Comment("서민교","대소마고","대소고 좋습니다"),
+            Comment("허새찬","대구소프트웨어고","대소고 좋아요"),
+            Comment("이민욱","대구소프트웨어마이스터고","대소고 좋습니다"),
         )
 
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
