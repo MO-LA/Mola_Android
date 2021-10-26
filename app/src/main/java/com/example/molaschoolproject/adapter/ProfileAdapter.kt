@@ -18,7 +18,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         parent: ViewGroup,
         viewType: Int
     ): CustomViewHolder {
-        val view =  LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val view =  LayoutInflater.from(parent.context).inflate(R.layout.main_list_item, parent, false)
         return CustomViewHolder(view)
     }
 
