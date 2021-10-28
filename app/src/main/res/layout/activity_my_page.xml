@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6E6"
+    android:background="#F6F6F6"
     android:orientation="vertical"
     tools:context=".activity.MyPageActivity">
 
@@ -60,7 +60,7 @@
             <ImageView
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:background="@drawable/icon_profil" />
+                android:background="@drawable/icon_profile" />
         </LinearLayout>
 
         <LinearLayout
