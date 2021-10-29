@@ -1,5 +1,6 @@
 package com.example.molaschoolproject.activity
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -20,6 +21,18 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
 
+        val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
+        var booleanPick: Boolean = false
+        ivSchoolDetailMyPick.setOnClickListener {
+            if (booleanPick == false) {
+                ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                booleanPick = true
+            }
+            else {
+                ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
+                booleanPick = false
+            }
+        }
         val commentList = arrayListOf(
             Comment("홍길동","대소고","대소고 좋습니다"),
             Comment("조주영","머소고","대소고 싫습니다"),
