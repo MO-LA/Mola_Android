@@ -102,9 +102,9 @@
 
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_next_color"
         android:fontFamily="@font/nexon_lv1_gothic_bold"

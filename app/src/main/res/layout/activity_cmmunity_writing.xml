@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#E6E6E6"
     tools:context=".activity.CmmunityWritingActivity">
 
     <LinearLayout
@@ -47,6 +48,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
         android:orientation="horizontal">
 
         <ImageView
@@ -54,6 +57,7 @@
             android:layout_height="75dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/icon_profile" />
 
         <LinearLayout
@@ -85,9 +89,32 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="458.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edit_writing"
+                android:layout_width="match_parent"
+                android:hint="입력 해주세요"
+                android:textSize="60dp"
+                android:layout_height="1000dp"/>
+        </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="22dp"
+        android:text="작성완료"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
+        android:background="@drawable/btn_next_color" />
 
 </LinearLayout>
