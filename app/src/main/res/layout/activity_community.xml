@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.CmmunityActivity">
+    android:background="#E6E6E6"
+    tools:context=".activity.CommunityActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,11 +45,24 @@
         android:elevation="15dp"
         android:outlineSpotShadowColor="#494949" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#E8EAED">
+        android:layout_marginTop="20dp"
+        android:background="#ffffff">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cmmunity"
