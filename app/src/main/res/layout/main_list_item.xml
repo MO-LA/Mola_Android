@@ -33,6 +33,7 @@
             android:text="대구 소프트웨어고등학교"
             android:textColor="@color/black"
             android:textSize="22dp"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
             app:layout_constraintStart_toEndOf="@+id/img_school"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +42,6 @@
             android:layout_width="36dp"
             android:layout_height="31dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintStart_toEndOf="@+id/img_school"
             app:layout_constraintTop_toBottomOf="@+id/tv_schoolname"
             app:srcCompat="@drawable/ic_baseline_star_24" />
@@ -53,6 +53,7 @@
             android:layout_marginTop="5dp"
             android:text="5.0"
             android:textSize="22dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
             app:layout_constraintStart_toEndOf="@+id/item_star"
             app:layout_constraintTop_toBottomOf="@+id/tv_schoolname" />
 
@@ -64,18 +65,34 @@
             android:layout_marginTop="5dp"
             android:text="(10+)"
             android:textSize="22dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
             app:layout_constraintStart_toEndOf="@+id/tv_point"
             app:layout_constraintTop_toBottomOf="@+id/tv_schoolname" />
+
+        <TextView
+            android:id="@+id/school_gendertype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:text="남녀공학"
+            android:textSize="20dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
+            app:layout_constraintStart_toEndOf="@+id/img_school"
+            app:layout_constraintTop_toBottomOf="@+id/item_star" />
 
         <TextView
             android:id="@+id/school_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="5dp"
             android:text="마이스터고 - 구지"
             android:textSize="20dp"
+            android:fontFamily="@font/nexon_lv1_gothic"
             app:layout_constraintStart_toEndOf="@+id/img_school"
-            app:layout_constraintTop_toBottomOf="@+id/item_star" />
+            app:layout_constraintTop_toBottomOf="@+id/school_gendertype" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
