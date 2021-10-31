@@ -29,6 +29,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.schoolName.text = profileList.get(position).schoolName
         holder.point.text = profileList.get(position).point.toString()
         holder.count.text = cnt
+        holder.schoolGenderType.text = profileList.get(position).schoolGenderType
         holder.schoolType.text = profileList.get(position).schoolType
 
         holder.itemView.setOnClickListener{
@@ -44,6 +45,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         val schoolName = itemView.findViewById<TextView>(R.id.tv_schoolname) // 학교명
         val point = itemView.findViewById<TextView>(R.id.tv_point) // 평점
         val count = itemView.findViewById<TextView>(R.id.tv_pick_count) // 평가한 유저 수
+        val schoolGenderType = itemView.findViewById<TextView>(R.id.school_gendertype)
         val schoolType = itemView.findViewById<TextView>(R.id.school_type) // 학교 유형
     }
 

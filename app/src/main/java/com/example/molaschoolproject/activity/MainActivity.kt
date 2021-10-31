@@ -21,12 +21,14 @@ class MainActivity : AppCompatActivity() {
         val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
 
         val profileList = arrayListOf( // 더미데이터
-            SchoolProfiles("대소고", 5.0, 10, "마이스터"),
-            SchoolProfiles("대소고", 5.0, 10, "마이스터"),
-            SchoolProfiles("대소고", 5.0, 10, "마이스터"),
-            SchoolProfiles("대소고", 5.0, 10, "마이스터"),
-            SchoolProfiles("대소고", 5.0, 10, "마이스터"),
-            SchoolProfiles("대소고", 5.0, 10, "마이스터")
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터"),
+
         )
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
