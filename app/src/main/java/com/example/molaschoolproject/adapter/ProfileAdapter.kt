@@ -30,7 +30,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.point.text = profileList.get(position).point.toString()
         holder.count.text = cnt
         holder.schoolGenderType.text = profileList.get(position).schoolGenderType
-        holder.schoolType.text = profileList.get(position).schoolType
+        holder.schoolType.text = "${profileList.get(position).schoolType} - ${profileList.get(position).schoolLocation}"
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
