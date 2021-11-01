@@ -29,17 +29,37 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
 
         starOne?.setOnClickListener {
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
+            starTwo?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starThree?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starFour?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starTwo?.setOnClickListener {
+            starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
+            starThree?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starFour?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starThree?.setOnClickListener {
+            starOne?.setImageResource(R.drawable.ic_baseline_star_24)
+            starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_24)
+            starFour?.setImageResource(R.drawable.ic_baseline_star_border_24)
+            starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starFour?.setOnClickListener {
+            starOne?.setImageResource(R.drawable.ic_baseline_star_24)
+            starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
+            starThree?.setImageResource(R.drawable.ic_baseline_star_24)
             starFour?.setImageResource(R.drawable.ic_baseline_star_24)
+            starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starFive?.setOnClickListener {
+            starOne?.setImageResource(R.drawable.ic_baseline_star_24)
+            starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
+            starThree?.setImageResource(R.drawable.ic_baseline_star_24)
+            starFour?.setImageResource(R.drawable.ic_baseline_star_24)
             starFive?.setImageResource(R.drawable.ic_baseline_star_24)
         }
     }
