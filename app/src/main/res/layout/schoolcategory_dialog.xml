@@ -64,5 +64,5 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:fontFamily="@font/nexon_lv1_gothic"
-        android:text="뒤로가기" />
+        android:text="완료" />
 </LinearLayout>
