@@ -8,8 +8,10 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.SchoolAssessmentBottomSheet
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.Comment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SchoolDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,5 +54,11 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         rv_comment.adapter = CommentAdapter(commentList)
 
+        val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
+
+        fabAssessment.setOnClickListener{
+            val bottomSheet = SchoolAssessmentBottomSheet()
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+        }
     }
 }

@@ -22,9 +22,25 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
         super.onActivityCreated(savedInstanceState)
 
         val starOne = view?.findViewById<ImageView>(R.id.assessment_star_one)
+        val starTwo = view?.findViewById<ImageView>(R.id.assessment_star_two)
+        val starThree = view?.findViewById<ImageView>(R.id.assessment_star_three)
+        val starFour = view?.findViewById<ImageView>(R.id.assessment_star_four)
+        val starFive = view?.findViewById<ImageView>(R.id.assessment_star_five)
 
         starOne?.setOnClickListener {
-            starOne.setImageResource(R.drawable.ic_baseline_star_24)
+            starOne?.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        starTwo?.setOnClickListener {
+            starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        starThree?.setOnClickListener {
+            starThree?.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        starFour?.setOnClickListener {
+            starFour?.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        starFive?.setOnClickListener {
+            starFive?.setImageResource(R.drawable.ic_baseline_star_24)
         }
     }
 }
