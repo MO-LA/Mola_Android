@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -61,6 +62,10 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starThree?.setImageResource(R.drawable.ic_baseline_star_24)
             starFour?.setImageResource(R.drawable.ic_baseline_star_24)
             starFive?.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+
+        view?.findViewById<Button>(R.id.btn_assessment_confirm)?.setOnClickListener{
+            dismiss()
         }
     }
 }
