@@ -24,11 +24,17 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
-        var cnt = profileList.get(position).estimatedPeople.toString()
 
         holder.schoolName.text = profileList.get(position).schoolName
-        holder.estimate.text = profileList.get(position).estimate.toString()
-        holder.estimatedPeople.text = cnt
+
+        var estimate: String = profileList.get(position).estimate.toString()
+        if (estimate == "NaN") estimate = "0.0"
+        holder.estimate.text = estimate
+
+        var estimatedPeople = profileList.get(position).estimatedPeople.toString()
+        estimatedPeople = "($estimatedPeople+)"
+        holder.estimatedPeople.text = estimatedPeople
+        
         holder.genderCheck.text = profileList.get(position).genderCheck
         holder.fondType.text = "${profileList.get(position).fondType} - ${profileList.get(position).roadNameAddress}"
 
