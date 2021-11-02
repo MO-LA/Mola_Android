@@ -1,6 +1,7 @@
 package com.example.molaschoolproject.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,13 +47,18 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         else if (fondType == "SPECIAL_PURPOSE") fondType = "특수목적고"
         else if (fondType == "AUTONOMOUS") fondType = "자율고"
         else if (fondType == "SPECIALIZED") fondType = "특성화고"
-        holder.fondType.text = fondType
 
-//                "${profileList.get(position).roadNameAddress}"
+        var address: String? = profileList.get(position).roadNameAddress
+        var addresssplit = address?.split("구")
+        Log.d("addresssplit","$addresssplit")
+        holder.fondType.text = "$fondType - $address"
+
 
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
+            intent.putExtra("schoolName",profileList.get(position).schoolName)
+            intent.putExtra("estimate",estimate)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
     }
