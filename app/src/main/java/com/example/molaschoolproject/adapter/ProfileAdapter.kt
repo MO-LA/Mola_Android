@@ -31,12 +31,25 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         if (estimate == "NaN") estimate = "0.0"
         holder.estimate.text = estimate
 
-        var estimatedPeople = profileList.get(position).estimatedPeople.toString()
+        var estimatedPeople: String = profileList.get(position).estimatedPeople.toString()
         estimatedPeople = "($estimatedPeople+)"
         holder.estimatedPeople.text = estimatedPeople
-        
-        holder.genderCheck.text = profileList.get(position).genderCheck
-        holder.fondType.text = "${profileList.get(position).fondType} - ${profileList.get(position).roadNameAddress}"
+
+        var genderCheck: String? = profileList.get(position).genderCheck
+        if (genderCheck == "M") genderCheck = "남고"
+        else if (genderCheck == "W") genderCheck = "여고"
+        else if (genderCheck == "MW") genderCheck = "남녀공학"
+        holder.genderCheck.text = genderCheck
+
+        var fondType: String? = profileList.get(position).fondType
+        if (fondType == "GENERAL") fondType = "일반고"
+        else if (fondType == "SPECIAL_PURPOSE") fondType = "특수목적고"
+        else if (fondType == "AUTONOMOUS") fondType = "자율고"
+        else if (fondType == "SPECIALIZED") fondType = "특성화고"
+        holder.fondType.text = fondType
+
+//                "${profileList.get(position).roadNameAddress}"
+
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
