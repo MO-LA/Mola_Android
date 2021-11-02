@@ -7,6 +7,7 @@ import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,51 +18,33 @@ class MasterApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Stetho.initializeWithDefaults(this)
         createRetrofit()
     }
 
-    fun createRetrofit() {
-        val header = Interceptor {
-            val original = it.request()
-            if (checkLogin()) {
-                getUserToken()?.let { token ->
-                    val request = original.newBuilder()
-                        .header("esfafds", "token " + token)
-                        .build()
-                    it.proceed(request)
-                }
-            } else {
-                it.proceed(original)
-            }
+    class Interceptor : okhttp3.Interceptor {
+        override fun intercept(chain: okhttp3.Interceptor.Chain): Response {
+            var req = chain
+                .request()
+                .newBuilder()
+                .addHeader("Authorization", App.prefs.token ?: "")
+                .build()
+            return chain.proceed(req)
         }
+    }
 
-        val client = OkHttpClient.Builder()
-            .addInterceptor(header)
-            .addNetworkInterceptor(StethoInterceptor())
+    fun createRetrofit() {
+        val okHttpClient = OkHttpClient
+            .Builder()
+            .addInterceptor(Interceptor())
             .build()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.80.162.195:8040/")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
+            .client(okHttpClient)
             .build()
+
         service = retrofit.create(RetrofitService::class.java)
     }
-
-    fun checkLogin(): Boolean {
-        //DB 써서 로그인 됐는지 안됐는지 확인하는 함수
-        val sp = getSharedPreferences("login_sp", Context.MODE_PRIVATE)
-        val token = sp.getString("login_sp", "null")
-        if (token != "null") return false
-        else return true
-    }
-
-    fun getUserToken(): String? {
-        //로그인이 됐으면 토큰주고, 아니면 NULL
-        val sp = getSharedPreferences("login_sp", Context.MODE_PRIVATE)
-        val token = sp.getString("login_sp", "null")
-        if (token == "null") return null
-        else return token
-    }
 }
+

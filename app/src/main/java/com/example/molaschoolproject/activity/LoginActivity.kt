@@ -13,10 +13,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.molaschoolproject.*
 import com.example.molaschoolproject.data_type.Login
-import com.example.molaschoolproject.data_type.User
+import com.example.molaschoolproject.data_type.token
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,23 +40,29 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btn_login.setOnClickListener {
-            loginValidation()
+//            loginValidation()
             val id = userId.text.toString()
             val pw = userPw.text.toString()
             val login = Login(id, pw)
-            (application as MasterApplication).service.login(login)
-                .enqueue(object :Callback<User>{
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                        if(isExistBlank) {
-                            dialog("blank")
-                        }
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://10.80.162.195:8040/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(RetrofitService::class.java)
+            service.login(login).enqueue(object :Callback<token>{
+                    override fun onFailure(call: Call<token>, t: Throwable) {
+                        Toast.makeText(this@LoginActivity,"로그인 실패", Toast.LENGTH_LONG).show()
+//                        if(isExistBlank) {
+//                        }
                     }
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                    override fun onResponse(call: Call<token>, response: Response<token>) {
                         if (response.isSuccessful) {
-                            (application as MasterApplication).createRetrofit()
+                            App.prefs.token = response.body()?.data?.accessToken
+                            Log.d("retrofitt","sp token = ${response.body()?.data?.accessToken}")
                             Toast.makeText(this@LoginActivity,"로그인 하셨습니다", Toast.LENGTH_LONG).show()
                             startActivity(
-                                Intent(this@LoginActivity, LocalSearchActivity::class.java)
+                                Intent(this@LoginActivity, MainActivity::class.java)
                             )
                         }
                     }
@@ -62,36 +70,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun loginValidation() { // 회원가입 예외처리
-        if(userId.toString().isEmpty()||userPw.toString().isEmpty()) {
-            isExistBlank = true
-        }
-    }
-
-    fun dialog(type: String) { // dialog 함수
-        val dialog = AlertDialog.Builder(this)
-
-        // 작성 안한 항목이 있을 경우
-        if(type.equals("blank")) {
-            dialog.setTitle("로그인 실패")
-            dialog.setMessage("입력란을 모두 작성해주세요")
-        }
-
-        val dialogListener = object: DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface?, which: Int) {
-                when(which){
-                    DialogInterface.BUTTON_POSITIVE ->
-                        Log.d("dialog", "다이얼로그")
-                }
-            }
-        }
-        dialog.setPositiveButton("확인",dialogListener)
-        dialog.show()
-    }
+//    fun loginValidation() { // 회원가입 예외처리
+//        if(userId.toString().isEmpty()||userPw.toString().isEmpty()) {
+//            isExistBlank = true
+//        }
+//    }
 
     fun initView(activity: Activity) {
         userId= activity.findViewById(R.id.edit_id)
-        userPw = activity.findViewById(R.id.signup_edit_pw)
+        userPw = activity.findViewById(R.id.edit_pw)
         btn_login = activity.findViewById(R.id.btn_login)
         text_signup = activity.findViewById(R.id.text_signup)
     }

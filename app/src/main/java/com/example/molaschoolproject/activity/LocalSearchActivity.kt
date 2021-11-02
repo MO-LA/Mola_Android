@@ -36,8 +36,8 @@ class LocalSearchActivity : AppCompatActivity() {
     fun signUpLocal(activity: Activity) {
         val localName = localName.text.toString()
         (application as MasterApplication).service.signup(SignUp(localName))
-            .enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+            .enqueue(object : Callback<SignUp> {
+                override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
                     if (response.isSuccessful) {
                         //회원가입 -> 학교등록에서 받아오던 정보 getExtra로 받아고 보내기
                         val intent = Intent(this@LocalSearchActivity, MainActivity::class.java)
@@ -46,7 +46,7 @@ class LocalSearchActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                override fun onFailure(call: Call<SignUp>, t: Throwable) {
                     if (isExistBlank) {
                         dialog("blank")
                     } else {
