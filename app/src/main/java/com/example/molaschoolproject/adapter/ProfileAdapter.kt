@@ -24,13 +24,13 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
-        var cnt = profileList.get(position).count.toString()
-        cnt = "($cnt+)"
+        var cnt = profileList.get(position).estimatedPeople.toString()
+
         holder.schoolName.text = profileList.get(position).schoolName
-        holder.point.text = profileList.get(position).point.toString()
-        holder.count.text = cnt
-        holder.schoolGenderType.text = profileList.get(position).schoolGenderType
-        holder.schoolType.text = "${profileList.get(position).schoolType} - ${profileList.get(position).schoolLocation}"
+        holder.estimate.text = profileList.get(position).estimate.toString()
+        holder.estimatedPeople.text = cnt
+        holder.genderCheck.text = profileList.get(position).genderCheck
+        holder.fondType.text = "${profileList.get(position).fondType} - ${profileList.get(position).roadNameAddress}"
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
@@ -43,10 +43,10 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
     }
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val schoolName = itemView.findViewById<TextView>(R.id.tv_schoolname) // 학교명
-        val point = itemView.findViewById<TextView>(R.id.tv_point) // 평점
-        val count = itemView.findViewById<TextView>(R.id.tv_pick_count) // 평가한 유저 수
-        val schoolGenderType = itemView.findViewById<TextView>(R.id.school_gendertype) // 성별타입
-        val schoolType = itemView.findViewById<TextView>(R.id.school_type) // 학교 유형
+        val estimate = itemView.findViewById<TextView>(R.id.tv_point) // 평점
+        val estimatedPeople = itemView.findViewById<TextView>(R.id.tv_pick_count) // 평가한 유저 수
+        val genderCheck = itemView.findViewById<TextView>(R.id.school_gendertype) // 성별타입
+        val fondType = itemView.findViewById<TextView>(R.id.school_type) // 학교 유형
     }
 
 }
