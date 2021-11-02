@@ -33,8 +33,10 @@ class SchoolDetailActivity : AppCompatActivity() {
         tvSchooldetailSchoolName.text = intent.getStringExtra("schoolName")
 
         val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
+        tvSchooldetailEstimate.text = "5.0"
 
+        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
+        
         var booleanPick: Boolean = false
         ivSchoolDetailMyPick.setOnClickListener {
             if (booleanPick == false) {

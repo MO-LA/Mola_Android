@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<token>, response: Response<token>) {
                         if (response.isSuccessful) {
                             App.prefs.token = response.body()?.data?.accessToken
-                            Log.d("retrofitt","sp token = ${response.body()?.data?.accessToken}")
+                            Log.d("retrofitt","sp token = ${App.prefs.token}")
                             Toast.makeText(this@LoginActivity,"로그인 하셨습니다", Toast.LENGTH_LONG).show()
                             startActivity(
                                 Intent(this@LoginActivity, MainActivity::class.java)
