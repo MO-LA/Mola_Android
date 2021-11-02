@@ -1,4 +1,13 @@
 package com.example.molaschoolproject.data_type
 
-class SchoolProfiles(val schoolName:String, val point:Double, val count:Int,val schoolGenderType:String, val schoolType:String,
-    val schoolLocation: String)
+import java.io.Serializable
+
+class SchoolProfiles(
+    var idx: Int? = 0,
+    var schoolName:String? = null,
+    var estimate:Double? = 0.0,
+    var estimatedPeople: Int? = 0,
+    var genderCheck:String? = null,
+    var fondType:String? = null,
+    val roadNameAddress: String? = null
+): Serializable
