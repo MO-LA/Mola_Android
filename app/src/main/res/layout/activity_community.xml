@@ -60,9 +60,9 @@
             android:background="@drawable/img_float_dgsw" />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:background="#ffffff">
 
@@ -75,34 +75,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/img_btn_write"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/icon_write"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/btnv_mypage"
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_write"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            app:itemIconTint="@drawable/menu_selector_color"
-            app:itemTextColor="@color/black"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu"
-            tools:layout_editor_absoluteX="16dp" />
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/icon_write"
+            app:backgroundTint="@color/white"
+            app:fabCustomSize="70dp"
+            app:maxImageSize="70dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/btnv_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                app:itemIconTint="@drawable/menu_selector_color"
+                app:itemTextColor="@color/black"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/menu"
+                tools:layout_editor_absoluteX="16dp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>
 

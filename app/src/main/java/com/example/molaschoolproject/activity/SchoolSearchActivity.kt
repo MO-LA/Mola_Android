@@ -32,12 +32,12 @@ class SchoolSearchActivity : AppCompatActivity() {
     fun signUpSchool(activity: Activity) {
         val schoolName = schoolName.text.toString()
         (application as MasterApplication).service.signup(SignUp(schoolName))
-            .enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+            .enqueue(object : Callback<SignUp> {
+                override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
 
                 }
 
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                override fun onFailure(call: Call<SignUp>, t: Throwable) {
                     
                 }
             })
