@@ -1,9 +1,6 @@
 package com.example.molaschoolproject
 
-import com.example.molaschoolproject.data_type.Login
-import com.example.molaschoolproject.data_type.SchoolData
-import com.example.molaschoolproject.data_type.SignUp
-import com.example.molaschoolproject.data_type.User
+import com.example.molaschoolproject.data_type.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,12 +9,12 @@ interface RetrofitService {
     @POST("auth/")
     fun signup(
         @Body signUp: SignUp
-    ): Call<Any?>
+    ): Call<SignUp>
 
     @POST("auth/login/")
     fun login(
         @Body login: Login
-    ): Call<User>
+    ): Call<token>
 
     @POST("auth/DV/")
     fun overlapID(
@@ -34,4 +31,9 @@ interface RetrofitService {
     fun getSchoolData(
 
     ): Call<SchoolData>
+
+    @GET("/post/list")
+    fun getCommunity(): Call<ArrayList<community>>
+
+
 }
