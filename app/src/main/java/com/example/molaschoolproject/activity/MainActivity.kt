@@ -3,6 +3,7 @@ package com.example.molaschoolproject.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -10,8 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.*
 import com.example.molaschoolproject.adapter.ProfileAdapter
+import com.example.molaschoolproject.data_type.SchoolData
 import com.example.molaschoolproject.data_type.SchoolProfiles
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.security.auth.callback.Callback
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,27 +26,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
-
-        val profileList = arrayListOf( // 더미데이터
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터", "구지"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","굳이"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","대구"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터", "구지"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","굳이"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","대구"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터", "구지"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","굳이"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","대구"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터", "구지"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","굳이"),
-            SchoolProfiles("대소고", 5.0, 10,"남녀공학" ,"마이스터","대구"),
-            
-        )
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
 
-        rvMain.adapter = ProfileAdapter(profileList)
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitService::class.java)
+
+        service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
+            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                Log.d("Retrofitt","main code = ${response.code()}")
+                if(response.isSuccessful) {
+                    val profileList = response.body()?.data
+                    Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                }
+            }
+
+            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                Log.d("Retrofitt","main False")
+            }
+        })
+
+
+
 
         schoolcategory.setOnClickListener{ // 학교 유형 선택 카테고리
             val bottomSheet = SchoolCategoryBottomSheet()
