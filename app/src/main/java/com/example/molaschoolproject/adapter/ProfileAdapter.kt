@@ -58,7 +58,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
             intent.putExtra("schoolName",profileList.get(position).schoolName)
-            intent.putExtra("estimate",estimate)
+            intent.putExtra("schoolIdx",profileList.get(position).idx)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
     }
