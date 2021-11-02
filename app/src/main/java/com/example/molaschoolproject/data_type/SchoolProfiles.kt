@@ -5,7 +5,7 @@ import java.io.Serializable
 class SchoolProfiles(
     var idx: Int? = 0,
     var schoolName:String? = null,
-    var estimate:Double? = 0.0,
+    var estimate:String,
     var estimatedPeople: Int? = 0,
     var genderCheck:String? = null,
     var fondType:String? = null,
