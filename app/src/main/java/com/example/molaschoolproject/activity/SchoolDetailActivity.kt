@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
@@ -24,6 +25,16 @@ class SchoolDetailActivity : AppCompatActivity() {
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
 
         val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
+
+        val tvSchooldetailTitle: TextView = findViewById(R.id.tv_schooldetail_title)
+        val tvSchooldetailSchoolName: TextView = findViewById(R.id.school_name)
+
+        tvSchooldetailTitle.text = intent.getStringExtra("schoolName")
+        tvSchooldetailSchoolName.text = intent.getStringExtra("schoolName")
+
+        val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
+        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
+
         var booleanPick: Boolean = false
         ivSchoolDetailMyPick.setOnClickListener {
             if (booleanPick == false) {
