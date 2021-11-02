@@ -1,6 +1,7 @@
 package com.example.molaschoolproject
 
 import com.example.molaschoolproject.data_type.Login
+import com.example.molaschoolproject.data_type.SchoolData
 import com.example.molaschoolproject.data_type.SignUp
 import com.example.molaschoolproject.data_type.User
 import retrofit2.Call
@@ -29,4 +30,8 @@ interface RetrofitService {
         @Query("school") school:String
     ): Call<Any?>
 
+    @GET("school/list")
+    fun getSchoolData(
+
+    ): Call<SchoolData>
 }
