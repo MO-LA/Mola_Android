@@ -8,10 +8,13 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.molaschoolproject.MasterApplication
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.SignUp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class LocalSearchActivity : AppCompatActivity() {
 
@@ -34,41 +37,34 @@ class LocalSearchActivity : AppCompatActivity() {
     }
 
     fun signUpLocal(activity: Activity) {
+        val id = intent.getStringExtra("id")
+        val pw = intent.getStringExtra("pw")
+        val age = intent.getIntExtra("age", 0)
+        val sex = intent.getStringExtra("sex")
+        val schoolName = intent.getStringExtra("schoolName")
         val localName = localName.text.toString()
-        (application as MasterApplication).service.signup(SignUp(localName))
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(RetrofitService::class.java)
+        service.signup(SignUp(id, pw, age, sex, schoolName, localName))
             .enqueue(object : Callback<SignUp> {
                 override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
                     if (response.isSuccessful) {
                         //회원가입 -> 학교등록에서 받아오던 정보 getExtra로 받아고 보내기
+                        Toast.makeText(this@LocalSearchActivity, "지역 등록에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@LocalSearchActivity, MainActivity::class.java)
-                        Toast.makeText(activity, "지역 등록에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
                     }
                 }
 
                 override fun onFailure(call: Call<SignUp>, t: Throwable) {
-                    if (isExistBlank) {
-                        dialog("blank")
-                    } else {
-                        dialog("failure")
-                    }
+                    Toast.makeText(this@LocalSearchActivity, "지역 등록에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
-    fun dialog(type: String) { // dialog 함수
-        val dialog = AlertDialog.Builder(this)
-
-        // 작성 안한 항목이 있을 경우
-        if (type.equals("blank")) {
-            dialog.setTitle("지역 등록 실패")
-            dialog.setMessage("입력란을 모두 작성해주세요")
-        }
-        if (type.equals("failure")) {
-            dialog.setTitle("지역 등록 실패")
-            dialog.setMessage("지역 등록에 실패하였습니다.")
-        }
-    }
 
     fun init(activity: Activity) {
         localName = activity.findViewById(R.id.edit_local_name)
