@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.molaschoolproject.MasterApplication
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.SignUp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SchoolSearchActivity : AppCompatActivity() {
 
@@ -29,16 +33,36 @@ class SchoolSearchActivity : AppCompatActivity() {
         skipListener()
     }
 
-    fun signUpSchool(activity: Activity) {
+    private fun signUpSchool(activity: Activity) {
         val schoolName = schoolName.text.toString()
-        (application as MasterApplication).service.signup(SignUp(schoolName))
+        val id = intent.getStringExtra("id")
+        val pw = intent.getStringExtra("pw")
+        val age = intent.getIntExtra("age", 0)
+        val sex = intent.getStringExtra("sex")
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(RetrofitService::class.java)
+        service.signup(SignUp(schoolName))
             .enqueue(object : Callback<SignUp> {
                 override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
+                    if(response.isSuccessful) {
+                        Toast.makeText(this@SchoolSearchActivity, "학교 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@SchoolSearchActivity, LocalSearchActivity::class.java)
+                        intent.putExtra("id", id)
+                        intent.putExtra("pw", pw)
+                        intent.putExtra("age", age)
+                        intent.putExtra("sex", sex)
+                        intent.putExtra("schoolName", schoolName)
+                        startActivity(intent)
+                    }
 
                 }
-
                 override fun onFailure(call: Call<SignUp>, t: Throwable) {
-                    
+                    Toast.makeText(this@SchoolSearchActivity, "학교 설정 실패었습니다.", Toast.LENGTH_SHORT).show()
+
                 }
             })
     }
