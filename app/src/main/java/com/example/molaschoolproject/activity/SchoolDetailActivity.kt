@@ -1,16 +1,20 @@
 package com.example.molaschoolproject.activity
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.molaschoolproject.AuthInterceptor
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.SchoolAssessmentBottomSheet
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.Comment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SchoolDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +55,18 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
 
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+        val retrofit: Retrofit = Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
+        val service = retrofit.create(RetrofitService::class.java)
+        ibtnCommentSend.setOnClickListener{
+            var comment = editComment.text.toString()
+            service.postReview(comment = comment, schoolIdx = schoolIdx).enqueue(object)
+        }
         val commentList = arrayListOf(
             Comment("홍길동","대소고","대소고 좋습니다"),
             Comment("조주영","머소고","대소고 싫습니다"),
