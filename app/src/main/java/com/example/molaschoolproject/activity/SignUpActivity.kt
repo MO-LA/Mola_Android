@@ -8,10 +8,11 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.util.Log
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import com.example.molaschoolproject.MasterApplication
+import androidx.core.view.isEmpty
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
+import com.example.molaschoolproject.data_type.Overlap
+import com.example.molaschoolproject.data_type.OverlapData
 import com.example.molaschoolproject.data_type.SignUp
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,45 +65,30 @@ class SignUpActivity : AppCompatActivity() {
 
     // 회원가입 함수
     fun signUp(activity: Activity) {
-        if (userPw.getText().toString().equals(userPwCheck.getText().toString())) {
-            val userSex = if (sex == "남") "M" else "W"
-            val userId = userId.text.toString()
-            val userPassword = userPw.text.toString()
-            val userAge = userAge.text.toString().toInt()
 
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://10.80.162.195:8040/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            val service = retrofit.create(RetrofitService::class.java)
-            service.signup(SignUp(userId, userPassword, userAge, userSex))
-                .enqueue(object : Callback<SignUp> {
-                    override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(activity, "가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
-                            intent.putExtra("id", userId)
-                            intent.putExtra("pw", userPassword)
-                            intent.putExtra("age", userAge)
-                            intent.putExtra("sex", userSex)
-                            startActivity(intent)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<SignUp>, t: Throwable) {
-                        t.printStackTrace()
-                        Toast.makeText(activity, "가입에 실패하였습니다.", Toast.LENGTH_LONG).show()
-//                        if(isExistBlank == false) {
-//                            Toast.makeText(activity, "빈칸을 채워주세요", Toast.LENGTH_LONG).show()
-//                        }
-//                        else {
-//                            Toast.makeText(activity, "가입에 실패하였습니다.", Toast.LENGTH_LONG).show()
-//                        }
-                    }
-                })
+        if (userId.text.isEmpty() ||
+            userPw.text.isEmpty() ||
+            userPwCheck.text.isEmpty() ||
+            userAge.text.isEmpty() ||
+            userRadiogroup.isEmpty()) {
+            Toast.makeText(this@SignUpActivity, "빈칸을 채워주세요.", Toast.LENGTH_SHORT).show()
         }
         else {
-            Toast.makeText(this@SignUpActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            if (userPw.getText().toString().equals(userPwCheck.getText().toString())) {
+                Toast.makeText(this@SignUpActivity, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
+                val userSex = if (sex == "남") "M" else "W"
+                val userId = userId.text.toString()
+                val userPassword = userPw.text.toString()
+                val userAge = userAge.text.toString().toInt()
+                val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
+                intent.putExtra("id", userId)
+                intent.putExtra("pw", userPassword)
+                intent.putExtra("age", userAge)
+                intent.putExtra("sex", userSex)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this@SignUpActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -113,49 +99,26 @@ class SignUpActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(RetrofitService::class.java)
-        service.overlapID(userId)
-            .enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                    Toast.makeText(activity, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
+        service.overlapID(Overlap(userId))
+            .enqueue(object : Callback<OverlapData> {
+                override fun onResponse(call: Call<OverlapData>, response: Response<OverlapData>) {
+                    var data: Boolean = response.body()!!.data
+                    Log.d("retrofitt", "data = $data")
+                    if (data == true) {
+                        Toast.makeText(activity, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(activity, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
-                    Toast.makeText(activity, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<OverlapData>, t: Throwable) {
+                    Toast.makeText(activity, "서버에 연결이 끊어졌습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
 //    fun registerValidation() { // 회원가입 예외처리
-//        if(userId.toString().isEmpty()||userPw.toString().isEmpty()||userPwCheck.toString().isEmpty()||
-//            userAge.toString().isEmpty()||userRadiogroup.toString().isEmpty()) {
-//             isExistBlank = true
-//        }
-//    }
 
-//    fun dialog(type: String) { // dialog 함수
-//        val dialog = AlertDialog.Builder(this)
-//
-//        // 작성 안한 항목이 있을 경우
-//        if(type.equals("blank")) {
-//            dialog.setTitle("회원가입 실패")
-//            dialog.setMessage("입력란을 모두 작성해주세요")
-//        }
-//        // 입력한 비밀번호가 다를 경우
-//        else if(type.equals("not same")) {
-//            dialog.setTitle("회원가입 실패")
-//            dialog.setMessage("비밀번호가 다릅니다")
-//        }
-//
-//        val dialogListener = object: DialogInterface.OnClickListener {
-//            override fun onClick(dialog: DialogInterface?, which: Int) {
-//                when(which){
-//                    DialogInterface.BUTTON_POSITIVE ->
-//                        Log.d("dialog", "다이얼로그")
-//                }
-//            }
-//        }
-//        dialog.setPositiveButton("확인",dialogListener)
-//        dialog.show()
 //    }
 
 //    fun filter(activity: Activity) { // 회원가입 정규식
