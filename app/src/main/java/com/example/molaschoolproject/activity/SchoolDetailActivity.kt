@@ -11,8 +11,6 @@ import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.SchoolAssessmentBottomSheet
 import com.example.molaschoolproject.adapter.CommentAdapter
-import com.example.molaschoolproject.data_type.Comment
-import com.example.molaschoolproject.data_type.PostReviewList
 import com.example.molaschoolproject.data_type.Review
 import com.example.molaschoolproject.data_type.SendReview
 import com.google.android.material.floatingactionbutton.FloatingActionButton
