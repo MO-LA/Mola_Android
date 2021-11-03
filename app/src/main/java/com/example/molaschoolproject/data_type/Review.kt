@@ -13,3 +13,4 @@ data class ReviewList(
     var id: String? = null,
     var school: String? = null
 ) : Serializable
+
