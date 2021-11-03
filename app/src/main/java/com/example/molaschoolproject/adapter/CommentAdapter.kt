@@ -7,9 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.data_type.Comment
+import com.example.molaschoolproject.data_type.ReviewList
 
 
-class CommentAdapter(val commentList: ArrayList<Comment>) : RecyclerView.Adapter<CommentAdapter.CustomViewHolder>() {
+class CommentAdapter(val commentList: ArrayList<ReviewList>) : RecyclerView.Adapter<CommentAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item_list,parent,false)
@@ -17,9 +18,9 @@ class CommentAdapter(val commentList: ArrayList<Comment>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: CommentAdapter.CustomViewHolder, position: Int) {
-        holder.commenter.text = commentList.get(position).commenter
-        holder.commenterSchool.text = commentList.get(position).commenterSchool
-        holder.comment.text = commentList.get(position).comment
+        holder.reviewerId.text = commentList.get(position).id
+        holder.reviewerSchool.text = commentList.get(position).school
+        holder.content.text = commentList.get(position).content
     }
 
     override fun getItemCount(): Int {
@@ -27,9 +28,9 @@ class CommentAdapter(val commentList: ArrayList<Comment>) : RecyclerView.Adapter
     }
 
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val commenter = itemView.findViewById<TextView>(R.id.tv_commenter)
-        val commenterSchool = itemView.findViewById<TextView>(R.id.tv_commenter_school)
-        val comment = itemView.findViewById<TextView>(R.id.tv_comment)
+        val reviewerId = itemView.findViewById<TextView>(R.id.tv_commenter)
+        val reviewerSchool = itemView.findViewById<TextView>(R.id.tv_commenter_school)
+        val content = itemView.findViewById<TextView>(R.id.tv_comment)
 
     }
 
