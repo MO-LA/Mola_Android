@@ -1,4 +1,15 @@
 package com.example.molaschoolproject.data_type
 
-class Review {
-}
+import java.io.Serializable
+
+data class Review(
+    var data: ArrayList<ReviewList>? = null,
+    var massage: String,
+    var status: Int
+) : Serializable
+
+data class ReviewList(
+    var content: String? = null,
+    var id: String,
+    var school: String
+) : Serializable
