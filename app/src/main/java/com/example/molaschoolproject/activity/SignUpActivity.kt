@@ -69,6 +69,7 @@ class SignUpActivity : AppCompatActivity() {
             val userId = userId.text.toString()
             val userPassword = userPw.text.toString()
             val userAge = userAge.text.toString().toInt()
+
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("http://10.80.162.195:8040/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -99,6 +100,9 @@ class SignUpActivity : AppCompatActivity() {
 //                        }
                     }
                 })
+        }
+        else {
+            Toast.makeText(this@SignUpActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
