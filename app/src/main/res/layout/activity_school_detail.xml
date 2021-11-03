@@ -238,7 +238,7 @@
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_comment"
-                android:background="#CDCDCD"
+                android:background="#f1f3f5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
@@ -253,8 +253,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="60dp"
         app:maxImageSize="50dp"
         app:fabCustomSize="70dp"
         android:src="@drawable/ic_baseline_star_24"
