@@ -21,7 +21,7 @@ interface RetrofitService {
         @Query("id") id: String
     ): Call<Any?>
 
-    @POST("/review")
+    @POST("review")
     fun postReview(
         @Body review:SendReview
     ): Call<Any?>
@@ -37,7 +37,9 @@ interface RetrofitService {
     ): Call<SchoolData>
 
     @GET("review/list")
-    fun getReviewList() : Call<Review>
+    fun getReviewList(
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<Review?>
 
     @GET("/post/list")
     fun getCommunity(): Call<ArrayList<community>>
