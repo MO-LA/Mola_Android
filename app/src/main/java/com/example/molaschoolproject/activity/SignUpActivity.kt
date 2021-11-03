@@ -39,7 +39,6 @@ class SignUpActivity : AppCompatActivity() {
 
         initView(this@SignUpActivity)
 
-
 //        registerListener() // 회원 가입 버튼 실행 함수
 
         btnSignup.setOnClickListener {
@@ -105,7 +104,12 @@ class SignUpActivity : AppCompatActivity() {
 
     fun overlapID(activity: Activity) { // 아이디 중복체크
         val userId = userId.text.toString()
-        (application as MasterApplication).service.overlapID(userId)
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(RetrofitService::class.java)
+        service.overlapID(userId)
             .enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     Toast.makeText(activity, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
