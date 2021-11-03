@@ -29,8 +29,10 @@ class SchoolSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_search)
 
         init(this@SchoolSearchActivity)
-        registerListener()
-        skipListener()
+
+        btnNext.setOnClickListener {
+            signUpSchool(this@SchoolSearchActivity)
+        }
     }
 
     private fun signUpSchool(activity: Activity) {
@@ -65,19 +67,6 @@ class SchoolSearchActivity : AppCompatActivity() {
 
                 }
             })
-    }
-
-    fun registerListener() { // 회원가입 버튼 함수
-        btnNext.setOnClickListener {
-            signUpSchool(this@SchoolSearchActivity)
-        }
-    }
-
-    fun skipListener() {
-        textSkip.setOnClickListener {
-            var intent = Intent(this@SchoolSearchActivity, LocalSearchActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     fun init(activity: Activity) {
