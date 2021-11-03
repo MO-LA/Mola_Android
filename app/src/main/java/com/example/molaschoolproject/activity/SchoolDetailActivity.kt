@@ -51,7 +51,7 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
 
-        
+
         val commentList = arrayListOf(
             Comment("홍길동","대소고","대소고 좋습니다"),
             Comment("조주영","머소고","대소고 싫습니다"),

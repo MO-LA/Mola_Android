@@ -9,7 +9,7 @@ class Interceptor : okhttp3.Interceptor {
         var req = chain
             .request()
             .newBuilder()
-            .addHeader("Authorization", App.prefs.token ?: "")
+            .addHeader("Authorization", "Bearer " + App.prefs.token ?: "")
             .build()
         return chain.proceed(req)
     }
