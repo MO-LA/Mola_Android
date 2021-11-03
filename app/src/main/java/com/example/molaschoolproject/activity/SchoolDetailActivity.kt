@@ -1,5 +1,6 @@
 package com.example.molaschoolproject.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -81,18 +82,11 @@ class SchoolDetailActivity : AppCompatActivity() {
                     Log.d("retrofitt","review post retrofit false")
                 }
             })
-            service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
-                override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
-                    Log.d("Retrofitt","reviewlist code = ${response.code()}")
-                    val reviewList = response.body()?.data
-                    Log.d("Retrofitt","reviewList = ${response.body()?.data}")
-                    rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
-                }
-
-                override fun onFailure(call: Call<Review?>, t: Throwable) {
-                    Log.d("Retrofitt","reviewList = false")
-                }
-            })
+            val restartIntent = Intent(this,SchoolDetailActivity::class.java)
+            restartIntent.putExtra("schoolName",intent.getStringExtra("schoolName"))
+            restartIntent.putExtra("schoolIdx",intent.getIntExtra("schoolIdx",0))
+            finish()
+            startActivity(restartIntent)
         }
 
 
