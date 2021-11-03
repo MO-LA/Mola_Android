@@ -6,17 +6,17 @@ import retrofit2.http.*
 
 interface RetrofitService {
 
-    @POST("auth/")
+    @POST("/auth")
     fun signup(
         @Body signUp: SignUp
     ): Call<SignUp>
 
-    @POST("auth/login/")
+    @POST("/auth/login")
     fun login(
         @Body login: Login
     ): Call<token>
 
-    @POST("auth/DV/")
+    @POST("/auth/DV")
     fun overlapID(
         @Query("id") id: String
     ): Call<Any?>
