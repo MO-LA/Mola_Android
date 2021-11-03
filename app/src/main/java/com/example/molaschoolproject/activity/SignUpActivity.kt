@@ -80,9 +80,7 @@ class SignUpActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
                         if (response.isSuccessful) {
                             Toast.makeText(activity, "가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
-                            (application as MasterApplication).createRetrofit()
-                            val intent =
-                                Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
+                            val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
                             intent.putExtra("id", userId)
                             intent.putExtra("pw", userPassword)
                             intent.putExtra("age", userAge)
