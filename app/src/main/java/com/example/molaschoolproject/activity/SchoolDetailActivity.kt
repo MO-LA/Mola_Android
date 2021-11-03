@@ -3,9 +3,7 @@ package com.example.molaschoolproject.activity
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
@@ -36,7 +34,7 @@ class SchoolDetailActivity : AppCompatActivity() {
         tvSchooldetailEstimate.text = "5.0"
 
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
-        
+
         var booleanPick: Boolean = false
         ivSchoolDetailMyPick.setOnClickListener {
             if (booleanPick == false) {
@@ -48,6 +46,12 @@ class SchoolDetailActivity : AppCompatActivity() {
                 booleanPick = false
             }
         }
+
+        val editComment: EditText = findViewById(R.id.edit_comment)
+
+        val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
+
+        
         val commentList = arrayListOf(
             Comment("홍길동","대소고","대소고 좋습니다"),
             Comment("조주영","머소고","대소고 싫습니다"),
