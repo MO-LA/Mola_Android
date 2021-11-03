@@ -30,6 +30,10 @@ class LocalSearchActivity : AppCompatActivity() {
 
         init(this@LocalSearchActivity)
 
+        btnNext.setOnClickListener {
+            signUpLocal(this@LocalSearchActivity)
+        }
+
         imgBack.setOnClickListener {
             val intent = Intent(this@LocalSearchActivity, SignUpActivity::class.java)
             startActivity(intent)
