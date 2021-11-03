@@ -10,6 +10,6 @@ data class Review(
 
 data class ReviewList(
     var content: String? = null,
-    var id: String,
-    var school: String
+    var id: String? = null,
+    var school: String? = null
 ) : Serializable

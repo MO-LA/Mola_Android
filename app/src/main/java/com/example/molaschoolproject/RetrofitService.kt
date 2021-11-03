@@ -34,8 +34,10 @@ interface RetrofitService {
 
     @GET("school/list")
     fun getSchoolData(
-
     ): Call<SchoolData>
+
+    @GET("review/list")
+    fun getReviewList() : Call<Review>
 
     @GET("/post/list")
     fun getCommunity(): Call<ArrayList<community>>
