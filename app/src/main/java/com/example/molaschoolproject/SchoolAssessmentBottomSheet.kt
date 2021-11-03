@@ -22,6 +22,8 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        var assessmentScore: Int = 0
+
         val starOne = view?.findViewById<ImageView>(R.id.assessment_star_one)
         val starTwo = view?.findViewById<ImageView>(R.id.assessment_star_two)
         val starThree = view?.findViewById<ImageView>(R.id.assessment_star_three)
@@ -29,6 +31,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
         val starFive = view?.findViewById<ImageView>(R.id.assessment_star_five)
 
         starOne?.setOnClickListener {
+            assessmentScore = 1
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_border_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -36,6 +39,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starTwo?.setOnClickListener {
+            assessmentScore = 2
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -43,6 +47,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starThree?.setOnClickListener {
+            assessmentScore = 3
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_24)
@@ -50,6 +55,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starFour?.setOnClickListener {
+            assessmentScore = 4
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_24)
@@ -57,6 +63,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_border_24)
         }
         starFive?.setOnClickListener {
+            assessmentScore = 5
             starOne?.setImageResource(R.drawable.ic_baseline_star_24)
             starTwo?.setImageResource(R.drawable.ic_baseline_star_24)
             starThree?.setImageResource(R.drawable.ic_baseline_star_24)
