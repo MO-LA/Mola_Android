@@ -21,6 +21,12 @@ interface RetrofitService {
         @Query("id") id: String
     ): Call<Any?>
 
+    @POST("/review")
+    fun postReview(
+        @Body comment: String,
+        @Body schoolIdx: Int
+    ): Call<Any?>
+
     @GET("")
     fun myPage(
         @Query("id") id: String,
