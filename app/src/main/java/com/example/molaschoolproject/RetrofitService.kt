@@ -23,8 +23,7 @@ interface RetrofitService {
 
     @POST("/review")
     fun postReview(
-        @Body comment: String,
-        @Body schoolIdx: Int
+        @Body review:SendReview
     ): Call<Any?>
 
     @GET("")

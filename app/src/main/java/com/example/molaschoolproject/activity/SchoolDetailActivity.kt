@@ -12,6 +12,7 @@ import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.SchoolAssessmentBottomSheet
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.Comment
+import com.example.molaschoolproject.data_type.SendReview
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -42,7 +43,7 @@ class SchoolDetailActivity : AppCompatActivity() {
         tvSchooldetailEstimate.text = "5.0"
 
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
-
+        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
         var booleanPick: Boolean = false
         ivSchoolDetailMyPick.setOnClickListener {
             if (booleanPick == false) {
@@ -68,8 +69,8 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val service = retrofit.create(RetrofitService::class.java)
         ibtnCommentSend.setOnClickListener{
-            var comment = editComment.text.toString()
-            service.postReview(comment = comment, schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+            var content = editComment.text.toString()
+            service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     Log.d("retrofitt","review post retrofit code = ${response.code()}")
                 }
