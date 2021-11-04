@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
 
@@ -77,7 +80,17 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_24)
         }
 
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+        val retrofit: Retrofit = Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitService::class.java)
         view?.findViewById<Button>(R.id.btn_assessment_confirm)?.setOnClickListener{
+
             dismiss()
         }
     }
