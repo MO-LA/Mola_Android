@@ -91,8 +91,9 @@
         android:background="#E8EAED">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_main"
+            android:id="@+id/rv_school"
             android:layout_width="match_parent"
+            android:background="#ffffff"
             android:layout_height="match_parent" />
     </LinearLayout>
 

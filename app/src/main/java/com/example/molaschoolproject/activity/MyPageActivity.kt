@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.molaschoolproject.MasterApplication
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyPageActivity : AppCompatActivity() {
 
@@ -38,7 +40,12 @@ class MyPageActivity : AppCompatActivity() {
     fun myPage() {
         val userid = userid.text.toString()
         val userschool = usershool.text.toString()
-        (application as MasterApplication).service.myPage(userid, userschool)
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(RetrofitService::class.java)
+        service.myPage(userid, userschool)
             .enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
 
