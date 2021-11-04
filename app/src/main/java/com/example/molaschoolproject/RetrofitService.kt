@@ -44,5 +44,10 @@ interface RetrofitService {
     @GET("/post/list")
     fun getCommunity(): Call<ArrayList<community>>
 
+    @POST("/post")
+    fun postCommunity(
+        @Body communityWrite: CommunityWrite
+    ) : Call<CommunityWrite>
+
 
 }
