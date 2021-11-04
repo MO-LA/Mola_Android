@@ -4,13 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.molaschoolproject.App
+import com.example.molaschoolproject.AuthInterceptor
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.CommunityWrite
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +47,9 @@ class CommunityWritingActivity : AppCompatActivity() {
             val userTitle = userTitle.text.toString()
             val userContent = userContent.text.toString()
 
+            val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
             val retrofit: Retrofit = Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("http://10.80.162.195:8040/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -52,6 +58,7 @@ class CommunityWritingActivity : AppCompatActivity() {
                 .enqueue(object : Callback<CommunityWrite> {
                     override fun onResponse(call: Call<CommunityWrite>, response: Response<CommunityWrite>) {
                         if(response.isSuccessful) {
+                            Log.d("retrofitt","post = ${App.prefs.token}")
                             Toast.makeText(this@CommunityWritingActivity, "게시물이 올라갔습니다.", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@CommunityWritingActivity, CommunityActivity::class.java)
                             startActivity(intent)
