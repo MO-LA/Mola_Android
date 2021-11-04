@@ -49,6 +49,6 @@ interface RetrofitService {
     fun PatchEstimate(
         @Query("estimate") estimate: Int,
         @Query("schoolIdx") schoolIdx: Int
-    )
+    ) : Call<Any?>
 
 }
