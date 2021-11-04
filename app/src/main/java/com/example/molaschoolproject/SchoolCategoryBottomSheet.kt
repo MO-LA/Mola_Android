@@ -25,9 +25,15 @@ class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
         view?.findViewById<Button>(R.id.button_bottom_sheet)?.setOnClickListener {
             dismiss()
         }
-        view?.findViewById<TextView>(R.id.cate_default)?.setOnClickListener{
-            val cateDefault:TextView = view?.findViewById(R.id.cate_default)!!
-            val typetext: String = cateDefault.text.toString()
+        view?.findViewById<TextView>(R.id.cate_all)?.setOnClickListener{
+            val cateAll:TextView = view?.findViewById(R.id.cate_all)!!
+            val typetext: String = cateAll.text.toString()
+            onClickedListener.onClicked(typetext)
+            dismiss()
+        }
+        view?.findViewById<TextView>(R.id.cate_general)?.setOnClickListener{
+            val cateGeneral:TextView = view?.findViewById(R.id.cate_general)!!
+            val typetext: String = cateGeneral.text.toString()
             onClickedListener.onClicked(typetext)
             dismiss()
         }
