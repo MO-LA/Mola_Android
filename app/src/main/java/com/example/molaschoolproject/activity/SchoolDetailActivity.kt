@@ -28,7 +28,11 @@ class SchoolDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_detail)
 
         val ivBack: ImageView = findViewById(R.id.iv_back)
-        ivBack.setOnClickListener { finish() }
+        ivBack.setOnClickListener {
+            val intent: Intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
 
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
@@ -43,7 +47,8 @@ class SchoolDetailActivity : AppCompatActivity() {
         tvSchooldetailSchoolName.text = intent.getStringExtra("schoolName")
 
         val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-        tvSchooldetailEstimate.text = "5.0"
+        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
+
 
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
         Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
@@ -111,7 +116,16 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         fabAssessment.setOnClickListener{
             val bottomSheet = SchoolAssessmentBottomSheet()
-            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+            var args: Bundle = Bundle()
+            args.putInt("schoolIdx",schoolIdx)
+            bottomSheet.arguments = args
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag,)
         }
+    }
+
+    override fun onBackPressed() {
+        val intent: Intent = Intent(this, MainActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 }

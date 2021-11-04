@@ -34,6 +34,7 @@ interface RetrofitService {
 
     @GET("school/list")
     fun getSchoolData(
+        @Query("size") size: Int = 5000
     ): Call<SchoolData>
 
     @GET("review/list")
@@ -43,11 +44,16 @@ interface RetrofitService {
 
     @GET("/post/list")
     fun getCommunity(): Call<ArrayList<community>>
-
+    
     @POST("/post")
     fun postCommunity(
         @Body communityWrite: CommunityWrite
     ) : Call<CommunityWrite>
 
+    @PATCH("/estimate")
+    fun PatchEstimate(
+        @Query("estimate") estimate: Int,
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<Any?>
 
 }
