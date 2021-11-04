@@ -34,6 +34,7 @@ interface RetrofitService {
 
     @GET("school/list")
     fun getSchoolData(
+        @Query("size") size: Int = 5000
     ): Call<SchoolData>
 
     @GET("review/list")
