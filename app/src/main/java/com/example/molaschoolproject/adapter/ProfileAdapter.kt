@@ -25,11 +25,9 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
-
         holder.schoolName.text = profileList.get(position).schoolName
 
         var estimate: String = profileList.get(position).estimate.toString()
-        if (estimate == "NaN") estimate = "0.0"
         holder.estimate.text = estimate
 
         var estimatedPeople: String = profileList.get(position).estimatedPeople.toString()
@@ -59,6 +57,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
             intent.putExtra("schoolName",profileList.get(position).schoolName)
             intent.putExtra("schoolIdx",profileList.get(position).idx)
+            intent.putExtra("estimate",estimate)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
     }

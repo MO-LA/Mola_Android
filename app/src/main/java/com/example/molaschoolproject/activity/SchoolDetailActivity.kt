@@ -43,7 +43,8 @@ class SchoolDetailActivity : AppCompatActivity() {
         tvSchooldetailSchoolName.text = intent.getStringExtra("schoolName")
 
         val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-        tvSchooldetailEstimate.text = "5.0"
+        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
+
 
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
         Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
