@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F6F6F6"
     android:orientation="vertical"
-    android:background="#E6E6E6"
     tools:context=".activity.CommunityWritingActivity">
 
     <LinearLayout
@@ -19,14 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/backarrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="115dp"
             android:fontFamily="@font/nexon_lv1_gothic"
             android:text="글 작성"
             android:textColor="#000000"
@@ -53,68 +53,74 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/icon_profile" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/commWrite_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:text="학교이름"
+                android:fontFamily="@font/nexon_lv1_gothic"
+                android:text="대수소프트웨어마이스터고등학교"
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/text_id"
+                android:id="@+id/commWrite_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/nexon_lv1_gothic"
-                android:text="아이디"
+                android:textSize="20dp"
+                android:text="cnj7224"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:fontFamily="@font/nexon_lv1_gothic"/>
         </LinearLayout>
-
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="458.5dp"
-        android:layout_marginTop="10dp"
-        android:background="#ffffff">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/edit_writing"
-                android:layout_width="match_parent"
-                android:hint="입력 해주세요"
-                android:textSize="60dp"
-                android:layout_height="1000dp"/>
-        </LinearLayout>
-
-    </ScrollView>
-
-    <Button
+    <EditText
+        android:id="@+id/commWrite_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textSize="22dp"
+        android:background="#ffffff"
+        android:hint="  제목"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="#ffffff">
+
+        <EditText
+            android:id="@+id/commWrite_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="36dp"
+            android:hint="  | 입력 해주세요"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_writeFinish"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/btn_next_color"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
         android:text="작성완료"
         android:textColor="#ffffff"
-        android:fontFamily="@font/nexon_lv1_gothic_bold"
-        android:background="@drawable/btn_next_color" />
+        android:textSize="22dp" />
 
 </LinearLayout>
