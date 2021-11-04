@@ -41,32 +41,35 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login.setOnClickListener {
 //            loginValidation()
-            val id = userId.text.toString()
-            val pw = userPw.text.toString()
-            val login = Login(id, pw)
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://10.80.162.195:8040/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            if(userId.text.isEmpty() || userPw.text.isEmpty()) {
+                Toast.makeText(this@LoginActivity, "빈칸을 다 채워주세요.", Toast.LENGTH_LONG)
+            } else {
+                val id = userId.text.toString()
+                val pw = userPw.text.toString()
+                val login = Login(id, pw)
+                val retrofit: Retrofit = Retrofit.Builder()
+                    .baseUrl("http://10.80.162.195:8040/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
 
-            val service = retrofit.create(RetrofitService::class.java)
-            service.login(login).enqueue(object :Callback<token>{
+                val service = retrofit.create(RetrofitService::class.java)
+                service.login(login).enqueue(object : Callback<token> {
                     override fun onFailure(call: Call<token>, t: Throwable) {
-                        Toast.makeText(this@LoginActivity,"로그인 실패", Toast.LENGTH_LONG).show()
-//                        if(isExistBlank) {
-//                        }
+                        Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_LONG).show()
                     }
+
                     override fun onResponse(call: Call<token>, response: Response<token>) {
                         if (response.isSuccessful) {
                             App.prefs.token = response.body()?.data?.accessToken
-                            Log.d("retrofitt","sp token = ${App.prefs.token}")
-                            Toast.makeText(this@LoginActivity,"로그인 하셨습니다", Toast.LENGTH_LONG).show()
+                            Log.d("retrofitt", "sp token = ${App.prefs.token}")
+                            Toast.makeText(this@LoginActivity, "로그인 하셨습니다", Toast.LENGTH_LONG).show()
                             startActivity(
                                 Intent(this@LoginActivity, MainActivity::class.java)
                             )
                         }
                     }
                 })
+            }
         }
     }
 
