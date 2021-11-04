@@ -28,7 +28,11 @@ class SchoolDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_detail)
 
         val ivBack: ImageView = findViewById(R.id.iv_back)
-        ivBack.setOnClickListener { finish() }
+        ivBack.setOnClickListener {
+            val intent: Intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
 
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
@@ -117,5 +121,11 @@ class SchoolDetailActivity : AppCompatActivity() {
             bottomSheet.arguments = args
             bottomSheet.show(supportFragmentManager,bottomSheet.tag,)
         }
+    }
+
+    override fun onBackPressed() {
+        val intent: Intent = Intent(this, MainActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 }
