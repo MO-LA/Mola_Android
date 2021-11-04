@@ -1,5 +1,6 @@
 package com.example.molaschoolproject.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -58,6 +59,8 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
             intent.putExtra("schoolName",profileList.get(position).schoolName)
             intent.putExtra("schoolIdx",profileList.get(position).idx)
             intent.putExtra("estimate",estimate)
+            val activityHolder: Activity = holder.itemView.context as Activity
+            activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
     }
