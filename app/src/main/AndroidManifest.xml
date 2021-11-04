@@ -14,7 +14,9 @@
         android:theme="@style/Theme.MolaSchoolProject"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.CommunityDetailActivity"></activity>
-        <activity android:name=".activity.MyPageActivity" />
+        <activity android:name=".activity.MyPageActivity" >
+
+        </activity>
         <activity android:name=".activity.WordSearchActivity" />
         <activity android:name=".activity.SchoolDetailActivity" />
         <activity android:name=".activity.MainActivity">
@@ -24,14 +26,15 @@
         <activity android:name=".activity.SchoolSearchActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LoginActivity" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CommunityActivity" />
+        <activity android:name=".activity.CommunityActivity" >
+
+        </activity>
         <activity android:name=".activity.CommunityWritingActivity">
 
         </activity>
