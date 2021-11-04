@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                     Log.d("Retrofitt","searchByName main code = ${response.code()}")
                     if(response.isSuccessful) {
                         val profileList = response.body()?.data
-                        Log.d("Retrofitt","mainList = ${response.body()?.data}")
                         rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                     }
                 }
@@ -83,8 +82,49 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
             bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
-                override fun onClicked(typetext: String) {
-                    schoolcategory.text = typetext
+                override fun onClicked(typeText: String) {
+                    schoolcategory.text = typeText
+                    var schoolType = typeText
+                    if (schoolType != "학교유형" && schoolType != "전체") {
+                        if (schoolType == "일반고") schoolType = "GENERAL"
+                        else if (schoolType == "자율고") schoolType = "AUTONOMOUS"
+                        else if (schoolType == "특성화고") schoolType = "SPECIALIZED"
+                        else if (schoolType == "특수목적고") schoolType = "SPECIAL_PURPOSE"
+
+                        service.getSchoolDataByKind(schoolKind = schoolType).enqueue(object : retrofit2.Callback<SchoolData> {
+                            override fun onResponse(
+                                call: Call<SchoolData>,
+                                response: Response<SchoolData>
+                            ) {
+                                Log.d("Retrofitt","searchByKind main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    val profileList = response.body()?.data
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","searchByKind main False")
+                            }
+                        })
+                    }
+                    else if (schoolType == "전체") {
+                        service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    val profileList = response.body()?.data
+                                    Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","main False")
+                            }
+                        })
+                    }
+
                 }
             })
         }

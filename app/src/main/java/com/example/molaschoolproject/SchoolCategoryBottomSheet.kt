@@ -22,7 +22,7 @@ class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var typeText: String = "전체"
+        var typeText: String = "학교유형"
 
         view?.findViewById<Button>(R.id.button_bottom_sheet)?.setOnClickListener {
             onClickedListener.onClicked(typeText)
@@ -51,7 +51,7 @@ class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
     }
 
     interface textClickListener {
-        fun onClicked(typetext: String)
+        fun onClicked(typeText: String)
     }
 
     private lateinit var onClickedListener: textClickListener
