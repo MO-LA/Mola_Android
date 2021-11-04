@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,27 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
+
+        val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
+        ivMainSearch.setOnClickListener {
+            var searchByNameData: String = editSearchMain.text.toString()
+            if (searchByNameData.isEmpty())  searchByNameData = ""
+            service.getSchoolDataByName(q = searchByNameData).enqueue(object: retrofit2.Callback<SchoolData> {
+                override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                    Log.d("Retrofitt","searchByName main code = ${response.code()}")
+                    if(response.isSuccessful) {
+                        val profileList = response.body()?.data
+                        Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                        rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                    }
+                }
+
+                override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                    Log.d("Retrofitt","searchByName main False")
+                }
+            })
+        }
 
 
 
@@ -67,8 +89,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        val searchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
-        val searchText: String = searchMain.text.toString()
 
         val btnvMain = findViewById<BottomNavigationView>(R.id.btnv_main)
         btnvMain.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{
