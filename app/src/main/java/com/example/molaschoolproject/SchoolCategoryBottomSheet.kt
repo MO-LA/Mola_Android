@@ -22,38 +22,31 @@ class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        var typeText: String = "전체"
+
         view?.findViewById<Button>(R.id.button_bottom_sheet)?.setOnClickListener {
+            onClickedListener.onClicked(typeText)
             dismiss()
         }
         view?.findViewById<TextView>(R.id.cate_all)?.setOnClickListener{
             val cateAll:TextView = view?.findViewById(R.id.cate_all)!!
-            val typetext: String = cateAll.text.toString()
-            onClickedListener.onClicked(typetext)
-            dismiss()
+            typeText = cateAll.text.toString()
         }
         view?.findViewById<TextView>(R.id.cate_general)?.setOnClickListener{
             val cateGeneral:TextView = view?.findViewById(R.id.cate_general)!!
-            val typetext: String = cateGeneral.text.toString()
-            onClickedListener.onClicked(typetext)
-            dismiss()
+            typeText = cateGeneral.text.toString()
         }
         view?.findViewById<TextView>(R.id.cate_automony)?.setOnClickListener{
             val cateAutomony:TextView = view?.findViewById(R.id.cate_automony)!!
-            val typetext: String = cateAutomony.text.toString()
-            onClickedListener.onClicked(typetext)
-            dismiss()
+            typeText = cateAutomony.text.toString()
         }
         view?.findViewById<TextView>(R.id.cate_specialized)?.setOnClickListener{
             val cateSpecialized:TextView = view?.findViewById(R.id.cate_specialized)!!
-            val typetext: String = cateSpecialized.text.toString()
-            onClickedListener.onClicked(typetext)
-            dismiss()
+            typeText = cateSpecialized.text.toString()
         }
         view?.findViewById<TextView>(R.id.cate_specialpurpose)?.setOnClickListener{
             val cateSpecialpurpose:TextView = view?.findViewById(R.id.cate_specialpurpose)!!
-            val typetext: String = cateSpecialpurpose.text.toString()
-            onClickedListener.onClicked(typetext)
-            dismiss()
+            typeText = cateSpecialpurpose.text.toString()
         }
     }
 
