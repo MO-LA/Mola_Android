@@ -12,12 +12,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="학교 유형을 선택해 주세요"
-        android:textColor="#008d62"
+        android:textColor="#789eff"
         android:gravity="center"
         android:fontFamily="@font/nexon_lv1_gothic_bold"
         android:textSize="24dp" />
     <TextView
-        android:id="@+id/cate_default"
+        android:id="@+id/cate_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="일반고"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/nexon_lv1_gothic"
+        android:textSize="18dp" />
+    <TextView
+        android:id="@+id/cate_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -60,7 +69,7 @@
         android:id="@+id/button_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1c9d9e"
+        android:background="#789eff"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:fontFamily="@font/nexon_lv1_gothic"
