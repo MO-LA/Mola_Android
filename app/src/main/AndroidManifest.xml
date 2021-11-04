@@ -24,7 +24,6 @@
         <activity android:name=".activity.SchoolSearchActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LoginActivity" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
