@@ -45,5 +45,10 @@ interface RetrofitService {
     @GET("/post/list")
     fun getCommunity(): Call<ArrayList<community>>
 
+    @PATCH("/estimate")
+    fun PatchEstimate(
+        @Query("estimate") estimate: Int,
+        @Query("schoolIdx") schoolIdx: Int
+    )
 
 }
