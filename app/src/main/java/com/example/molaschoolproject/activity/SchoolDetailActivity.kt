@@ -112,7 +112,10 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         fabAssessment.setOnClickListener{
             val bottomSheet = SchoolAssessmentBottomSheet()
-            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+            var args: Bundle = Bundle()
+            args.putInt("schoolIdx",schoolIdx)
+            bottomSheet.arguments = args
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag,)
         }
     }
 }

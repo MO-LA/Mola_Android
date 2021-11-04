@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
@@ -21,6 +22,11 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        var args: Bundle? = arguments
+        var schoolIdx: Int = args?.getInt("schoolIdx") ?: 0
+
+        Toast.makeText(context,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
 
         var assessmentScore: Int = 0
 
