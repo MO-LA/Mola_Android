@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6E6"
+    android:background="#F6F6F6"
     android:orientation="vertical"
     tools:context=".activity.CommunityActivity">
 
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
@@ -24,17 +25,17 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginRight="40dp">
+            android:layout_marginRight="40dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_schooldetail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nexon_lv1_gothic"
                 android:gravity="center"
                 android:padding="20dp"
                 android:text="커뮤니티"
-                android:fontFamily="@font/nexon_lv1_gothic"
                 android:textColor="#000000"
                 android:textSize="28dp" />
         </LinearLayout>
@@ -56,68 +57,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/img_float_dgsw" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_community"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_write"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="80dp"
-            android:src="@drawable/icon_write"
-            app:backgroundTint="@color/white"
-            app:fabCustomSize="70dp"
-            app:maxImageSize="70dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/btnv_mypage"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_community"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_write"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/white"
-                app:itemIconTint="@drawable/menu_selector_color"
-                app:itemTextColor="@color/black"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/menu"
-                tools:layout_editor_absoluteX="16dp" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/icon_write"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="70dp"
+                app:maxImageSize="70dp" />
 
-        </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btnv_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu"
+        tools:layout_editor_absoluteX="16dp" />
 
 </LinearLayout>
 
