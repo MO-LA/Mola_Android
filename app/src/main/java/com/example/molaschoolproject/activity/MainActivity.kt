@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var profileList: List<SchoolProfiles>?
         val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                 Log.d("Retrofitt","main code = ${response.code()}")
                 if(response.isSuccessful) {
-                    val profileList = response.body()?.data
+                    profileList = response.body()?.data
                     Log.d("Retrofitt","mainList = ${response.body()?.data}")
                     rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                 }
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                     Log.d("Retrofitt","searchByName main code = ${response.code()}")
                     if(response.isSuccessful) {
-                        val profileList = response.body()?.data
+                        profileList = response.body()?.data
                         rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                     }
                 }
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                             ) {
                                 Log.d("Retrofitt","searchByKind main code = ${response.code()}")
                                 if(response.isSuccessful) {
-                                    val profileList = response.body()?.data
+                                    profileList = response.body()?.data
                                     rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                                 }
                             }
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                                 Log.d("Retrofitt","main code = ${response.code()}")
                                 if(response.isSuccessful) {
-                                    val profileList = response.body()?.data
+                                    profileList = response.body()?.data
                                     Log.d("Retrofitt","mainList = ${response.body()?.data}")
                                     rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                                 }
