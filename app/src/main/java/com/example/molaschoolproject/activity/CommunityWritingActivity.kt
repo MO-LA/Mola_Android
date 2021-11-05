@@ -13,7 +13,9 @@ import com.example.molaschoolproject.App
 import com.example.molaschoolproject.AuthInterceptor
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
+import com.example.molaschoolproject.data_type.CommunityData
 import com.example.molaschoolproject.data_type.CommunityWrite
+import com.example.molaschoolproject.data_type.User
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,6 +36,7 @@ class CommunityWritingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_community_writing)
 
         init(this@CommunityWritingActivity)
+        communityUser()
 
         btnWriteFinish.setOnClickListener {
             communityPost()
@@ -70,6 +73,32 @@ class CommunityWritingActivity : AppCompatActivity() {
                     }
                 })
         }
+
+    }
+
+    fun communityUser() {
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl("http://10.80.162.195:8040/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitService::class.java)
+        service.getUser().enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if(response.isSuccessful) {
+                    userSchool.text = response.body()?.data?.school
+                    userId.text = response.body()?.data?.id
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+
+            }
+
+        })
 
     }
 
