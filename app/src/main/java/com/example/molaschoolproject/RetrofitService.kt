@@ -21,11 +21,6 @@ interface RetrofitService {
         @Body overlap: Overlap
     ): Call<OverlapData>
 
-    @POST("review")
-    fun postReview(
-        @Body review:SendReview
-    ): Call<Any?>
-
     @GET("school/list")
     fun getSchoolData(
         @Query("size") size: Int = 5000
@@ -43,6 +38,11 @@ interface RetrofitService {
         @Query("schoolKind") schoolKind: String
     ) : Call<SchoolData>
 
+    @POST("review")
+    fun postReview(
+        @Body review:SendReview
+    ): Call<Any?>
+
     @GET("review/list")
     fun getReviewList(
         @Query("schoolIdx") schoolIdx: Int
@@ -58,10 +58,23 @@ interface RetrofitService {
         @Query("size") size: Int = 10000
     ): Call<CommunityData>
 
+    @POST("/comment")
+    fun postComment(
+        @Body commentWrite: CommentWrite
+    ): Call<CommentWrite>
+
+    @GET("/comment/list")
+    fun getComment(
+        @Query("postIdx") postIdx: Int
+    ): Call<Comment>
+
     @PATCH("/estimate")
     fun PatchEstimate(
         @Query("estimate") estimate: Int,
         @Query("schoolIdx") schoolIdx: Int
     ) : Call<Any?>
+
+    @GET("/user")
+    fun getUser(): Call<User>
 
 }
