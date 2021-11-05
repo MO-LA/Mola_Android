@@ -29,6 +29,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.schoolName.text = profileList.get(position).schoolName
 
         var estimate: String = profileList.get(position).estimate.toString()
+
         holder.estimate.text = estimate
 
         var estimatedPeople: String = profileList.get(position).estimatedPeople.toString()
