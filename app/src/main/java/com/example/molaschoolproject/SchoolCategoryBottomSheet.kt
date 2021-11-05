@@ -1,5 +1,6 @@
 package com.example.molaschoolproject
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,28 +25,58 @@ class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
         super.onActivityCreated(savedInstanceState)
         var typeText: String = "학교유형"
 
+        val cateAll: TextView? = view?.findViewById<TextView>(R.id.cate_all)
+        val cateGeneral: TextView? = view?.findViewById<TextView>(R.id.cate_general)
+        val cateAutomony: TextView? = view?.findViewById<TextView>(R.id.cate_automony)
+        val cateSpecialized: TextView? = view?.findViewById<TextView>(R.id.cate_specialized)
+        val cateSpecialpurpose: TextView? = view?.findViewById<TextView>(R.id.cate_specialpurpose)
         view?.findViewById<Button>(R.id.button_bottom_sheet)?.setOnClickListener {
             onClickedListener.onClicked(typeText)
             dismiss()
         }
-        view?.findViewById<TextView>(R.id.cate_all)?.setOnClickListener{
-            val cateAll:TextView = view?.findViewById(R.id.cate_all)!!
+        cateAll?.setOnClickListener{
+            cateAll.setTextColor(Color.BLUE)
+            cateGeneral?.setTextColor(Color.BLACK)
+            cateAutomony?.setTextColor(Color.BLACK)
+            cateSpecialized?.setTextColor(Color.BLACK)
+            cateSpecialpurpose?.setTextColor(Color.BLACK)
+
             typeText = cateAll.text.toString()
         }
-        view?.findViewById<TextView>(R.id.cate_general)?.setOnClickListener{
-            val cateGeneral:TextView = view?.findViewById(R.id.cate_general)!!
+        cateGeneral?.setOnClickListener{
+            cateAll?.setTextColor(Color.BLACK)
+            cateGeneral.setTextColor(Color.BLUE)
+            cateAutomony?.setTextColor(Color.BLACK)
+            cateSpecialized?.setTextColor(Color.BLACK)
+            cateSpecialpurpose?.setTextColor(Color.BLACK)
+
             typeText = cateGeneral.text.toString()
         }
-        view?.findViewById<TextView>(R.id.cate_automony)?.setOnClickListener{
-            val cateAutomony:TextView = view?.findViewById(R.id.cate_automony)!!
+        cateAutomony?.setOnClickListener{
+            cateAll?.setTextColor(Color.BLACK)
+            cateGeneral?.setTextColor(Color.BLACK)
+            cateAutomony.setTextColor(Color.BLUE)
+            cateSpecialized?.setTextColor(Color.BLACK)
+            cateSpecialpurpose?.setTextColor(Color.BLACK)
+
             typeText = cateAutomony.text.toString()
         }
-        view?.findViewById<TextView>(R.id.cate_specialized)?.setOnClickListener{
-            val cateSpecialized:TextView = view?.findViewById(R.id.cate_specialized)!!
+        cateSpecialized?.setOnClickListener{
+            cateAll?.setTextColor(Color.BLACK)
+            cateGeneral?.setTextColor(Color.BLACK)
+            cateAutomony?.setTextColor(Color.BLACK)
+            cateSpecialized.setTextColor(Color.BLUE)
+            cateSpecialpurpose?.setTextColor(Color.BLACK)
+
             typeText = cateSpecialized.text.toString()
         }
-        view?.findViewById<TextView>(R.id.cate_specialpurpose)?.setOnClickListener{
-            val cateSpecialpurpose:TextView = view?.findViewById(R.id.cate_specialpurpose)!!
+        cateSpecialpurpose?.setOnClickListener{
+            cateAll?.setTextColor(Color.BLACK)
+            cateGeneral?.setTextColor(Color.BLACK)
+            cateAutomony?.setTextColor(Color.BLACK)
+            cateSpecialized?.setTextColor(Color.BLACK)
+            cateSpecialpurpose.setTextColor(Color.BLUE)
+
             typeText = cateSpecialpurpose.text.toString()
         }
     }
