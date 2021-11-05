@@ -2,31 +2,33 @@ package com.example.molaschoolproject.adapter
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.activity.CommunityDetailActivity
-import com.example.molaschoolproject.activity.CommunityWritingActivity
 import com.example.molaschoolproject.data_type.Community
-import com.example.molaschoolproject.data_type.ReviewList
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class communityAdapter(
     val communityList: ArrayList<Community>
 ) : RecyclerView.Adapter<communityAdapter.CustomViewHolder>() {
 
+
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): CustomViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.community_list, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.community_list_item, parent, false)
         return CustomViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.communityTitle.text = communityList.get(position).title
         holder.communityId.text = communityList.get(position).id
@@ -37,12 +39,15 @@ class communityAdapter(
             intent.putExtra("title", communityList.get(position).title)
             intent.putExtra("id", communityList.get(position).id)
             intent.putExtra("dateTime", communityList.get(position).dateTime)
-            intent.putExtra("idx", communityList.get(position).idx)
+            intent.putExtra("postIdx ", communityList.get(position).idx)
             intent.putExtra("content", communityList.get(position).content)
-            val activityHolder: Activity = holder.itemView.context as Activity
-            activityHolder.finish()
+            intent.putExtra("school", communityList.get(position).school)
+//            val activityHolder: Activity = holder.itemView.context as Activity
+//            activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
+
+        holder
     }
 
     override fun getItemCount(): Int {
