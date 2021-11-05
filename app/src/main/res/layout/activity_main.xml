@@ -54,12 +54,24 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/tv_grade"
+            android:id="@+id/tv_fond"
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="평점순"
+            android:text="설립구분"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_fondtype"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="설립유형"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="22dp"
@@ -71,17 +83,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="학교유형"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="22dp"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_subcatecory"
-            android:fontFamily="@font/nexon_lv1_gothic_bold"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="서브유형"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="22dp"
