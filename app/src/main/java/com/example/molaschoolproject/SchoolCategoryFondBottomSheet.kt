@@ -9,13 +9,14 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SchoolCategoryFondBottomSheet(): BottomSheetDialogFragment() {
+class SchoolCategoryFondBottomSheet() : BottomSheetDialogFragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.schoolcategory_fond_dialog, container, false)
     }
 
@@ -65,10 +66,10 @@ class SchoolCategoryFondBottomSheet(): BottomSheetDialogFragment() {
 
             fondText = catePublic.text.toString()
         }
-
     }
+
     interface textClickListener {
-        fun onClicked(typeText: String)
+        fun onClicked(fondText: String)
     }
 
     private lateinit var onClickedListener: textClickListener
