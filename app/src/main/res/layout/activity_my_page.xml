@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:orientation="horizontal">
 
         <ImageView
@@ -31,7 +32,7 @@
                 android:id="@+id/tv_schooldetail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nexon_lv1_gothic_bold"
+                android:fontFamily="@font/nexon_lv1_gothic"
                 android:gravity="center"
                 android:padding="20dp"
                 android:text="마이페이지"
@@ -40,12 +41,12 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#E8EAED" />
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#E8EAED"
@@ -79,28 +80,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_school"
+                android:id="@+id/txt_mypage_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="대구소프트웨어고등학교"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_name"
+                android:id="@+id/txt_mypage_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
-                android:text="조주영님"
+                android:text="조주영"
                 android:textColor="#000000"
                 android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nexon_lv1_gothic_bold"
+                    android:text="님"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="환영합니다."
+                android:layout_marginTop="1dp"
                 android:textColor="#000000"
                 android:textSize="25dp" />
         </LinearLayout>
@@ -108,7 +124,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_mypick"
+        android:id="@+id/layout_btn_mypick"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="15dp"
@@ -146,7 +162,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_logout"
+        android:id="@+id/layout_btn_logout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
