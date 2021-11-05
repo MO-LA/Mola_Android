@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         ivMainSearch.setOnClickListener {
             var searchByNameData: String = editSearchMain.text.toString()
             if (searchByNameData.isEmpty())  searchByNameData = ""
+            searchByNameData = searchByNameData.replace(" ","")
             service.getSchoolDataByName(q = searchByNameData).enqueue(object: retrofit2.Callback<SchoolData> {
                 override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                     Log.d("Retrofitt","searchByName main code = ${response.code()}")
