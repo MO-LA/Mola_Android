@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var profileList: List<SchoolProfiles>?
         val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                 Log.d("Retrofitt","main code = ${response.code()}")
                 if(response.isSuccessful) {
-                    val profileList = response.body()?.data
+                    profileList = response.body()?.data
                     Log.d("Retrofitt","mainList = ${response.body()?.data}")
                     rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
                 }
@@ -53,6 +55,26 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
+
+        val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
+        ivMainSearch.setOnClickListener {
+            var searchByNameData: String = editSearchMain.text.toString()
+            if (searchByNameData.isEmpty())  searchByNameData = ""
+            service.getSchoolDataByName(q = searchByNameData).enqueue(object: retrofit2.Callback<SchoolData> {
+                override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                    Log.d("Retrofitt","searchByName main code = ${response.code()}")
+                    if(response.isSuccessful) {
+                        profileList = response.body()?.data
+                        rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                    }
+                }
+
+                override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                    Log.d("Retrofitt","searchByName main False")
+                }
+            })
+        }
 
 
 
@@ -61,14 +83,53 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
             bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
-                override fun onClicked(typetext: String) {
-                    schoolcategory.text = typetext
+                override fun onClicked(typeText: String) {
+                    schoolcategory.text = typeText
+                    var schoolType = typeText
+                    if (schoolType != "학교유형" && schoolType != "전체") {
+                        if (schoolType == "일반고") schoolType = "GENERAL"
+                        else if (schoolType == "자율고") schoolType = "AUTONOMOUS"
+                        else if (schoolType == "특성화고") schoolType = "SPECIALIZED"
+                        else if (schoolType == "특수목적고") schoolType = "SPECIAL_PURPOSE"
+
+                        service.getSchoolDataByKind(schoolKind = schoolType).enqueue(object : retrofit2.Callback<SchoolData> {
+                            override fun onResponse(
+                                call: Call<SchoolData>,
+                                response: Response<SchoolData>
+                            ) {
+                                Log.d("Retrofitt","searchByKind main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","searchByKind main False")
+                            }
+                        })
+                    }
+                    else if (schoolType == "전체") {
+                        service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","main False")
+                            }
+                        })
+                    }
+
                 }
             })
         }
 
-        val searchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
-        val searchText: String = searchMain.text.toString()
 
         val btnvMain = findViewById<BottomNavigationView>(R.id.btnv_main)
         btnvMain.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{

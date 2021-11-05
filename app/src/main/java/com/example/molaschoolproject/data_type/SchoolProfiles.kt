@@ -9,5 +9,5 @@ class SchoolProfiles(
     var estimatedPeople: Int? = 0,
     var genderCheck:String? = null,
     var fondType:String? = null,
-    val roadNameAddress: String? = null
+    val address: String? = null
 ): Serializable

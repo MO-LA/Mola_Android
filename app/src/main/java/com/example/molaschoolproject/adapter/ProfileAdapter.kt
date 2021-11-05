@@ -48,12 +48,8 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         else if (fondType == "AUTONOMOUS") fondType = "자율고"
         else if (fondType == "SPECIALIZED") fondType = "특성화고"
 
-        var address: String? = profileList.get(position).roadNameAddress
-        var addresssplit = address?.split("구")
-        Log.d("addresssplit","$addresssplit")
+        var address: String? = profileList.get(position).address
         holder.fondType.text = "$fondType - $address"
-
-
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
