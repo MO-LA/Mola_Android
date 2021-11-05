@@ -79,10 +79,10 @@ class MainActivity : AppCompatActivity() {
 
 
         schoolCategoryKind.setOnClickListener{ // 학교 유형 선택 카테고리
-            val bottomSheet = SchoolCategoryBottomSheet()
+            val bottomSheet = SchoolCategoryKindBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
-            bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
+            bottomSheet.setOnClickedListener(object : SchoolCategoryKindBottomSheet.textClickListener {
                 override fun onClicked(typeText: String) {
                     schoolCategoryKind.text = typeText
                     var schoolType = typeText

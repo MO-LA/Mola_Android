@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SchoolCategoryBottomSheet() : BottomSheetDialogFragment() {
+class SchoolCategoryKindBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
