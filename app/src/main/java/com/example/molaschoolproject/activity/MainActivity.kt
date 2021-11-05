@@ -19,7 +19,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.security.auth.callback.Callback
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var profileList: List<SchoolProfiles>?
-        val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
+        val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
@@ -79,13 +78,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        schoolcategory.setOnClickListener{ // 학교 유형 선택 카테고리
+        schoolCategoryKind.setOnClickListener{ // 학교 유형 선택 카테고리
             val bottomSheet = SchoolCategoryBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
             bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
                 override fun onClicked(typeText: String) {
-                    schoolcategory.text = typeText
+                    schoolCategoryKind.text = typeText
                     var schoolType = typeText
                     if (schoolType != "학교유형" && schoolType != "전체") {
                         if (schoolType == "일반고") schoolType = "GENERAL"
