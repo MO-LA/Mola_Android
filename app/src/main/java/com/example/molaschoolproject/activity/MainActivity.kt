@@ -16,10 +16,10 @@ import com.example.molaschoolproject.data_type.SchoolData
 import com.example.molaschoolproject.data_type.SchoolProfiles
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.security.auth.callback.Callback
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var profileList: List<SchoolProfiles>?
-        val schoolcategory:TextView = findViewById(R.id.tv_schoolcatecory)
+        val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
+        val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         ivMainSearch.setOnClickListener {
             var searchByNameData: String = editSearchMain.text.toString()
             if (searchByNameData.isEmpty())  searchByNameData = ""
+            searchByNameData = searchByNameData.replace(" ","")
             service.getSchoolDataByName(q = searchByNameData).enqueue(object: retrofit2.Callback<SchoolData> {
                 override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                     Log.d("Retrofitt","searchByName main code = ${response.code()}")
@@ -76,15 +78,63 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        schoolCategoryFond.setOnClickListener{ // 학교 설립구분 선택 카테고리
+            val fondBottomSheet = SchoolCategoryFondBottomSheet()
+            fondBottomSheet.show(supportFragmentManager,fondBottomSheet.tag)
+
+            fondBottomSheet.setOnClickedListener(object : SchoolCategoryFondBottomSheet.textClickListener {
+                override fun onClicked(fondText: String) {
+                    schoolCategoryFond.text = fondText
+                    var schoolFond = fondText
+
+                    if (schoolFond != "설립구분" && schoolFond != "전체") {
+                        if (schoolFond == "국립") schoolFond = "NATIONAL"
+                        else if (schoolFond == "사립") schoolFond = "PRIVATE"
+                        else if (schoolFond == "공립") schoolFond = "PUBLIC"
+
+                        service.getSchoolDataByFond(fond = schoolFond).enqueue(object : Callback<SchoolData> {
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","searchByFond main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","searchByFond main False")
+                            }
+                        })
+                    }
+                    else if (schoolFond == "전체") {
+                        service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","main False")
+                            }
+                        })
+                    }
+                }
+            })
+        }
 
 
-        schoolcategory.setOnClickListener{ // 학교 유형 선택 카테고리
-            val bottomSheet = SchoolCategoryBottomSheet()
+
+        schoolCategoryKind.setOnClickListener{ // 학교 유형 선택 카테고리
+            val bottomSheet = SchoolCategoryKindBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
 
-            bottomSheet.setOnClickedListener(object : SchoolCategoryBottomSheet.textClickListener {
+            bottomSheet.setOnClickedListener(object : SchoolCategoryKindBottomSheet.textClickListener {
                 override fun onClicked(typeText: String) {
-                    schoolcategory.text = typeText
+                    schoolCategoryKind.text = typeText
                     var schoolType = typeText
                     if (schoolType != "학교유형" && schoolType != "전체") {
                         if (schoolType == "일반고") schoolType = "GENERAL"
@@ -93,10 +143,7 @@ class MainActivity : AppCompatActivity() {
                         else if (schoolType == "특수목적고") schoolType = "SPECIAL_PURPOSE"
 
                         service.getSchoolDataByKind(schoolKind = schoolType).enqueue(object : retrofit2.Callback<SchoolData> {
-                            override fun onResponse(
-                                call: Call<SchoolData>,
-                                response: Response<SchoolData>
-                            ) {
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                                 Log.d("Retrofitt","searchByKind main code = ${response.code()}")
                                 if(response.isSuccessful) {
                                     profileList = response.body()?.data

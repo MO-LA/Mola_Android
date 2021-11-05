@@ -43,6 +43,12 @@ interface RetrofitService {
         @Body review:SendReview
     ): Call<Any?>
 
+    @GET("school/list/fond")
+    fun getSchoolDataByFond(
+        @Query("size") size: Int = 5000,
+        @Query("fond") fond: String
+    ) : Call<SchoolData>
+
     @GET("review/list")
     fun getReviewList(
         @Query("schoolIdx") schoolIdx: Int

@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/community_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nexon_lv1_gothic"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="제목"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="22dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
@@ -36,20 +34,30 @@
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="시간"
                 android:textColor="#8D8D8D"
-                android:textSize="20dp" />
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" | "
+                android:textSize="24dp"
+                android:textColor="#8D8D8D"/>
 
             <TextView
                 android:id="@+id/community_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="아이디"
                 android:textColor="#8D8D8D"
-                android:textSize="20dp" />
+                android:textSize="22dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e6e6e6"/>
 </LinearLayout>
