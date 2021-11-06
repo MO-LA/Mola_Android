@@ -50,7 +50,7 @@ class LocalSearchActivity : AppCompatActivity() {
             val localName = localName.text.toString()
 
             val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://10.80.162.195:8040/")
+                .baseUrl("http://192.168.61.124:8040/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val service = retrofit.create(RetrofitService::class.java)
