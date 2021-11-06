@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="학교 유형을 선택해 주세요"
+        android:text="설립 구분을 선택해 주세요"
         android:textColor="#789eff"
         android:gravity="center"
         android:fontFamily="@font/nexon_lv1_gothic_bold"
