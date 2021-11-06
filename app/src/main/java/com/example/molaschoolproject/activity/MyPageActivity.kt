@@ -25,19 +25,27 @@ class MyPageActivity : AppCompatActivity() {
 
     lateinit var userSchool: TextView
     lateinit var userId: TextView
-    lateinit var btnMypick: Button
-    lateinit var btnLogout: Button
+    lateinit var btnMypick: LinearLayout
+    lateinit var btnLogout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)
 
-        init()
+        userSchool = findViewById(R.id.txt_mypage_school)
+        userId = findViewById(R.id.txt_mypage_id)
+        btnMypick = findViewById(R.id.layout_btn_mypick)
+        btnLogout = findViewById(R.id.layout_btn_logout)
+
         setTextMypage()
 
         btnMypick.setOnClickListener {
             val intent = Intent(this@MyPageActivity, MyPickActivity::class.java)
             startActivity(intent)
+        }
+
+        btnLogout.setOnClickListener {
+            logout()
         }
     }
 
@@ -68,36 +76,27 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     fun logout() {
-        btnLogout.setOnClickListener {
-            var dialog = AlertDialog.Builder(this)
-            dialog.setTitle("로그아웃을 하시겠습니까?")
-            dialog.setMessage("저희 SAFE FARM을 이용해주셔서 감사합니다.")
+        var dialog = AlertDialog.Builder(this)
+        dialog.setTitle("로그아웃을 하시겠습니까?")
+        dialog.setMessage("저희 MOLA을 이용해주셔서 감사합니다.")
 
-            fun toast_p() {
-                Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-            }
+        fun toast_p() {
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
-            var dialog_listener = object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE ->
-                            toast_p()
-                    }
+        var dialog_listener = object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE ->
+                        toast_p()
                 }
             }
-            dialog.setPositiveButton("YES", dialog_listener)
-            dialog.setNegativeButton("NO", null)
-            dialog.show()
         }
-    }
-
-    fun init() {
-        userSchool = findViewById(R.id.txt_mypage_school)
-        userId = findViewById(R.id.txt_mypage_id)
-        btnMypick = findViewById(R.id.layout_btn_mypick)
-        btnLogout = findViewById(R.id.layout_btn_logout)
+        dialog.setPositiveButton("YES", dialog_listener)
+        dialog.setNegativeButton("NO", null)
+        dialog.show()
     }
 
 }
