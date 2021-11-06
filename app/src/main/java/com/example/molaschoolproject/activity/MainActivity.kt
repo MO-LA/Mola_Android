@@ -34,9 +34,7 @@ class MainActivity : AppCompatActivity() {
         val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
         val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
         val schoolCategoryFondType: TextView = findViewById(R.id.tv_fondtype)
-
-
-
+        val schoolCategoryRegion: TextView = findViewById(R.id.tv_region)
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://10.80.162.195:8040/")
@@ -224,6 +222,39 @@ class MainActivity : AppCompatActivity() {
                         })
                     }
 
+                }
+            })
+        }
+
+        schoolCategoryRegion.setOnClickListener{
+            val bottomSheet = SchoolCategoryRegionBottomSheet()
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+
+            bottomSheet.setOnClickedListener(object : SchoolCategoryRegionBottomSheet.textClickListener {
+                override fun onClicked(regionText: String) {
+                    var schoolRegion: String = regionText
+                    schoolRegion = schoolRegion.replace(" ","")
+
+                    if (schoolRegion.isEmpty()) {
+                        schoolCategoryRegion.text = "지역"
+                        schoolRegion = ""
+                    }
+                    else schoolCategoryRegion.text = schoolRegion
+
+
+                    service.getSchoolDataByRegion(q = schoolRegion).enqueue(object : Callback<SchoolData> {
+                        override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                            Log.d("Retrofitt","searchByRegion main code = ${response.code()}")
+                            if(response.isSuccessful) {
+                                profileList = response.body()?.data
+                                rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                            }
+                        }
+                        
+                        override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                            Log.d("Retrofitt","searchByRegion main False")
+                        }
+                    })
                 }
             })
         }
