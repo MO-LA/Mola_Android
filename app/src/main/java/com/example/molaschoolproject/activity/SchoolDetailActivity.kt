@@ -189,10 +189,6 @@ class SchoolDetailActivity : AppCompatActivity() {
             }
         })
 
-
-
-
-
         val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
 
         fabAssessment.setOnClickListener{

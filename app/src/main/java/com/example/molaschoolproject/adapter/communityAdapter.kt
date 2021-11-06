@@ -1,6 +1,5 @@
 package com.example.molaschoolproject.adapter
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
@@ -13,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.activity.CommunityDetailActivity
 import com.example.molaschoolproject.data_type.Community
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-class communityAdapter(
+class CommunityAdapter(
     val communityList: ArrayList<Community>
-) : RecyclerView.Adapter<communityAdapter.CustomViewHolder>() {
+) : RecyclerView.Adapter<CommunityAdapter.CustomViewHolder>() {
 
 
     override fun onCreateViewHolder(
@@ -39,7 +36,7 @@ class communityAdapter(
             intent.putExtra("title", communityList.get(position).title)
             intent.putExtra("id", communityList.get(position).id)
             intent.putExtra("dateTime", communityList.get(position).dateTime)
-            intent.putExtra("postIdx ", communityList.get(position).idx)
+            intent.putExtra("idx", communityList.get(position).idx)
             intent.putExtra("content", communityList.get(position).content)
             intent.putExtra("school", communityList.get(position).school)
 //            val activityHolder: Activity = holder.itemView.context as Activity
