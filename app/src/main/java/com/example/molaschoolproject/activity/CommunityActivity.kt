@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,11 +31,18 @@ class CommunityActivity : AppCompatActivity() {
 
 //        LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 
+        val btnBack: ImageView = findViewById(R.id.iv_back)
         val btnWrite: FloatingActionButton = findViewById(R.id.fab_write)
         val rvCommunity = findViewById<RecyclerView>(R.id.rv_community)
         rvCommunity.layoutManager =
             LinearLayoutManager(this@CommunityActivity, LinearLayoutManager.VERTICAL, false)
         rvCommunity.setHasFixedSize(true)
+
+        btnBack.setOnClickListener {
+            val intent = Intent(this@CommunityActivity, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
 
         btnWrite.setOnClickListener {
             val intent = Intent(this@CommunityActivity, CommunityWritingActivity::class.java)
@@ -45,7 +53,7 @@ class CommunityActivity : AppCompatActivity() {
 
         val retrofit: Retrofit = Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://192.168.61.124/:8040/")
+            .baseUrl("http://192.168.61.124:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
