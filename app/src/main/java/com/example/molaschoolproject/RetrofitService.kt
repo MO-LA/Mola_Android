@@ -79,13 +79,13 @@ interface RetrofitService {
 
     @POST("/comment")
     fun postComment(
-        @Body commentWrite: CommentWrite
-    ): Call<CommentWrite>
+        @Body comment: CommentWrite
+    ): Call<Any?>
 
     @GET("/comment/list")
     fun getComment(
         @Query("postIdx") postIdx: Int
-    ): Call<Comment>
+    ): Call<Comment?>
 
     @PATCH("/estimate")
     fun PatchEstimate(
