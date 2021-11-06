@@ -183,16 +183,19 @@
                 android:text=" 학교 상세 설명"
                 android:textColor="@color/black"
                 android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/tv_schooldetail_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nexon_lv1_gothic_bold"
+                android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="textArea"
                 android:textSize="25dp"
-                android:layout_marginStart="10dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
 
             </TextView>
 

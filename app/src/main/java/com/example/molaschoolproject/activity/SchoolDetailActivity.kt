@@ -27,10 +27,18 @@ class SchoolDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_detail)
 
         val ivBack: ImageView = findViewById(R.id.iv_back)
+        Toast.makeText(this,"context = ${intent.getStringExtra("context")}",Toast.LENGTH_SHORT).show()
         ivBack.setOnClickListener {
-            val intent: Intent = Intent(this, MainActivity::class.java)
-            finish()
-            startActivity(intent)
+            if (intent.getStringExtra("context") == "M"){
+                val intent: Intent = Intent(this, MainActivity::class.java)
+                finish()
+                startActivity(intent)
+            }
+            else {
+                val intent: Intent = Intent(this, MyPickActivity::class.java)
+                finish()
+                startActivity(intent)
+            }
         }
 
         val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
@@ -238,8 +246,15 @@ class SchoolDetailActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val intent: Intent = Intent(this, MainActivity::class.java)
-        finish()
-        startActivity(intent)
+        if (intent.getStringExtra("context") == "M"){
+            val intent: Intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+        else {
+            val intent: Intent = Intent(this, MyPickActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
     }
 }
