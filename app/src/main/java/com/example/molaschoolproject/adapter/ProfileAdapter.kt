@@ -32,6 +32,8 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
 
         holder.estimate.text = estimate
 
+        var estimateDouble: Double = profileList.get(position).estimate
+
         var estimatedPeople: String = profileList.get(position).estimatedPeople.toString()
         estimatedPeople = "($estimatedPeople+)"
         holder.estimatedPeople.text = estimatedPeople
@@ -55,6 +57,7 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
             intent.putExtra("schoolIdx",profileList.get(position).idx)
             intent.putExtra("estimate",estimate)
+            intent.putExtra("estimateDouble",estimateDouble)
             val activityHolder: Activity = holder.itemView.context as Activity
             activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context,intent,null)

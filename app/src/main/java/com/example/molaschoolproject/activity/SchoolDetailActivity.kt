@@ -56,6 +56,42 @@ class SchoolDetailActivity : AppCompatActivity() {
         val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
         tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
 
+        val ivStarOne: ImageView = findViewById(R.id.star_one)
+        val ivStarTwo: ImageView = findViewById(R.id.star_two)
+        val ivStarThree: ImageView = findViewById(R.id.star_three)
+        val ivStarFour: ImageView = findViewById(R.id.star_four)
+        val ivStarFive: ImageView = findViewById(R.id.star_five)
+
+        val estimateDouble:Double = intent.getDoubleExtra("estimateDouble",0.0)
+
+        if (estimateDouble < 1)
+
+        else if (estimateDouble >= 5) {
+            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarFive.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        else if (estimateDouble >= 4) {
+            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        else if (estimateDouble >= 3) {
+            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        else if (estimateDouble >= 2) {
+            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+        }
+        else if (estimateDouble >= 1) ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+
+
+
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
         Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
 
@@ -85,8 +121,9 @@ class SchoolDetailActivity : AppCompatActivity() {
                                 Log.d("Retrofitt","pick code = ${response.code()}")
                                 if (response.isSuccessful) {
                                     pick = response.body()!!.data
-                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                                    Log.d("Retrofittt","pick = $pick")
+                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
                                 }
                             }
                             override fun onFailure(call: Call<Pick>, t: Throwable) {
