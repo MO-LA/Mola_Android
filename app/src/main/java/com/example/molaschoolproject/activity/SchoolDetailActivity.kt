@@ -12,8 +12,7 @@ import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.SchoolAssessmentBottomSheet
 import com.example.molaschoolproject.adapter.CommentAdapter
-import com.example.molaschoolproject.data_type.Review
-import com.example.molaschoolproject.data_type.SendReview
+import com.example.molaschoolproject.data_type.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -34,40 +33,6 @@ class SchoolDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
-        rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        rv_comment.setHasFixedSize(true)
-
-        val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
-
-        val tvSchooldetailTitle: TextView = findViewById(R.id.tv_schooldetail_title)
-        val tvSchooldetailSchoolName: TextView = findViewById(R.id.school_name)
-
-        tvSchooldetailTitle.text = intent.getStringExtra("schoolName")
-        tvSchooldetailSchoolName.text = intent.getStringExtra("schoolName")
-
-        val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
-
-
-        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
-        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
-        var booleanPick: Boolean = false
-        ivSchoolDetailMyPick.setOnClickListener {
-            if (booleanPick == false) {
-                ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
-                booleanPick = true
-            }
-            else {
-                ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                booleanPick = false
-            }
-        }
-
-        val editComment: EditText = findViewById(R.id.edit_comment)
-
-        val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
-
         val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
         val retrofit: Retrofit = Retrofit.Builder()
             .client(okHttpClient)
@@ -76,6 +41,110 @@ class SchoolDetailActivity : AppCompatActivity() {
             .build()
 
         val service = retrofit.create(RetrofitService::class.java)
+
+        val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
+        rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rv_comment.setHasFixedSize(true)
+
+        val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
+
+        val tvSchooldetailTitle: TextView = findViewById(R.id.tv_schooldetail_title)
+        val tvSchooldetailSchoolName: TextView = findViewById(R.id.school_name)
+        val tvHomepage: TextView = findViewById(R.id.tv_homepage)
+        val tvSchooldetailContents: TextView = findViewById(R.id.tv_schooldetail_contents)
+
+        val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
+        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
+
+        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
+        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
+
+        var schoolDetailData: SchoolDetailData
+        service.getSchoolDetailData(schoolIdx = schoolIdx).enqueue(object : Callback<SchoolDetail> {
+            override fun onResponse(call: Call<SchoolDetail>, response: Response<SchoolDetail>) {
+                Log.d("Retrofitt","SchoolDetail code = ${response.code()}")
+                if(response.isSuccessful) {
+                    schoolDetailData = response.body()?.data!!
+                    tvSchooldetailTitle.text = schoolDetailData.schoolName
+                    tvSchooldetailSchoolName.text = schoolDetailData.schoolName
+
+                    tvHomepage.text = schoolDetailData.homePage
+
+                    var schoolDetailContents: String
+                    if (schoolDetailData.administrativeOfficeTel == null) schoolDetailData.administrativeOfficeTel = "없음"
+                    if (schoolDetailData.staffroomTel == null) schoolDetailData.staffroomTel = "없음"
+
+                    if (schoolDetailData.schoolKind == "GENERAL") schoolDetailData.schoolKind = "일반고"
+                    else if (schoolDetailData.schoolKind == "SPECIAL_PURPOSE") schoolDetailData.schoolKind = "특수목적고"
+                    else if (schoolDetailData.schoolKind == "AUTONOMOUS") schoolDetailData.schoolKind = "자율고"
+                    else if (schoolDetailData.schoolKind == "SPECIALIZED") schoolDetailData.schoolKind = "특성화고"
+
+                    if (schoolDetailData.fond == "PRIVATE") schoolDetailData.fond = "사립"
+                    else if (schoolDetailData.fond == "PUBLIC") schoolDetailData.fond = "공립"
+                    else if (schoolDetailData.fond == "NATIONAL") schoolDetailData.fond = "국립"
+
+                    if (schoolDetailData.fondType == "INDEPENDENCE") schoolDetailData.fondType = "단설"
+                    else if (schoolDetailData.fondType == "ESTABLISH") schoolDetailData.fondType = "병설"
+                    else if (schoolDetailData.fondType == "ACCESSORIES") schoolDetailData.fondType = "부속"
+
+                    if (schoolDetailData.genderCheck == "M") schoolDetailData.genderCheck = "남고"
+                    else if (schoolDetailData.genderCheck == "W") schoolDetailData.genderCheck = "여고"
+                    else if (schoolDetailData.genderCheck == "MW") schoolDetailData.genderCheck = "남녀공학"
+
+                    schoolDetailContents = "행정실 전화번호 : ${schoolDetailData.administrativeOfficeTel} \n" +
+                            "교무실 전화번호 : ${schoolDetailData.staffroomTel} \n" +
+                            "도로명 주소 : ${schoolDetailData.roadNameAddress} \n" +
+                            "학교 유형 : ${schoolDetailData.schoolKind} \n" +
+                            "설립 구분 : ${schoolDetailData.fond} \n" +
+                            "설립 유형 : ${schoolDetailData.fondType} \n" +
+                            "학교 성별 : ${schoolDetailData.genderCheck} \n" +
+                            "남녀 성비 : 남 ${schoolDetailData.maleSum.toString()}명 여 ${schoolDetailData.femaleSum}명"
+                    tvSchooldetailContents.text = schoolDetailContents
+                }
+            }
+
+            override fun onFailure(call: Call<SchoolDetail>, t: Throwable) {
+                Log.d("Retrofitt","SchoolDetailFalse")
+            }
+        })
+
+
+        var pick: Boolean
+        service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
+            override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
+                Log.d("Retrofitt","pick code = ${response.code()}")
+                if (response.isSuccessful) {
+                    pick = response.body()?.data ?: false
+                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
+                }
+            }
+
+            override fun onFailure(call: Call<Pick>, t: Throwable) {
+                Log.d("Retrofitt","pick false")
+            }
+        })
+        ivSchoolDetailMyPick.setOnClickListener {
+            service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
+                override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
+                    Log.d("Retrofitt","pick code = ${response.code()}")
+                    if (response.isSuccessful) {
+                        pick = response.body()?.data ?: false
+                        if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                        else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
+                    }
+                }
+
+                override fun onFailure(call: Call<Pick>, t: Throwable) {
+                    Log.d("Retrofitt","pick false")
+                }
+            })
+        }
+
+        val editComment: EditText = findViewById(R.id.edit_comment)
+
+        val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
+
         ibtnCommentSend.setOnClickListener{
             var content = editComment.text.toString()
             service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
