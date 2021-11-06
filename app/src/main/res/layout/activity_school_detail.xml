@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="15dp"
-                android:text="대구 소프트웨어 고등학교"
+                android:text="학교명"
                 android:paddingLeft="10dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
@@ -157,8 +157,18 @@
                     android:text=" 홈페이지"
                     android:fontFamily="@font/nexon_lv1_gothic_bold"
                     android:textColor="#fff100"
-                    android:textStyle="bold"
                     android:textSize="23dp"/>
+                <TextView
+                    android:id="@+id/tv_homepage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="homepage"
+                    android:linksClickable="true"
+                    android:autoLink="web"
+                    android:textColor="@color/black"
+                    android:textSize="23dp"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/nexon_lv1_gothic_bold"/>
             </LinearLayout>
 
             <View
@@ -174,16 +184,15 @@
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#CDCDCD"/>
+
             <TextView
+                android:id="@+id/tv_schooldetail_contents"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
-                android:text=" textArea"
-                android:textSize="25dp" >
+                android:text="textArea"
+                android:textSize="25dp"
+                android:layout_marginStart="10dp">
 
             </TextView>
 
