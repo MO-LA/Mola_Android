@@ -102,7 +102,7 @@ interface RetrofitService {
     ): Call<Comment?>
 
     @PATCH("/estimate")
-    fun PatchEstimate(
+    fun patchEstimate(
         @Query("estimate") estimate: Int,
         @Query("schoolIdx") schoolIdx: Int
     ) : Call<Any?>
@@ -110,4 +110,6 @@ interface RetrofitService {
     @GET("/user")
     fun getUser(): Call<User>
 
+    @GET("user/picked")
+    fun getMyPicked() : Call<SchoolData>
 }

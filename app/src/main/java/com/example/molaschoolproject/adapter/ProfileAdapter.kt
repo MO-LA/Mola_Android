@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.activity.MainActivity
+import com.example.molaschoolproject.activity.MyPickActivity
 import com.example.molaschoolproject.activity.SchoolDetailActivity
 import com.example.molaschoolproject.data_type.SchoolProfiles
 
@@ -59,6 +62,11 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
             intent.putExtra("estimate",estimate)
             intent.putExtra("estimateDouble",estimateDouble)
             val activityHolder: Activity = holder.itemView.context as Activity
+            val contextText: String = holder.itemView.context.toString()
+            Toast.makeText(holder.itemView.context,"activityHolder = $contextText",Toast.LENGTH_SHORT).show()
+
+            if (contextText.contains("MainActivity")) intent.putExtra("context","M")
+            else if (contextText.contains("MyPickActivity")) intent.putExtra("context","P")
             activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
