@@ -60,12 +60,16 @@ interface RetrofitService {
     fun postReview(
         @Body review:SendReview
     ): Call<Any?>
-
-
+    
     @GET("review/list")
     fun getReviewList(
         @Query("schoolIdx") schoolIdx: Int
     ) : Call<Review?>
+
+    @GET("/pick")
+    fun getPickBoolean(
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<Pick>
 
     @POST("/post")
     fun postCommunity(
