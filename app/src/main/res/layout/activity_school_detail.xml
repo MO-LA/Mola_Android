@@ -184,16 +184,15 @@
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#CDCDCD"/>
+
             <TextView
+                android:id="@+id/tv_schooldetail_contents"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
-                android:text=" textArea"
-                android:textSize="25dp" >
+                android:text="textArea"
+                android:textSize="25dp"
+                android:layout_marginStart="10dp">
 
             </TextView>
 
