@@ -265,6 +265,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, WordSearchActivity::class.java)
             startActivity(intent)
         }
+        btnvMain.findViewById<View>(R.id.btnv_item_community).setOnClickListener{
+            val intent = Intent(this@MainActivity, CommunityActivity::class.java)
+            startActivity(intent)
+        }
+        btnvMain.findViewById<View>(R.id.btnv_item_mypage).setOnClickListener{
+            val intent = Intent(this@MainActivity,MyPageActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
