@@ -134,7 +134,47 @@ class MainActivity : AppCompatActivity() {
             val bottomSheet = SchoolCategoryFondTypeBottomSheet()
             bottomSheet.show(supportFragmentManager,bottomSheet.tag)
 
+            bottomSheet.setOnClickedListener(object  : SchoolCategoryFondTypeBottomSheet.textClickListener {
+                override fun onClicked(fondTypeText: String) {
+                    schoolCategoryFondType.text = fondTypeText
+                    var schoolFondType = fondTypeText
+                    if (schoolFondType != "설립유형" && schoolFondType != "전체") {
+                        if (schoolFondType == "단설") schoolFondType = "INDEPENDENCE"
+                        else if (schoolFondType == "병설") schoolFondType = "ESTABLISH"
+                        else if (schoolFondType == "부속") schoolFondType = "ACCESSORIES"
 
+                        service.getSchoolDataByFondType(fondType = schoolFondType).enqueue(object : Callback<SchoolData> {
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","searchByFondType main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","searchByFondType main False")
+                            }
+                        })
+                    }
+                    else if (schoolFondType == "전체") {
+                        service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
+                            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+                                Log.d("Retrofitt","main code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    profileList = response.body()?.data
+                                    Log.d("Retrofitt","mainList = ${response.body()?.data}")
+                                    rvMain.adapter = ProfileAdapter(profileList as ArrayList<SchoolProfiles>)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                                Log.d("Retrofitt","main False")
+                            }
+                        })
+                    }
+                }
+            })
         }
 
 

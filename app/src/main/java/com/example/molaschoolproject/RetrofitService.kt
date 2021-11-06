@@ -49,7 +49,7 @@ interface RetrofitService {
         @Query("size") size: Int = 5000,
         @Query("fondType") fondType: String
     ) : Call<SchoolData>
-    
+
     @POST("review")
     fun postReview(
         @Body review:SendReview
