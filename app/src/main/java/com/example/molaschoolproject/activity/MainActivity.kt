@@ -27,11 +27,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var profileList: List<SchoolProfiles>?
-        val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
-        val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
+
+        val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
+        val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
+        val schoolCategoryFondType: TextView = findViewById(R.id.tv_fondtype)
+
+
 
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -124,6 +128,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+        }
+
+        schoolCategoryFondType.setOnClickListener{
+            val bottomSheet = SchoolCategoryFondTypeBottomSheet()
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+
+
         }
 
 
