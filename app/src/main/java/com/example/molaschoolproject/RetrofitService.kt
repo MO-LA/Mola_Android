@@ -23,7 +23,7 @@ interface RetrofitService {
 
     @GET("school/list")
     fun getSchoolData(
-        @Query("size") size: Int = 5000
+        @Query("size") size: Int = 100
     ): Call<SchoolData>
 
     @GET("school/list/name")
@@ -68,7 +68,8 @@ interface RetrofitService {
     
     @GET("review/list")
     fun getReviewList(
-        @Query("schoolIdx") schoolIdx: Int
+        @Query("schoolIdx") schoolIdx: Int,
+        @Query("size") size: Int = 100
     ) : Call<Review?>
 
     @GET("/pick")
@@ -76,6 +77,10 @@ interface RetrofitService {
         @Query("schoolIdx") schoolIdx: Int
     ) : Call<Pick>
 
+    @PATCH("/pick")
+    fun PatchPick(
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<Any?>
     @POST("/post")
     fun postCommunity(
         @Body communityWrite: CommunityWrite

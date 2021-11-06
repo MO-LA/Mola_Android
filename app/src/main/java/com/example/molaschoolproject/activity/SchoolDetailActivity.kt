@@ -36,7 +36,7 @@ class SchoolDetailActivity : AppCompatActivity() {
         val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
         val retrofit: Retrofit = Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
+            .baseUrl("http://192.168.61.124:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -58,6 +58,51 @@ class SchoolDetailActivity : AppCompatActivity() {
 
         val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
         Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
+
+        var pick: Boolean
+        service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
+            override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
+                Log.d("Retrofitt","pick code = ${response.code()}")
+                if (response.isSuccessful) {
+                    pick = response.body()!!.data
+                    Log.d("Retrofitt","getPick code = ${response.code()} pick = $pick")
+                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
+                }
+            }
+
+            override fun onFailure(call: Call<Pick>, t: Throwable) {
+            }
+        })
+
+        ivSchoolDetailMyPick.setOnClickListener {
+            service.PatchPick(schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                    Log.d("Retrofitt","Patch Pick code = ${response.code()}")
+                    if (response.isSuccessful) {
+                        service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
+                            override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
+                                Log.d("Retrofitt","pick code = ${response.code()}")
+                                if (response.isSuccessful) {
+                                    pick = response.body()!!.data
+                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
+                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                                }
+                            }
+                            override fun onFailure(call: Call<Pick>, t: Throwable) {
+                                Log.d("Retrofitt","pick false")
+                            }
+                        })
+                    }
+                }
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    Log.d("Retrofitt","Patch Pick false")
+                }
+            })
+
+
+
+        }
 
         var schoolDetailData: SchoolDetailData
         service.getSchoolDetailData(schoolIdx = schoolIdx).enqueue(object : Callback<SchoolDetail> {
@@ -108,39 +153,6 @@ class SchoolDetailActivity : AppCompatActivity() {
             }
         })
 
-
-        var pick: Boolean
-        service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
-            override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
-                Log.d("Retrofitt","pick code = ${response.code()}")
-                if (response.isSuccessful) {
-                    pick = response.body()?.data ?: false
-                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
-                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                }
-            }
-
-            override fun onFailure(call: Call<Pick>, t: Throwable) {
-                Log.d("Retrofitt","pick false")
-            }
-        })
-        ivSchoolDetailMyPick.setOnClickListener {
-            service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
-                override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
-                    Log.d("Retrofitt","pick code = ${response.code()}")
-                    if (response.isSuccessful) {
-                        pick = response.body()?.data ?: false
-                        if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
-                        else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                    }
-                }
-
-                override fun onFailure(call: Call<Pick>, t: Throwable) {
-                    Log.d("Retrofitt","pick false")
-                }
-            })
-        }
-
         val editComment: EditText = findViewById(R.id.edit_comment)
 
         val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
@@ -150,17 +162,17 @@ class SchoolDetailActivity : AppCompatActivity() {
             service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     Log.d("retrofitt","review post retrofit code = ${response.code()}")
+                    val restartIntent = Intent(this@SchoolDetailActivity,SchoolDetailActivity::class.java)
+                    restartIntent.putExtra("schoolIdx",intent.getIntExtra("schoolIdx",0))
+                    finish()
+                    startActivity(restartIntent)
                 }
 
                 override fun onFailure(call: Call<Any?>, t: Throwable) {
                     Log.d("retrofitt","review post retrofit false")
                 }
             })
-            val restartIntent = Intent(this,SchoolDetailActivity::class.java)
-            restartIntent.putExtra("schoolName",intent.getStringExtra("schoolName"))
-            restartIntent.putExtra("schoolIdx",intent.getIntExtra("schoolIdx",0))
-            finish()
-            startActivity(restartIntent)
+
         }
 
 
