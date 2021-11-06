@@ -163,7 +163,7 @@ class SignUpActivity : AppCompatActivity() {
         userRadiogroup = activity.findViewById(R.id.sign_radiogroup)
         btnSignup = activity.findViewById(R.id.btn_signup)
         btnOverlap = activity.findViewById(R.id.btn_overlap)
-        imgBack = activity.findViewById(R.id.img_back)
+        imgBack = activity.findViewById(R.id.iv_back)
     }
 
 
