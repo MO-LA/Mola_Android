@@ -5,8 +5,8 @@ import java.io.Serializable
 data class SchoolDetail(
     var status: Int,
     var massage: String,
-    var data: List<SchoolDetailData>? = null
-)
+    var data: SchoolDetailData? = null
+) : Serializable
 
 data class SchoolDetailData(
     var idx: Int? = 0,
