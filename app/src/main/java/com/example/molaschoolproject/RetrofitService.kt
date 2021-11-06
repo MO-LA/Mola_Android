@@ -56,6 +56,11 @@ interface RetrofitService {
         @Query("q") q: String
     ) : Call<SchoolData>
 
+    @GET("school")
+    fun getSchoolDetailData(
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<SchoolDetail>
+
     @POST("review")
     fun postReview(
         @Body review:SendReview
