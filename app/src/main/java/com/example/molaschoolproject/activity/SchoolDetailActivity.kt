@@ -85,8 +85,9 @@ class SchoolDetailActivity : AppCompatActivity() {
                                 Log.d("Retrofitt","pick code = ${response.code()}")
                                 if (response.isSuccessful) {
                                     pick = response.body()!!.data
-                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                                    Log.d("Retrofittt","pick = $pick")
+                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
+                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
                                 }
                             }
                             override fun onFailure(call: Call<Pick>, t: Throwable) {
