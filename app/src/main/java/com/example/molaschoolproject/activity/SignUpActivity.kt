@@ -70,22 +70,32 @@ class SignUpActivity : AppCompatActivity() {
             userPw.text.isEmpty() ||
             userPwCheck.text.isEmpty() ||
             userAge.text.isEmpty() ||
-            userRadiogroup.isEmpty()) {
+            userRadiogroup.isEmpty()
+        ) {
             Toast.makeText(this@SignUpActivity, "빈칸을 채워주세요.", Toast.LENGTH_SHORT).show()
-        }
-        else {
+        } else {
             if (userPw.getText().toString().equals(userPwCheck.getText().toString())) {
-                Toast.makeText(this@SignUpActivity, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
                 val userSex = if (sex == "남") "M" else "W"
                 val userId = userId.text.toString()
                 val userPassword = userPw.text.toString()
                 val userAge = userAge.text.toString().toInt()
-                val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
-                intent.putExtra("id", userId)
-                intent.putExtra("pw", userPassword)
-                intent.putExtra("age", userAge)
-                intent.putExtra("sex", userSex)
-                startActivity(intent)
+                if (!Pattern.matches("^[a-zA-Z0-9]*\$", userId)) {
+                    Toast.makeText(this, "아이디는 영문 & 숫자만 가능합니다.", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                else if (!Pattern.matches("^[a-zA-Z0-9]*\$", userPassword)) {
+                    Toast.makeText(this, "비밀번호는 영문 & 숫자만 가능합니다.", Toast.LENGTH_LONG).show()
+                    return
+                }
+                else {
+                    Toast.makeText(this@SignUpActivity, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
+                    intent.putExtra("id", userId)
+                    intent.putExtra("pw", userPassword)
+                    intent.putExtra("age", userAge)
+                    intent.putExtra("sex", userSex)
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this@SignUpActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -116,44 +126,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
             })
     }
-
-//    fun registerValidation() { // 회원가입 예외처리
-
-//    }
-
-//    fun filter(activity: Activity) { // 회원가입 정규식
-//        userId.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-//            val ps: Pattern =
-//                Pattern.compile("^[a-zA-Z0-9\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$")
-//            if (source == "" || ps.matcher(source).matches()) {
-//                return@InputFilter source
-//            }
-//            Toast.makeText( this, "영문, 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
-//            ""
-//        }, InputFilter.LengthFilter(10))
-//
-//        userPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-//            val ps: Pattern =
-//                Pattern.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,15}.\$\n")
-//            if (source == "" || ps.matcher(source).matches()) {
-//                return@InputFilter source
-//            }
-//            Toast.makeText( this, " 숫자, 문자, 특수문자 모두 포함하여야 합니다.", Toast.LENGTH_SHORT).show()
-//            ""
-//        }, InputFilter.LengthFilter(15))
-//
-//        userAge.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-//            val ps: Pattern =
-//                Pattern.compile("^(?=.*[0-9]).{1,3}.\$\n")
-//            if (source == "" || ps.matcher(source).matches()) {
-//                return@InputFilter source
-//            }
-//            Toast.makeText( this, " 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
-//            ""
-//        }, InputFilter.LengthFilter(3))
-//
-//
-//    }
 
     fun initView(activity: Activity) {
         userId = activity.findViewById(R.id.signup_edit_id)
