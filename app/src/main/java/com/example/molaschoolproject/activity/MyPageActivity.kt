@@ -83,6 +83,7 @@ class MyPageActivity : AppCompatActivity() {
         fun toast_p() {
             Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
+            finish()
             startActivity(intent)
         }
 
