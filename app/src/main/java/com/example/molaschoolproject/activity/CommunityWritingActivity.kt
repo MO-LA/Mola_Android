@@ -57,7 +57,7 @@ class CommunityWritingActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val service = retrofit.create(RetrofitService::class.java)
-            service.postCommunity(CommunityWrite(userTitle, userContent))
+            service.postCommunity(CommunityWrite(title = userTitle, content = userContent))
                 .enqueue(object : Callback<CommunityWrite> {
                     override fun onResponse(call: Call<CommunityWrite>, response: Response<CommunityWrite>) {
                         if(response.isSuccessful) {
