@@ -32,7 +32,7 @@
             android:layout_marginRight="20dp"
             android:padding="8dp"
             android:background="@drawable/border"
-
+            android:imeOptions="actionSearch"
             />
         <ImageView
             android:id="@+id/iv_main_search"
