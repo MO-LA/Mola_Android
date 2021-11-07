@@ -4,7 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -59,8 +62,20 @@ class MainActivity : AppCompatActivity() {
         })
 
         val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
-
         val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
+
+        editSearchMain.setOnEditorActionListener{ textView, action, event ->
+            var handled = false
+            val info = EditorInfo.IME_ACTION_SEARCH
+            Log.d("innn","innn $info")
+            if (action == EditorInfo.IME_ACTION_SEARCH) {
+                Log.d("Outt","outt")
+                ivMainSearch.performClick()
+                handled = true
+            }
+            handled
+        }
+
         ivMainSearch.setOnClickListener {
             var searchByNameData: String = editSearchMain.text.toString()
             if (searchByNameData.isEmpty())  searchByNameData = ""
