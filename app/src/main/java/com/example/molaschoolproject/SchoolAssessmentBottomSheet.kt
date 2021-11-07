@@ -88,7 +88,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
         val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
         val retrofit: Retrofit = Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://192.168.61.124:8040/")
+            .baseUrl("http://10.80.162.195:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
