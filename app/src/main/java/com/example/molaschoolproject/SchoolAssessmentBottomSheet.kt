@@ -95,7 +95,7 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
         val service = retrofit.create(RetrofitService::class.java)
         view?.findViewById<Button>(R.id.btn_assessment_confirm)?.setOnClickListener{
             if (estimateScore != 0) {
-                service.PatchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+                service.patchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
                     override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                         Log.d("Retrofitt","별점 입력 완료 code = ${response.code()}")
 
