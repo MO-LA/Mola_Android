@@ -31,6 +31,7 @@ class SchoolSearchActivity : AppCompatActivity() {
     lateinit var btnNext: Button
     lateinit var schoolName: EditText
     var schoolNameString: String? = null
+    lateinit var schoolNameTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +70,7 @@ class SchoolSearchActivity : AppCompatActivity() {
                                 SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
                             schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
                                 override fun onClick(v: View, position: Int) {
-                                    schoolName.setText(schoolSearchList[position].schoolName)
+                                    schoolNameTextView.text = schoolSearchList[position].schoolName
                                     schoolNameString = schoolSearchList[position].schoolName.toString()
                                     Toast.makeText(
                                         v.context,
@@ -118,6 +119,7 @@ class SchoolSearchActivity : AppCompatActivity() {
     }
 
     fun init() {
+        schoolNameTextView = findViewById(R.id.select_school)
         schoolName = findViewById(R.id.edit_school_name)
         btnNext = findViewById(R.id.btn_next)
     }
