@@ -60,25 +60,14 @@ class SchoolSearchActivity : AppCompatActivity() {
 
             if (searchSchoolData.isEmpty()) searchSchoolData = ""
             searchSchoolData = searchSchoolData.replace(" ", "")
-            searchService.getSchoolDataByName(q = searchSchoolData)
-                .enqueue(object : Callback<SchoolData> {
-
+            searchService.getSchoolDataByName(q = searchSchoolData).enqueue(object : Callback<SchoolData> {
                     override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
-                        Log.d("Retrofitt", "searchByName main code = ${response.code()}")
-                        if (response.isSuccessful) {
-                            val schoolSearchList = response.body()?.data
-                            rvSchoolSearch.adapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
-                    override fun onResponse(
-                        call: Call<SchoolData>,
-                        response: Response<SchoolData>
-                    ) {
                         Log.d("Retrofitt", "searchByName main code = ${response.code()}")
                         if (response.isSuccessful) {
                             val schoolSearchList = response.body()?.data
                             val schoolSearchAdapter =
                                 SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
-                            schoolSearchAdapter.setItemClickListener(object :
-                                SchoolSearchAdapter.OnItemClickListener {
+                            schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
                                 override fun onClick(v: View, position: Int) {
                                     schoolName.setText(schoolSearchList[position].schoolName)
                                     schoolNameString = schoolSearchList[position].schoolName.toString()
@@ -133,5 +122,3 @@ class SchoolSearchActivity : AppCompatActivity() {
         btnNext = findViewById(R.id.btn_next)
     }
 }
-
-
