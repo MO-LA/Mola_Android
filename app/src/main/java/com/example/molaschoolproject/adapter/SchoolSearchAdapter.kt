@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.activity.SchoolSearchActivity
 import com.example.molaschoolproject.data_type.SchoolProfiles
 
 class SchoolSearchAdapter(
@@ -22,8 +23,9 @@ class SchoolSearchAdapter(
         holder.schoolSearchSchoolName.text = schoolSearchList.get(position).schoolName
         holder.schoolSearchArea.text = schoolSearchList.get(position).address
 
-        holder.itemView.setOnClickListener {
-            
+        var schoolName: String? = schoolSearchList.get(position).schoolName
+        holder.itemView.setOnClickListener{
+            itemClickListener.onClick(it,position)
         }
     }
 
@@ -35,4 +37,14 @@ class SchoolSearchAdapter(
         val schoolSearchSchoolName = itemView.findViewById<TextView>(R.id.schoolSearch_schoolName)
         val schoolSearchArea = itemView.findViewById<TextView>(R.id.schoolSearch_area)
     }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    private lateinit var itemClickListener : OnItemClickListener
+
+    fun setItemClickListener(itemClickListener: OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
 }
