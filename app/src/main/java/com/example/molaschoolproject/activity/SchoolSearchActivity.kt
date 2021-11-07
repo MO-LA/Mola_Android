@@ -30,6 +30,7 @@ class SchoolSearchActivity : AppCompatActivity() {
 
     lateinit var btnNext: Button
     lateinit var schoolName: EditText
+    var schoolNameString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +75,7 @@ class SchoolSearchActivity : AppCompatActivity() {
                                 SchoolSearchAdapter.OnItemClickListener {
                                 override fun onClick(v: View, position: Int) {
                                     schoolName.setText(schoolSearchList[position].schoolName)
+                                    schoolNameString = schoolSearchList[position].schoolName.toString()
                                     Toast.makeText(
                                         v.context,
                                         "position = ${schoolSearchList[position].schoolName}",
@@ -93,10 +95,11 @@ class SchoolSearchActivity : AppCompatActivity() {
 
 
     fun signUpSchool() {
-        if (schoolName.text.isEmpty()) {
+        if (schoolNameString == null) {
             Toast.makeText(this@SchoolSearchActivity, "빈칸을 채워주세요.", Toast.LENGTH_SHORT).show()
         } else {
-            val userSchool = schoolName.text.toString()
+            val userSchool = schoolNameString
+            Toast.makeText(this@SchoolSearchActivity,"userSchool = $userSchool",Toast.LENGTH_SHORT).show()
             if (!Pattern.matches("^[가-힣]*\$", userSchool)) {
                 Toast.makeText(this@SchoolSearchActivity, "학교검색은 한글만 가능합니다.", Toast.LENGTH_SHORT).show()
                 return
