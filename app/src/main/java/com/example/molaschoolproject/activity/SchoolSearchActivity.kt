@@ -52,62 +52,15 @@ class SchoolSearchActivity : AppCompatActivity() {
             .baseUrl("http://192.168.61.124:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val schoolSearchService = retrofit.create(RetrofitService::class.java)
-
-        schoolSearchService.getSchoolData().enqueue(object : Callback<SchoolData> {
-            override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
-                Log.d("Retrofitt", "SchoolSearch code = ${response.code()}")
-                if (response.isSuccessful) {
-                    val schoolSearchList = response.body()?.data
-<<<<<<< HEAD
-                    val schoolSearchAdapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
-                    schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
-                        override fun onClick(v: View, position: Int) {
-                            schoolName.setText(schoolSearchList[position].schoolName)
-                            Toast.makeText(v.context,"position = ${schoolSearchList[position].schoolName}",Toast.LENGTH_SHORT).show()
-                        }
-                    })
-                    rvSchoolSearch.adapter = schoolSearchAdapter
-=======
-                    rvSchoolSearch.adapter =
-                        SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
->>>>>>> 2c77810251e3642de9d11a30e2d15f83df66c45d
-                }
-            }
-
-            override fun onFailure(call: Call<SchoolData>, t: Throwable) {
-
-            }
-        })
-
 
         schoolName.setOnClickListener {
             val searchService = retrofit.create(RetrofitService::class.java)
             var searchSchoolData: String = schoolName.text.toString()
-<<<<<<< HEAD
-            if (searchSchoolData.isEmpty())  searchSchoolData = ""
-            searchSchoolData = searchSchoolData.replace(" ","")
-            searchService.getSchoolDataByName(q = searchSchoolData).enqueue(object : Callback<SchoolData> {
 
-                override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
-                    Log.d("Retrofitt","searchByName main code = ${response.code()}")
-                    if(response.isSuccessful){
-                        val schoolSearchList = response.body()?.data
-                        val schoolSearchAdapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
-                        schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
-                            override fun onClick(v: View, position: Int) {
-                                schoolName.setText(schoolSearchList[position].schoolName) 
-                                Toast.makeText(v.context,"position = ${schoolSearchList[position].schoolName}",Toast.LENGTH_SHORT).show()
-                            }
-                        })
-                        rvSchoolSearch.adapter = schoolSearchAdapter
-
-=======
             if (searchSchoolData.isEmpty()) searchSchoolData = ""
             searchSchoolData = searchSchoolData.replace(" ", "")
             searchService.getSchoolDataByName(q = searchSchoolData)
                 .enqueue(object : Callback<SchoolData> {
-
                     override fun onResponse(
                         call: Call<SchoolData>,
                         response: Response<SchoolData>
@@ -115,19 +68,29 @@ class SchoolSearchActivity : AppCompatActivity() {
                         Log.d("Retrofitt", "searchByName main code = ${response.code()}")
                         if (response.isSuccessful) {
                             val schoolSearchList = response.body()?.data
-                            rvSchoolSearch.adapter =
+                            val schoolSearchAdapter =
                                 SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                            schoolSearchAdapter.setItemClickListener(object :
+                                SchoolSearchAdapter.OnItemClickListener {
+                                override fun onClick(v: View, position: Int) {
+                                    schoolName.setText(schoolSearchList[position].schoolName)
+                                    Toast.makeText(
+                                        v.context,
+                                        "position = ${schoolSearchList[position].schoolName}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            })
+                            rvSchoolSearch.adapter = schoolSearchAdapter
                         }
->>>>>>> 2c77810251e3642de9d11a30e2d15f83df66c45d
                     }
 
                     override fun onFailure(call: Call<SchoolData>, t: Throwable) {
-                        TODO("Not yet implemented")
                     }
-
                 })
         }
     }
+
 
     fun signUpSchool() {
         if (schoolName.text.isEmpty()) {
@@ -135,7 +98,7 @@ class SchoolSearchActivity : AppCompatActivity() {
         } else {
             val userSchool = schoolName.text.toString()
             if (!Pattern.matches("^[가-힣]*\$", userSchool)) {
-                Toast.makeText(this, "학교검색은 한글만 가능합니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SchoolSearchActivity, "학교검색은 한글만 가능합니다.", Toast.LENGTH_SHORT).show()
                 return
             }
             else {
@@ -160,7 +123,6 @@ class SchoolSearchActivity : AppCompatActivity() {
         schoolName = findViewById(R.id.edit_school_name)
         btnNext = findViewById(R.id.btn_next)
     }
-
-
 }
+
 

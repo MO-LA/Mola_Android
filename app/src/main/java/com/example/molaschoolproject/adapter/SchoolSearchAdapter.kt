@@ -23,7 +23,6 @@ class SchoolSearchAdapter(
         holder.schoolSearchSchoolName.text = schoolSearchList.get(position).schoolName
         holder.schoolSearchArea.text = schoolSearchList.get(position).address
 
-        var schoolName: String? = schoolSearchList.get(position).schoolName
         holder.itemView.setOnClickListener{
             itemClickListener.onClick(it,position)
         }
