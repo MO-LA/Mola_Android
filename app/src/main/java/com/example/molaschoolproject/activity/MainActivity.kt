@@ -102,6 +102,9 @@ class MainActivity : AppCompatActivity() {
             fondBottomSheet.setOnClickedListener(object : SchoolCategoryFondBottomSheet.textClickListener {
                 override fun onClicked(fondText: String) {
                     schoolCategoryFond.text = fondText
+                    schoolCategoryFondType.text = "설립유형"
+                    schoolCategoryKind.text = "학교유형"
+                    schoolCategoryRegion.text = "지역"
                     var schoolFond = fondText
 
                     if (schoolFond != "설립구분" && schoolFond != "전체") {
@@ -150,6 +153,10 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object  : SchoolCategoryFondTypeBottomSheet.textClickListener {
                 override fun onClicked(fondTypeText: String) {
                     schoolCategoryFondType.text = fondTypeText
+                    schoolCategoryFond.text = "설립구분"
+                    schoolCategoryKind.text = "학교유형"
+                    schoolCategoryRegion.text = "지역"
+
                     var schoolFondType = fondTypeText
                     if (schoolFondType != "설립유형" && schoolFondType != "전체") {
                         if (schoolFondType == "단설") schoolFondType = "INDEPENDENCE"
@@ -199,6 +206,9 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object : SchoolCategoryKindBottomSheet.textClickListener {
                 override fun onClicked(typeText: String) {
                     schoolCategoryKind.text = typeText
+                    schoolCategoryFond.text = "설립구분"
+                    schoolCategoryFondType.text = "설립유형"
+                    schoolCategoryRegion.text = "지역"
                     var schoolType = typeText
                     if (schoolType != "학교유형" && schoolType != "전체") {
                         if (schoolType == "일반고") schoolType = "GENERAL"
@@ -248,6 +258,9 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object : SchoolCategoryRegionBottomSheet.textClickListener {
                 override fun onClicked(regionText: String) {
                     var schoolRegion: String = regionText
+                    schoolCategoryFond.text = "설립구분"
+                    schoolCategoryFondType.text = "설립유형"
+                    schoolCategoryKind.text = "학교유형"
                     schoolRegion = schoolRegion.replace(" ","")
 
                     if (schoolRegion.isEmpty()) {
