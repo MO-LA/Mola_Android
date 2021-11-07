@@ -75,15 +75,11 @@ class SchoolSearchActivity : AppCompatActivity() {
             searchService.getSchoolDataByName(q = searchSchoolData)
                 .enqueue(object : Callback<SchoolData> {
 
-                    override fun onResponse(
-                        call: Call<SchoolData>,
-                        response: Response<SchoolData>
-                    ) {
+                    override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
                         Log.d("Retrofitt", "searchByName main code = ${response.code()}")
                         if (response.isSuccessful) {
                             val schoolSearchList = response.body()?.data
-                            rvSchoolSearch.adapter =
-                                SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                            rvSchoolSearch.adapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
                         }
                     }
 
