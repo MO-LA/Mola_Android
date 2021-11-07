@@ -81,8 +81,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="20dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -91,31 +91,50 @@
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="현재 선택된 학교"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/select_school"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
-                android:text="학교"
+                android:text="선택된 학교 없음"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:layout_marginTop="5dp"
+                android:textSize="25dp" />
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_school_name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/border"
-            android:drawableEnd="@drawable/search_icon"
-            android:fontFamily="@font/nexon_lv1_gothic_bold"
-            android:hint=" 학교이름" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/edit_school_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:fontFamily="@font/nexon_lv1_gothic_bold"
+                android:hint=" 학교이름"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColorHint="#808080"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/img_schoolSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/search_icon" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
