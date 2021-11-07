@@ -1,11 +1,15 @@
 package com.example.molaschoolproject.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
+import com.example.molaschoolproject.activity.LocalSearchActivity
+import com.example.molaschoolproject.activity.SchoolSearchActivity
 import com.example.molaschoolproject.data_type.SchoolProfiles
 
 class SchoolSearchAdapter(
@@ -23,7 +27,7 @@ class SchoolSearchAdapter(
         holder.schoolSearchArea.text = schoolSearchList.get(position).address
 
         holder.itemView.setOnClickListener {
-            
+
         }
     }
 
