@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -36,6 +37,7 @@ class SchoolSearchActivity : AppCompatActivity() {
         val rvSchoolSearch = findViewById<RecyclerView>(R.id.rv_school)
         rvSchoolSearch.layoutManager =
             LinearLayoutManager(this@SchoolSearchActivity, LinearLayoutManager.VERTICAL, false)
+
         rvSchoolSearch.setHasFixedSize(true)
 
         init()
@@ -57,7 +59,14 @@ class SchoolSearchActivity : AppCompatActivity() {
                 Log.d("Retrofitt","SchoolSearch code = ${response.code()}")
                 if(response.isSuccessful){
                     val schoolSearchList = response.body()?.data
-                    rvSchoolSearch.adapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                    val schoolSearchAdapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                    schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
+                        override fun onClick(v: View, position: Int) {
+                            schoolName.setText(schoolSearchList[position].schoolName)
+                            Toast.makeText(v.context,"position = ${schoolSearchList[position].schoolName}",Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                    rvSchoolSearch.adapter = schoolSearchAdapter
                 }
             }
 
@@ -65,6 +74,7 @@ class SchoolSearchActivity : AppCompatActivity() {
 
             }
         })
+
 
         schoolName.setOnClickListener {
             val searchService = retrofit.create(RetrofitService::class.java)
@@ -77,7 +87,15 @@ class SchoolSearchActivity : AppCompatActivity() {
                     Log.d("Retrofitt","searchByName main code = ${response.code()}")
                     if(response.isSuccessful){
                         val schoolSearchList = response.body()?.data
-                        rvSchoolSearch.adapter =  SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                        val schoolSearchAdapter = SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                        schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
+                            override fun onClick(v: View, position: Int) {
+                                schoolName.setText(schoolSearchList[position].schoolName) 
+                                Toast.makeText(v.context,"position = ${schoolSearchList[position].schoolName}",Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                        rvSchoolSearch.adapter = schoolSearchAdapter
+
                     }
                 }
 
