@@ -40,7 +40,7 @@ class WordSearchActivity : AppCompatActivity() {
 
         val wordList = arrayListOf( // 용어 데이터 리스트
             Word("일반고", "다양한 분야에 걸쳐 일반적인 교육을 실시하는 고등학교이다.",
-                "링크 : https://www.youtube.com/watch?v=9DJWt3crhWE"),
+                "링크 : https://namu.wiki/w/%EC%9D%BC%EB%B0%98%EA%B3%84%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90"),
             Word("자율형\n공립고", "진보한 형태의 공교육 모델을 만드는 것이 목표인 학교이다.",
                 "https://www.youtube.com/watch?v=9DJWt3crhWE"),
             Word("자율형\n사립고", "다양하고 특성화된 교육과정과 학사운영 등을 자율적으로 운영하는 학교이다.",
