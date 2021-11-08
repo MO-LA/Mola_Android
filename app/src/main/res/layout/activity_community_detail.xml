@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/backarrow" />
 
         <LinearLayout
@@ -120,7 +120,7 @@
             <TextView
                 android:id="@+id/txt_community_detail_content"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="내용"
@@ -153,6 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="5"
+                    android:maxLines="1"
+                    android:maxLength="200"
                     android:hint="댓글을 입력해 주세요" />
 
                 <LinearLayout
