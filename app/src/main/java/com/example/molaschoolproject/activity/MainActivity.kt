@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.*
@@ -314,9 +315,7 @@ class MainActivity : AppCompatActivity() {
         dialog.setMessage("저희 MOLA을 이용해주셔서 감사합니다.")
 
         fun AppEnd() {
-            finishAffinity()
-            System.runFinalization()
-            System.exit(0)
+            ActivityCompat.finishAffinity(this)
         }
 
         var dialog_listener = object : DialogInterface.OnClickListener {
