@@ -107,6 +107,11 @@ interface RetrofitService {
         @Query("schoolIdx") schoolIdx: Int
     ) : Call<Any?>
 
+    @GET("/estimate/avg")
+    fun getEstimate(
+        @Query("schoolIdx") schoolIdx: Int
+    ) : Call<Estimate>
+
     @GET("/user")
     fun getUser(): Call<User>
 
