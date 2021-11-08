@@ -1,5 +1,6 @@
 package com.example.molaschoolproject.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.*
@@ -302,6 +305,31 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onBackPressed() {
+
+        var dialog = AlertDialog.Builder(this)
+        dialog.setTitle("앱을 종료 하시겠습니까?")
+        dialog.setMessage("저희 MOLA을 이용해주셔서 감사합니다.")
+
+        fun AppEnd() {
+            finishAffinity()
+            System.runFinalization()
+            System.exit(0)
+        }
+
+        var dialog_listener = object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE ->
+                        AppEnd()
+                }
+            }
+        }
+        dialog.setPositiveButton("YES", dialog_listener)
+        dialog.setNegativeButton("NO", null)
+        dialog.show()
 
     }
 }
