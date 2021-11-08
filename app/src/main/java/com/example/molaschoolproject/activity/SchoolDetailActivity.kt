@@ -20,6 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.round
 
 class SchoolDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +94,7 @@ class SchoolDetailActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     estimate = response.body()?.data!!
                     Log.d("Retrofitt","Estimate = ${estimate}")
+                    estimate = round((estimate!! * 10)) / 10
 
                     tvSchooldetailEstimate.text = estimate.toString()
 
@@ -294,6 +296,7 @@ class SchoolDetailActivity : AppCompatActivity() {
                                             if (response.isSuccessful) {
                                                 estimate = response.body()?.data!!
                                                 Log.d("Retrofitt","Estimate = ${estimate}")
+                                                estimate = round((estimate!! * 10)) / 10
 
                                                 tvSchooldetailEstimate.text = estimate.toString()
 
