@@ -16,9 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.adapter.SchoolSearchAdapter
-import com.example.molaschoolproject.data_type.SchoolData
-import com.example.molaschoolproject.data_type.SchoolProfiles
-import com.example.molaschoolproject.data_type.SignUp
+import com.example.molaschoolproject.data_type.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,20 +59,20 @@ class SchoolSearchActivity : AppCompatActivity() {
 
             if (searchSchoolData.isEmpty()) searchSchoolData = ""
             searchSchoolData = searchSchoolData.replace(" ", "")
-            searchService.getSchoolDataByName(q = searchSchoolData).enqueue(object : Callback<SchoolData> {
-                    override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
+            searchService.getMiddleSchoolDataByName(q = searchSchoolData).enqueue(object : Callback<MiddleSchoolData> {
+                    override fun onResponse(call: Call<MiddleSchoolData>, response: Response<MiddleSchoolData>) {
                         Log.d("Retrofitt", "searchByName main code = ${response.code()}")
                         if (response.isSuccessful) {
                             val schoolSearchList = response.body()?.data
                             val schoolSearchAdapter =
-                                SchoolSearchAdapter(schoolSearchList as ArrayList<SchoolProfiles>)
+                                SchoolSearchAdapter(schoolSearchList as ArrayList<MiddleSchool>)
                             schoolSearchAdapter.setItemClickListener(object : SchoolSearchAdapter.OnItemClickListener {
                                 override fun onClick(v: View, position: Int) {
-                                    schoolNameTextView.text = schoolSearchList[position].schoolName
-                                    schoolNameString = schoolSearchList[position].schoolName.toString()
+                                    schoolNameTextView.text = schoolSearchList[position].name
+                                    schoolNameString = schoolSearchList[position].name.toString()
                                     Toast.makeText(
                                         v.context,
-                                        "position = ${schoolSearchList[position].schoolName}",
+                                        "position = ${schoolSearchList[position].name}",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -83,7 +81,7 @@ class SchoolSearchActivity : AppCompatActivity() {
                         }
                     }
 
-                    override fun onFailure(call: Call<SchoolData>, t: Throwable) {
+                    override fun onFailure(call: Call<MiddleSchoolData>, t: Throwable) {
                     }
                 })
         }
