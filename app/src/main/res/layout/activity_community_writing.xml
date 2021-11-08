@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/backarrow" />
 
         <LinearLayout
@@ -63,9 +63,9 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/icon_profile" />
 
         <LinearLayout
@@ -88,10 +88,10 @@
                 android:id="@+id/txt_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="cnj7224"
                 android:textColor="#000000"
-                android:fontFamily="@font/nexon_lv1_gothic"/>
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -99,25 +99,29 @@
         android:id="@+id/edit_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:hint="  제목"
-        android:textSize="24dp"
-        android:layout_marginTop="10dp"/>
+        android:maxLength="20"
+        android:maxLines="1"
+        android:textSize="24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:background="#ffffff">
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/edit_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="36dp"
-            android:hint="  | 입력 해주세요"/>
+            android:gravity="top"
+            android:hint="  | 입력 해주세요"
+            android:maxLines="20"
+            android:textSize="30dp" />
     </LinearLayout>
 
     <Button
