@@ -7,10 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.activity.SchoolSearchActivity
+import com.example.molaschoolproject.data_type.MiddleSchool
 import com.example.molaschoolproject.data_type.SchoolProfiles
 
 class SchoolSearchAdapter(
-    val schoolSearchList: ArrayList<SchoolProfiles>
+    val schoolSearchList: ArrayList<MiddleSchool>
 ): RecyclerView.Adapter<SchoolSearchAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -20,8 +21,8 @@ class SchoolSearchAdapter(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.schoolSearchSchoolName.text = schoolSearchList.get(position).schoolName
-        holder.schoolSearchArea.text = schoolSearchList.get(position).address
+        holder.schoolSearchSchoolName.text = schoolSearchList.get(position).name
+        holder.schoolSearchArea.text = schoolSearchList.get(position).roadAddressName
 
         holder.itemView.setOnClickListener{
             itemClickListener.onClick(it,position)
