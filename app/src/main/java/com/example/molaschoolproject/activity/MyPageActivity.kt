@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,6 +15,7 @@ import com.example.molaschoolproject.AuthInterceptor
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,6 +49,26 @@ class MyPageActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             logout()
         }
+
+        val btnvMyPage: BottomNavigationView = findViewById(R.id.btnv_mypage)
+        btnvMyPage.findViewById<View>(R.id.btnv_item_mypage).performClick()
+        btnvMyPage.findViewById<View>(R.id.btnv_item_home).setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+        btnvMyPage.findViewById<View>(R.id.btnv_item_community).setOnClickListener{
+            val intent = Intent(this, CommunityActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+
+        btnvMyPage.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{
+            val intent = Intent(this, WordSearchActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+
     }
 
     fun setTextMypage() {
