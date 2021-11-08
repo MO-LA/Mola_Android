@@ -7,7 +7,10 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.text.style.BackgroundColorSpan
+import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Button
@@ -38,9 +41,14 @@ class LoginActivity : AppCompatActivity() {
 
         initView(this@LoginActivity)
 
+//        val url = "https://namu.wiki/w/%EC%9D%BC%EB%B0%98%EA%B3%84%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90"
+//        val content = SpannableString(text_signup.text.toString())
+//        content.setSpan(URLSpan(url), 0, content.length, 0)
+//        text_signup.setMovementMethod(LinkMovementMethod.getInstance())
+//        text_signup.setText(content)
+
         val content = SpannableString(text_signup.text.toString())
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
-//        content.setSpan(BackgroundColorSpan(Color.MAGENTA), 0, content.length, 0)
         text_signup.text = content
 
         text_signup.setOnClickListener {
