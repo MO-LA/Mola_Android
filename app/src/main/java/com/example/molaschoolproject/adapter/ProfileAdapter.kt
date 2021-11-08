@@ -11,10 +11,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
-import com.example.molaschoolproject.activity.MainActivity
-import com.example.molaschoolproject.activity.MyPickActivity
 import com.example.molaschoolproject.activity.SchoolDetailActivity
 import com.example.molaschoolproject.data_type.SchoolProfiles
+import kotlin.math.round
 
 class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.Adapter<ProfileAdapter.CustomViewHolder>(){
 
@@ -31,11 +30,10 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
 
         holder.schoolName.text = profileList.get(position).schoolName
 
-        var estimate: String = profileList.get(position).estimate.toString()
+        var estimate: Double = profileList.get(position).estimate
+        estimate = round((estimate * 10)) / 10
 
-        holder.estimate.text = estimate
-
-        var estimateDouble: Double = profileList.get(position).estimate
+        holder.estimate.text = estimate.toString()
 
         var estimatedPeople: String = profileList.get(position).estimatedPeople.toString()
         estimatedPeople = "($estimatedPeople+)"
@@ -59,8 +57,6 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, SchoolDetailActivity::class.java)
             intent.putExtra("schoolIdx",profileList.get(position).idx)
-            intent.putExtra("estimate",estimate)
-            intent.putExtra("estimateDouble",estimateDouble)
             val activityHolder: Activity = holder.itemView.context as Activity
             val contextText: String = holder.itemView.context.toString()
             Toast.makeText(holder.itemView.context,"activityHolder = $contextText",Toast.LENGTH_SHORT).show()
