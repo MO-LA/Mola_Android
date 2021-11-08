@@ -65,11 +65,16 @@
 
     <Button
         android:id="@+id/btn_assessment_confirm"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="완료"
         android:textSize="25dp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round_login"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center"/>
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"/>
 
 </LinearLayout>
