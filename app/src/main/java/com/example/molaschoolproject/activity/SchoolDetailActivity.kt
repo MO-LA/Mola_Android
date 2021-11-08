@@ -186,7 +186,7 @@ class SchoolDetailActivity : AppCompatActivity() {
                     Log.d("Retrofitt","Patch Pick false")
                 }
             })
-            
+
         }
 
         var schoolDetailData: SchoolDetailData
@@ -279,7 +279,87 @@ class SchoolDetailActivity : AppCompatActivity() {
             var args: Bundle = Bundle()
             args.putInt("schoolIdx",schoolIdx)
             bottomSheet.arguments = args
-            bottomSheet.show(supportFragmentManager,bottomSheet.tag,)
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
+
+            bottomSheet.setOnClickedListener(object : SchoolAssessmentBottomSheet.buttonClickListener {
+                override fun onClicked(estimateScore: Int) {
+                    if (estimateScore != 0) {
+                        service.patchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+                            override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                                Log.d("Retrofitt","별점 입력 code = ${response.code()}")
+                                if(response.isSuccessful) {
+                                    service.getEstimate(schoolIdx = schoolIdx).enqueue(object : Callback<Estimate> {
+                                        override fun onResponse(call: Call<Estimate>, response: Response<Estimate>) {
+                                            Log.d("Retrofitt","Estimate code = ${response.code()}")
+                                            if (response.isSuccessful) {
+                                                estimate = response.body()?.data!!
+                                                Log.d("Retrofitt","Estimate = ${estimate}")
+
+                                                tvSchooldetailEstimate.text = estimate.toString()
+
+                                                if (estimate!! < 1) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                }
+                                                else if (estimate!! >= 5) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_24)
+                                                }
+                                                else if (estimate!! >= 4) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                }
+                                                else if (estimate!! >= 3) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                }
+                                                else if (estimate!! >= 2) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                }
+                                                else if (estimate!! >= 1) {
+                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<Estimate>, t: Throwable) {
+                                            Log.d("Retrofitt","Estimate false")
+                                        }
+                                    })
+                                }
+                            }
+
+                            override fun onFailure(call: Call<Any?>, t: Throwable) {
+                                Log.d("Retrofitt","별점 입력 실패")
+                            }
+                        })
+                    }
+                    else {
+                        Toast.makeText(this@SchoolDetailActivity,"별점을 입력 후에 완료를 눌러 주세요",Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+            })
         }
     }
 
