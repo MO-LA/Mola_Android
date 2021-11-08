@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.adapter.CommunityAdapter
 import com.example.molaschoolproject.data_type.Community
 import com.example.molaschoolproject.data_type.CommunityData
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -74,5 +76,24 @@ class CommunityActivity : AppCompatActivity() {
             }
 
         })
+
+        val btnvCommunity: BottomNavigationView = findViewById(R.id.btnv_community)
+        btnvCommunity.findViewById<View>(R.id.btnv_item_community).performClick()
+        btnvCommunity.findViewById<View>(R.id.btnv_item_home).setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+        btnvCommunity.findViewById<View>(R.id.btnv_item_wordsearch).setOnClickListener{
+            val intent = Intent(this, WordSearchActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+        btnvCommunity.findViewById<View>(R.id.btnv_item_mypage).setOnClickListener{
+            val intent = Intent(this, MyPageActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+
     }
 }

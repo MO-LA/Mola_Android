@@ -26,15 +26,19 @@
         <activity android:name=".activity.SchoolSearchActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.CommunityActivity"></activity>
         <activity android:name=".activity.CommunityWritingActivity"></activity>
         <activity android:name=".activity.MyPickActivity"></activity>
+
+
     </application>
 
 </manifest>
