@@ -3,8 +3,12 @@ package com.example.molaschoolproject.activity
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -34,13 +38,17 @@ class LoginActivity : AppCompatActivity() {
 
         initView(this@LoginActivity)
 
+        val content = SpannableString(text_signup.text.toString())
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+//        content.setSpan(BackgroundColorSpan(Color.MAGENTA), 0, content.length, 0)
+        text_signup.text = content
+
         text_signup.setOnClickListener {
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
 
         btn_login.setOnClickListener {
-//            loginValidation()
             if(userId.text.isEmpty() || userPw.text.isEmpty()) {
                 Toast.makeText(this@LoginActivity, "빈칸을 다 채워주세요.", Toast.LENGTH_LONG)
             } else {
