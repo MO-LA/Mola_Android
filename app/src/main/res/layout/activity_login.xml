@@ -28,6 +28,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:maxLines="1"
+            android:maxLength="50"
             android:hint=" 아이디를 입력해주세요." />
     </LinearLayout>
 
@@ -45,6 +47,7 @@
             android:inputType="textPassword"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:maxLength="50"
             android:hint=" 비밀번호를 입력해주세요." />
     </LinearLayout>
 
