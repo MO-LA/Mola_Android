@@ -23,14 +23,14 @@
 
         <TextView
             android:id="@+id/tv_wordname"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="word"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="28dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

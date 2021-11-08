@@ -41,11 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         initView(this@LoginActivity)
 
-//        val url = "https://namu.wiki/w/%EC%9D%BC%EB%B0%98%EA%B3%84%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90"
-//        val content = SpannableString(text_signup.text.toString())
-//        content.setSpan(URLSpan(url), 0, content.length, 0)
-//        text_signup.setMovementMethod(LinkMovementMethod.getInstance())
-//        text_signup.setText(content)
+
 
         val content = SpannableString(text_signup.text.toString())
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
