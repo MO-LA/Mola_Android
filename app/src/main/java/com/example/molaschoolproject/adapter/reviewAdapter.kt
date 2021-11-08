@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
-import com.example.molaschoolproject.data_type.ReviewList
+import com.example.molaschoolproject.data_type.CommentList
 
-class reviewAdapter(
-    val reviewList: ArrayList<ReviewList>
-) : RecyclerView.Adapter<reviewAdapter.CustomViewHolder>() {
+class ReviewAdapter(
+    val reviewList: ArrayList<CommentList>
+) : RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
