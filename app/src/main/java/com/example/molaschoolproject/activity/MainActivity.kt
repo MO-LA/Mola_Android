@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -62,20 +59,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
+
         val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
-
-        editSearchMain.setOnEditorActionListener{ textView, action, event ->
-            var handled = false
-            val info = EditorInfo.IME_ACTION_SEARCH
-            Log.d("innn","innn $info")
-            if (action == EditorInfo.IME_ACTION_SEARCH) {
-                Log.d("Outt","outt")
-                ivMainSearch.performClick()
-                handled = true
-            }
-            handled
-        }
-
         ivMainSearch.setOnClickListener {
             var searchByNameData: String = editSearchMain.text.toString()
             if (searchByNameData.isEmpty())  searchByNameData = ""
@@ -102,9 +87,6 @@ class MainActivity : AppCompatActivity() {
             fondBottomSheet.setOnClickedListener(object : SchoolCategoryFondBottomSheet.textClickListener {
                 override fun onClicked(fondText: String) {
                     schoolCategoryFond.text = fondText
-                    schoolCategoryFondType.text = "설립유형"
-                    schoolCategoryKind.text = "학교유형"
-                    schoolCategoryRegion.text = "지역"
                     var schoolFond = fondText
 
                     if (schoolFond != "설립구분" && schoolFond != "전체") {
@@ -153,10 +135,6 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object  : SchoolCategoryFondTypeBottomSheet.textClickListener {
                 override fun onClicked(fondTypeText: String) {
                     schoolCategoryFondType.text = fondTypeText
-                    schoolCategoryFond.text = "설립구분"
-                    schoolCategoryKind.text = "학교유형"
-                    schoolCategoryRegion.text = "지역"
-
                     var schoolFondType = fondTypeText
                     if (schoolFondType != "설립유형" && schoolFondType != "전체") {
                         if (schoolFondType == "단설") schoolFondType = "INDEPENDENCE"
@@ -206,9 +184,6 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object : SchoolCategoryKindBottomSheet.textClickListener {
                 override fun onClicked(typeText: String) {
                     schoolCategoryKind.text = typeText
-                    schoolCategoryFond.text = "설립구분"
-                    schoolCategoryFondType.text = "설립유형"
-                    schoolCategoryRegion.text = "지역"
                     var schoolType = typeText
                     if (schoolType != "학교유형" && schoolType != "전체") {
                         if (schoolType == "일반고") schoolType = "GENERAL"
@@ -258,9 +233,6 @@ class MainActivity : AppCompatActivity() {
             bottomSheet.setOnClickedListener(object : SchoolCategoryRegionBottomSheet.textClickListener {
                 override fun onClicked(regionText: String) {
                     var schoolRegion: String = regionText
-                    schoolCategoryFond.text = "설립구분"
-                    schoolCategoryFondType.text = "설립유형"
-                    schoolCategoryKind.text = "학교유형"
                     schoolRegion = schoolRegion.replace(" ","")
 
                     if (schoolRegion.isEmpty()) {
