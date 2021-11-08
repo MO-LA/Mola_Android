@@ -59,7 +59,7 @@ class LocalSearchActivity : AppCompatActivity() {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 val service = retrofit.create(RetrofitService::class.java)
-                service.signup(SignUp(id, pw, age, sex, schoolName, localName))
+                service.signup(SignUp(id = id, password = pw, age = age, sex = sex,residentialArea = localName, school = schoolName))
                     .enqueue(object : Callback<SignUp> {
                         override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {
                             if (response.isSuccessful) {
