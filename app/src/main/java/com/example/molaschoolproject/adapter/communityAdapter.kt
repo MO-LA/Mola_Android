@@ -44,7 +44,6 @@ class CommunityAdapter(
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
 
-        holder
     }
 
     override fun getItemCount(): Int {
