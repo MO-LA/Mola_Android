@@ -78,7 +78,6 @@ class SchoolDetailActivity : AppCompatActivity() {
         val tvSchooldetailContents: TextView = findViewById(R.id.tv_schooldetail_contents)
 
         val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-        tvSchooldetailEstimate.text = intent.getStringExtra("estimate")
 
         val ivStarOne: ImageView = findViewById(R.id.star_one)
         val ivStarTwo: ImageView = findViewById(R.id.star_two)
@@ -86,34 +85,66 @@ class SchoolDetailActivity : AppCompatActivity() {
         val ivStarFour: ImageView = findViewById(R.id.star_four)
         val ivStarFive: ImageView = findViewById(R.id.star_five)
 
-        val estimateDouble:Double = intent.getDoubleExtra("estimateDouble",0.0)
+        var estimate: Double? = 0.0
 
-        if (estimateDouble < 1)
+        service.getEstimate(schoolIdx = schoolIdx).enqueue(object : Callback<Estimate> {
+            override fun onResponse(call: Call<Estimate>, response: Response<Estimate>) {
+                Log.d("Retrofitt","Estimate code = ${response.code()}")
+                if (response.isSuccessful) {
+                    estimate = response.body()?.data!!
+                    Log.d("Retrofitt","Estimate = ${estimate}")
 
-        else if (estimateDouble >= 5) {
-            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarFive.setImageResource(R.drawable.ic_baseline_star_24)
-        }
-        else if (estimateDouble >= 4) {
-            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
-        }
-        else if (estimateDouble >= 3) {
-            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-        }
-        else if (estimateDouble >= 2) {
-            ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-            ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-        }
-        else if (estimateDouble >= 1) ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                    tvSchooldetailEstimate.text = estimate.toString()
 
+                    if (estimate!! < 1) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                    }
+                    else if (estimate!! >= 5) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_24)
+                    }
+                    else if (estimate!! >= 4) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                    }
+                    else if (estimate!! >= 3) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                    }
+                    else if (estimate!! >= 2) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                    }
+                    else if (estimate!! >= 1) {
+                        ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
+                        ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
+                        ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Estimate>, t: Throwable) {
+                Log.d("Retrofitt","Estimate false")
+            }
+        })
         var pick: Boolean
         service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
             override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
@@ -155,9 +186,7 @@ class SchoolDetailActivity : AppCompatActivity() {
                     Log.d("Retrofitt","Patch Pick false")
                 }
             })
-
-
-
+            
         }
 
         var schoolDetailData: SchoolDetailData
@@ -242,9 +271,6 @@ class SchoolDetailActivity : AppCompatActivity() {
             })
 
         }
-
-
-
 
         val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
 
