@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import com.example.molaschoolproject.AuthInterceptor
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
@@ -105,7 +106,7 @@ class MyPageActivity : AppCompatActivity() {
         fun toast_p() {
             Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
-            finish()
+            ActivityCompat.finishAffinity(this)
             startActivity(intent)
         }
 
