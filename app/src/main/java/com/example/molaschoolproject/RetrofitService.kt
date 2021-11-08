@@ -32,6 +32,12 @@ interface RetrofitService {
         @Query("q") q: String
     ): Call<SchoolData>
 
+    @GET("school/middle")
+    fun getMiddleSchoolDataByName(
+        @Query("size") size: Int = 5000,
+        @Query("q") q: String
+    ): Call<MiddleSchoolData>
+
     @GET("school/list/kind")
     fun getSchoolDataByKind(
         @Query("size") size: Int = 5000,
