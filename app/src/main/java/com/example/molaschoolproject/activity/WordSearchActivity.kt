@@ -37,7 +37,7 @@ class WordSearchActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }
-        
+
         val wordList = arrayListOf( // 용어 데이터 리스트
             Word("일반고", "다양한 분야에 걸쳐 일반적인 교육을 실시하는 고등학교이다.",
                 "링크 : https://www.youtube.com/watch?v=9DJWt3crhWE"),
