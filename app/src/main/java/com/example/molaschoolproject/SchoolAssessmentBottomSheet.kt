@@ -84,33 +84,18 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
             starFive?.setImageResource(R.drawable.ic_baseline_star_24)
         }
 
-
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
         view?.findViewById<Button>(R.id.btn_assessment_confirm)?.setOnClickListener{
-            if (estimateScore != 0) {
-                service.patchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
-                    override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                        Log.d("Retrofitt","별점 입력 완료 code = ${response.code()}")
-
-                        dismiss()
-                    }
-
-                    override fun onFailure(call: Call<Any?>, t: Throwable) {
-                        Log.d("Retrofitt","별점 입력 실패")
-                    }
-                })
-            }
-            else {
-                Toast.makeText(context,"별점을 입력 후에 완료를 눌러 주세요",Toast.LENGTH_SHORT).show()
-            }
-
+            onClickedListener.onClicked(estimateScore)
+            dismiss()
         }
+    }
+    interface buttonClickListener {
+        fun onClicked(estimateScore: Int)
+    }
+
+    private lateinit var onClickedListener: buttonClickListener
+
+    fun setOnClickedListener(listener:buttonClickListener){
+        onClickedListener = listener
     }
 }
