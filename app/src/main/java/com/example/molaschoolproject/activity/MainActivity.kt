@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
         val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
-        
+
         editSearchMain.setOnEditorActionListener{ textView, action, event ->
             var handled = false
             val info = EditorInfo.IME_ACTION_SEARCH

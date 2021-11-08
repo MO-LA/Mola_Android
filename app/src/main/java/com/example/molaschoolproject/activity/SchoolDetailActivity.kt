@@ -26,6 +26,9 @@ class SchoolDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school_detail)
 
+        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
+        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
+
         val ivBack: ImageView = findViewById(R.id.iv_back)
         Toast.makeText(this,"context = ${intent.getStringExtra("context")}",Toast.LENGTH_SHORT).show()
         ivBack.setOnClickListener {
@@ -53,6 +56,19 @@ class SchoolDetailActivity : AppCompatActivity() {
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         rv_comment.setHasFixedSize(true)
+
+        service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
+            override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
+                Log.d("Retrofitt","reviewlist code = ${response.code()}")
+                val reviewList = response.body()?.data
+                Log.d("Retrofitt","reviewList = ${response.body()?.data}")
+                rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
+            }
+
+            override fun onFailure(call: Call<Review?>, t: Throwable) {
+                Log.d("Retrofitt","reviewList = false")
+            }
+        })
 
         val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
 
@@ -97,11 +113,6 @@ class SchoolDetailActivity : AppCompatActivity() {
             ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
         }
         else if (estimateDouble >= 1) ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-
-
-
-        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
-        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
 
         var pick: Boolean
         service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
@@ -207,10 +218,22 @@ class SchoolDetailActivity : AppCompatActivity() {
             service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     Log.d("retrofitt","review post retrofit code = ${response.code()}")
-                    val restartIntent = Intent(this@SchoolDetailActivity,SchoolDetailActivity::class.java)
-                    restartIntent.putExtra("schoolIdx",intent.getIntExtra("schoolIdx",0))
-                    finish()
-                    startActivity(restartIntent)
+                    if (response.isSuccessful) {
+                        editComment.text = null
+                        service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
+                            override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
+                                Log.d("Retrofitt","reviewlist code = ${response.code()}")
+                                val reviewList = response.body()?.data
+                                Log.d("Retrofitt","reviewList = ${response.body()?.data}")
+                                rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
+                            }
+
+                            override fun onFailure(call: Call<Review?>, t: Throwable) {
+                                Log.d("Retrofitt","reviewList = false")
+                            }
+                        })
+                    }
+
                 }
 
                 override fun onFailure(call: Call<Any?>, t: Throwable) {
@@ -221,18 +244,7 @@ class SchoolDetailActivity : AppCompatActivity() {
         }
 
 
-        service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
-            override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
-                Log.d("Retrofitt","reviewlist code = ${response.code()}")
-                val reviewList = response.body()?.data
-                Log.d("Retrofitt","reviewList = ${response.body()?.data}")
-                rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
-            }
 
-            override fun onFailure(call: Call<Review?>, t: Throwable) {
-                Log.d("Retrofitt","reviewList = false")
-            }
-        })
 
         val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
 
