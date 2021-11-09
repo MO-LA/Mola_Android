@@ -76,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="10dp"
             android:background="#ffffff">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -84,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never"
+                android:background="#ffffff"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:src="@drawable/icon_write"
                 app:backgroundTint="@color/white"
                 app:fabCustomSize="70dp"
