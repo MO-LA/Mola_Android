@@ -29,21 +29,30 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var schoolCategoryKind:TextView
+    lateinit var schoolCategoryFond: TextView
+    lateinit var schoolCategoryFondType: TextView
+    lateinit var schoolCategoryRegion: TextView
+
+    lateinit var editSearchMain: EditText // 메인 검색창
+    lateinit var ivMainSearch: ImageView // 메인 검색 버튼
+
+    private val service = CreateRetrofit().noHeaderRetrofit()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        init() // 뷰 연결
+
 
         var profileList: List<SchoolProfiles>?
         val rvMain = findViewById<RecyclerView>(R.id.rv_main) // 메인 리사이클러뷰
         rvMain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMain.setHasFixedSize(true)
-
-        val schoolCategoryKind:TextView = findViewById(R.id.tv_schoolcatecory)
-        val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
-        val schoolCategoryFondType: TextView = findViewById(R.id.tv_fondtype)
-        val schoolCategoryRegion: TextView = findViewById(R.id.tv_region)
         
-        val service = CreateRetrofit().noHeaderRetrofit()
+
 
         service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
@@ -60,8 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        val editSearchMain: EditText = findViewById(R.id.edit_search_main) // 메인 검색창
-        val ivMainSearch: ImageView = findViewById(R.id.iv_main_search)
+
 
         editSearchMain.setOnEditorActionListener{ textView, action, event ->
             var handled = false
@@ -303,6 +311,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun init() {
+        schoolCategoryKind = findViewById(R.id.tv_schoolcatecory) // 카테고리 학교유형
+        schoolCategoryFond = findViewById(R.id.tv_fond) // 카테고리 설립구분
+        schoolCategoryFondType = findViewById(R.id.tv_fondtype) // 카테고리 설립유형
+        schoolCategoryRegion = findViewById(R.id.tv_region) // 카테고리 지역
+
+        editSearchMain = findViewById(R.id.edit_search_main) // 메인 검색창
+        ivMainSearch = findViewById(R.id.iv_main_search) // 메인 검색 버튼
+
+    }
     override fun onBackPressed() {
 
         var dialog = AlertDialog.Builder(this)
