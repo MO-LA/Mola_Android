@@ -25,7 +25,6 @@ class WordSearchActivity : AppCompatActivity() {
 
         init()
 
-
         val ivWordsearchBack: ImageView = findViewById(R.id.iv_wordsearch_back) // 뒤로가기 뷰
         ivWordsearchBack.setOnClickListener { finish() }
 
@@ -47,28 +46,15 @@ class WordSearchActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         var wordList = allWordList()
 
         rvWordsearch.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         rvWordsearch.setHasFixedSize(true)
-        rvWordsearch.adapter = WordAdapter(wordList as ArrayList<Word>)
 
-//        drawWordRecyclerView(wordList)
+        drawWordRecyclerView(wordList)
 
         ivWordSearch.setOnClickListener {
-            var searchData: String = editSearchWordSearch.text.toString()
-
-            var wordSearchList: ArrayList<Word> = ArrayList()
-
-            for (i: Int in 0..(wordList.size - 1)) {
-                if (wordList.get(i).wordName.toString().contains(searchData)) {
-                    wordSearchList.add(
-                        Word(wordList.get(i).wordName,wordList.get(i).wordContents, wordList.get(i).wordLink,wordList.get(i).urlLink)
-                    )
-                }
-            }
-            rvWordsearch.adapter = WordAdapter(wordSearchList)
+            wordSearch(wordList)
         }
     }
 
@@ -77,6 +63,7 @@ class WordSearchActivity : AppCompatActivity() {
         ivWordSearch = findViewById(R.id.iv_wordsearch_search)
         editSearchWordSearch = findViewById(R.id.edit_search_wordsearch)
     }
+
     fun allWordList(): ArrayList<Word> {
         val wordList = arrayListOf( // 용어 데이터 리스트
             Word("일반고", "다양한 분야에 걸쳐 일반적인 교육을 실시하는 고등학교이다.",
@@ -141,9 +128,22 @@ class WordSearchActivity : AppCompatActivity() {
         return wordList
     }
 
-    fun drawWordRecyclerView(wordList: List<Word>) {
-         // 용어 설명 리사이클러뷰
+    fun drawWordRecyclerView(wordList: ArrayList<Word>) { // 용어 검색 리사이클러뷰 그려주기
+        rvWordsearch.adapter = WordAdapter(wordList)
+    }
 
+    fun wordSearch(wordList: ArrayList<Word>) {
+        var searchData: String = editSearchWordSearch.text.toString()
 
+        var wordSearchList: ArrayList<Word> = ArrayList()
+
+        for (i: Int in 0..(wordList.size - 1)) {
+            if (wordList.get(i).wordName.toString().contains(searchData)) {
+                wordSearchList.add(
+                    Word(wordList.get(i).wordName,wordList.get(i).wordContents, wordList.get(i).wordLink,wordList.get(i).urlLink)
+                )
+            }
+        }
+        drawWordRecyclerView(wordSearchList)
     }
 }
