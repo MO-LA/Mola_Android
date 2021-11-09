@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.AuthInterceptor
+import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.adapter.ReviewAdapter
@@ -54,13 +55,7 @@ class CommunityDetailActivity : AppCompatActivity() {
         }
 
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val commentService = retrofit.create(RetrofitService::class.java)
+        val commentService = CreateRetrofit().hasTokenRetrofit()
 
         imgBtnSend.setOnClickListener {
             if (editReview.text.isEmpty()) {
@@ -73,7 +68,7 @@ class CommunityDetailActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                             Log.d("retrofitt", "comment post retrofit code = ${response.code()}")
                             if(response.isSuccessful) {
-                                val getCommentService = retrofit.create(RetrofitService::class.java)
+                                val getCommentService = CreateRetrofit().hasTokenRetrofit()
                                 getCommentService.getComment(postIdx).enqueue(object : Callback<Comment?> {
                                     override fun onResponse(call: Call<Comment?>, response: Response<Comment?>) {
                                         Log.d("Retrofitt", "get comment code = ${response.code()}")
@@ -95,7 +90,7 @@ class CommunityDetailActivity : AppCompatActivity() {
                 editReview.text = null
             }
         }
-        val getCommentService = retrofit.create(RetrofitService::class.java)
+        val getCommentService = CreateRetrofit().hasTokenRetrofit()
         getCommentService.getComment(postIdx).enqueue(object : Callback<Comment?> {
             override fun onResponse(call: Call<Comment?>, response: Response<Comment?>) {
                 Log.d("Retrofitt", "get comment code = ${response.code()}")
