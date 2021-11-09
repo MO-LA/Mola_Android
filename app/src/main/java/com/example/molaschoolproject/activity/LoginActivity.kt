@@ -74,6 +74,9 @@ class LoginActivity : AppCompatActivity() {
                                 Intent(this@LoginActivity, MainActivity::class.java)
                             )
                         }
+                        else if (response.code() == 403) {
+                            Toast.makeText(this@LoginActivity,"아이디나 비밀번호가 일치하지 않습니다",Toast.LENGTH_SHORT).show()
+                        }
 
                     }
                 })

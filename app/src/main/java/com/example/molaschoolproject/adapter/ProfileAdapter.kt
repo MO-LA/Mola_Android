@@ -59,7 +59,6 @@ class ProfileAdapter(val profileList: ArrayList<SchoolProfiles>) : RecyclerView.
             intent.putExtra("schoolIdx",profileList.get(position).idx)
             val activityHolder: Activity = holder.itemView.context as Activity
             val contextText: String = holder.itemView.context.toString()
-            Toast.makeText(holder.itemView.context,"activityHolder = $contextText",Toast.LENGTH_SHORT).show()
 
             if (contextText.contains("MainActivity")) intent.putExtra("context","M")
             else if (contextText.contains("MyPickActivity")) intent.putExtra("context","P")
