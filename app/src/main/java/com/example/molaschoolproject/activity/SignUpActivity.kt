@@ -129,7 +129,7 @@ class SignUpActivity : AppCompatActivity() {
     fun signupMinLenth() {
         userId.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                if (userId.length() < 8) {
+                if (userId.length() < 6) {
                     var dialog = AlertDialog.Builder(this)
                     dialog.setMessage("ID는 6 ~ 12자 이상이어야 합니다.")
 
@@ -146,7 +146,7 @@ class SignUpActivity : AppCompatActivity() {
 
         userPw.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                if (userId.length() < 8) {
+                if (userId.length() < 6) {
                     var dialog = AlertDialog.Builder(this)
                     dialog.setMessage("PW는 6 ~ 15자 이상이어야 합니다.")
 
