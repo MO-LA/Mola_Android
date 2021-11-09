@@ -11,74 +11,132 @@ import com.example.molaschoolproject.*
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.round
 
 class SchoolDetailActivity : AppCompatActivity() {
+    private var schoolIdx: Int = 0
+
+    lateinit var ivSchoolDetailMyPick: ImageView // 찜 버튼
+
+    lateinit var tvSchooldetailTitle: TextView // Title 학교 이름
+    lateinit var tvSchooldetailSchoolName: TextView // 상세정보 학교 이름
+    lateinit var tvHomepage: TextView // 상세정보 학교 주소
+    lateinit var tvSchooldetailContents: TextView // 상세정보 학교 상세설명
+    lateinit var tvSchooldetailEstimate: TextView // 상세정보 학교 평점
+
+    lateinit var ivStarOne: ImageView
+    lateinit var ivStarTwo: ImageView
+    lateinit var ivStarThree: ImageView
+    lateinit var ivStarFour: ImageView
+    lateinit var ivStarFive: ImageView
+
+    lateinit var editComment: EditText // 리뷰작성란
+    lateinit var ibtnCommentSend: ImageButton // 리뷰 작성 커밋하기
+
+    lateinit var fabAssessment: FloatingActionButton
+
+    private var reviewList: List<ReviewList>? = null // 댓글 리스트
+
+    private var pick: Boolean = false
+
+    private lateinit var schoolDetailData: SchoolDetailData
+
+    private val service = CreateRetrofit().hasTokenRetrofit() // 레트로핏 서비스 생성
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school_detail)
 
-        val schoolIdx: Int = intent.getIntExtra("schoolIdx",0)
-        Toast.makeText(this,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
+        schoolIdx = intent.getIntExtra("schoolIdx",0)
 
-        val ivBack: ImageView = findViewById(R.id.iv_back)
-        Toast.makeText(this,"context = ${intent.getStringExtra("context")}",Toast.LENGTH_SHORT).show()
+        init() // 뷰 연결
+
+        val ivBack: ImageView = findViewById(R.id.iv_back) // 뒤로가기 버튼
+
         ivBack.setOnClickListener {
             if (intent.getStringExtra("context") == "M"){
-                val intent: Intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 finish()
                 startActivity(intent)
             }
             else {
-                val intent: Intent = Intent(this, MyPickActivity::class.java)
+                val intent = Intent(this, MyPickActivity::class.java)
                 finish()
                 startActivity(intent)
             }
+        } // 뒤로가기 클릭 이벤트
+
+        val rvComment: RecyclerView = findViewById(R.id.rv_comment) // 리뷰 리사이클러뷰
+        rvComment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rvComment.setHasFixedSize(true)
+
+        schoolDetailDataSettings(rvComment) // 학교 상세정보 가져오기
+
+        ivSchoolDetailMyPick.setOnClickListener { // 평점 남기기
+            patchPick()
         }
 
-        val service = CreateRetrofit().hasTokenRetrofit()
+        ibtnCommentSend.setOnClickListener{
+            postReview(rvComment)
+        }
 
-        val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
-        rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        rv_comment.setHasFixedSize(true)
+        fabAssessment.setOnClickListener{
+            val bottomSheet = SchoolAssessmentBottomSheet()
+            var args: Bundle = Bundle()
+            args.putInt("schoolIdx",schoolIdx)
+            bottomSheet.arguments = args
+            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
 
+            bottomSheet.setOnClickedListener(object : SchoolAssessmentBottomSheet.buttonClickListener {
+                override fun onClicked(estimateScore: Int) {
+                    patchEstimate(estimateScore)
+                }
+            })
+        }
+    }
+
+    fun init() {
+        ivSchoolDetailMyPick = findViewById(R.id.iv_schooldetail_mypick)
+
+        tvSchooldetailTitle = findViewById(R.id.tv_schooldetail_title)
+        tvSchooldetailSchoolName = findViewById(R.id.school_name)
+        tvHomepage = findViewById(R.id.tv_homepage)
+        tvSchooldetailContents = findViewById(R.id.tv_schooldetail_contents)
+
+        tvSchooldetailEstimate = findViewById(R.id.tv_schooldetail_estimate)
+
+        ivStarOne = findViewById(R.id.star_one)
+        ivStarTwo = findViewById(R.id.star_two)
+        ivStarThree = findViewById(R.id.star_three)
+        ivStarFour = findViewById(R.id.star_four)
+        ivStarFive = findViewById(R.id.star_five)
+
+        editComment = findViewById(R.id.edit_comment)
+        ibtnCommentSend = findViewById(R.id.ibtn_comment_send)
+
+        fabAssessment = findViewById(R.id.fab_schooldetail)
+    }
+
+    fun getReviewList(rvComment:RecyclerView) {
         service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
             override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
                 Log.d("Retrofitt","reviewlist code = ${response.code()}")
-                val reviewList = response.body()?.data
+                reviewList = (response.body()?.data) as List<ReviewList>
                 Log.d("Retrofitt","reviewList = ${response.body()?.data}")
-                rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
+                rvComment.adapter = CommentAdapter(reviewList as ArrayList<ReviewList>)
             }
 
             override fun onFailure(call: Call<Review?>, t: Throwable) {
                 Log.d("Retrofitt","reviewList = false")
             }
         })
+    }
 
-        val ivSchoolDetailMyPick: ImageView = findViewById(R.id.iv_schooldetail_mypick)
-
-        val tvSchooldetailTitle: TextView = findViewById(R.id.tv_schooldetail_title)
-        val tvSchooldetailSchoolName: TextView = findViewById(R.id.school_name)
-        val tvHomepage: TextView = findViewById(R.id.tv_homepage)
-        val tvSchooldetailContents: TextView = findViewById(R.id.tv_schooldetail_contents)
-
-        val tvSchooldetailEstimate: TextView = findViewById(R.id.tv_schooldetail_estimate)
-
-        val ivStarOne: ImageView = findViewById(R.id.star_one)
-        val ivStarTwo: ImageView = findViewById(R.id.star_two)
-        val ivStarThree: ImageView = findViewById(R.id.star_three)
-        val ivStarFour: ImageView = findViewById(R.id.star_four)
-        val ivStarFive: ImageView = findViewById(R.id.star_five)
-
-        var estimate: Double? = 0.0
-
+    fun getEstimate() {
         service.getEstimate(schoolIdx = schoolIdx).enqueue(object : Callback<Estimate> {
+            var estimate: Double? = 0.0
             override fun onResponse(call: Call<Estimate>, response: Response<Estimate>) {
                 Log.d("Retrofitt","Estimate code = ${response.code()}")
                 if (response.isSuccessful) {
@@ -137,7 +195,9 @@ class SchoolDetailActivity : AppCompatActivity() {
                 Log.d("Retrofitt","Estimate false")
             }
         })
-        var pick: Boolean
+    }
+
+    fun getPick() {
         service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
             override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
                 Log.d("Retrofitt","pick code = ${response.code()}")
@@ -148,40 +208,27 @@ class SchoolDetailActivity : AppCompatActivity() {
                     else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
                 }
             }
-
             override fun onFailure(call: Call<Pick>, t: Throwable) {
             }
         })
+    }
 
-        ivSchoolDetailMyPick.setOnClickListener {
-            service.PatchPick(schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                    Log.d("Retrofitt","Patch Pick code = ${response.code()}")
-                    if (response.isSuccessful) {
-                        service.getPickBoolean(schoolIdx = schoolIdx).enqueue(object : Callback<Pick> {
-                            override fun onResponse(call: Call<Pick>, response: Response<Pick>) {
-                                Log.d("Retrofitt","pick code = ${response.code()}")
-                                if (response.isSuccessful) {
-                                    pick = response.body()!!.data
-                                    Log.d("Retrofittt","pick = $pick")
-                                    if (pick == true) ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_true)
-                                    else ivSchoolDetailMyPick.setImageResource(R.drawable.ic_pick_false)
-                                }
-                            }
-                            override fun onFailure(call: Call<Pick>, t: Throwable) {
-                                Log.d("Retrofitt","pick false")
-                            }
-                        })
-                    }
+    fun patchPick() {
+        service.PatchPick(schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+            override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                Log.d("Retrofitt","Patch Pick code = ${response.code()}")
+                if (response.isSuccessful) {
+                    getPick()
                 }
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
-                    Log.d("Retrofitt","Patch Pick false")
-                }
-            })
+            }
+            override fun onFailure(call: Call<Any?>, t: Throwable) {
+                Log.d("Retrofitt","Patch Pick false")
+            }
+        })
 
-        }
+    }
 
-        var schoolDetailData: SchoolDetailData
+    fun getSchoolDetailData() {
         service.getSchoolDetailData(schoolIdx = schoolIdx).enqueue(object : Callback<SchoolDetail> {
             override fun onResponse(call: Call<SchoolDetail>, response: Response<SchoolDetail>) {
                 Log.d("Retrofitt","SchoolDetail code = ${response.code()}")
@@ -229,136 +276,62 @@ class SchoolDetailActivity : AppCompatActivity() {
                 Log.d("Retrofitt","SchoolDetailFalse")
             }
         })
+    }
 
-        val editComment: EditText = findViewById(R.id.edit_comment)
-
-        val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
-
-        ibtnCommentSend.setOnClickListener{
-            if (editComment.text.isEmpty()) {
-                Toast.makeText(this@SchoolDetailActivity,"내용을 작성해 주세요", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                var content = editComment.text.toString()
-
-                service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
-                    override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                        Log.d("retrofitt","review post retrofit code = ${response.code()}")
-                        if (response.isSuccessful) {
-                            editComment.text = null
-                            service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
-                                override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
-                                    Log.d("Retrofitt","reviewlist code = ${response.code()}")
-                                    val reviewList = response.body()?.data
-                                    Log.d("Retrofitt","reviewList = ${response.body()?.data}")
-                                    rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
-                                }
-
-                                override fun onFailure(call: Call<Review?>, t: Throwable) {
-                                    Log.d("Retrofitt","reviewList = false")
-                                }
-                            })
-                        }
-
-                    }
-
-                    override fun onFailure(call: Call<Any?>, t: Throwable) {
-                        Log.d("retrofitt","review post retrofit false")
-                    }
-                })
-            }
+    fun postReview(rvComment: RecyclerView) {
+        if (editComment.text.isEmpty()) {
+            Toast.makeText(this@SchoolDetailActivity,"내용을 작성해 주세요", Toast.LENGTH_SHORT).show()
         }
+        else {
+            var content = editComment.text.toString()
 
-        val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
-
-        fabAssessment.setOnClickListener{
-            val bottomSheet = SchoolAssessmentBottomSheet()
-            var args: Bundle = Bundle()
-            args.putInt("schoolIdx",schoolIdx)
-            bottomSheet.arguments = args
-            bottomSheet.show(supportFragmentManager,bottomSheet.tag)
-
-            bottomSheet.setOnClickedListener(object : SchoolAssessmentBottomSheet.buttonClickListener {
-                override fun onClicked(estimateScore: Int) {
-                    if (estimateScore != 0) {
-                        service.patchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
-                            override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                                Log.d("Retrofitt","별점 입력 code = ${response.code()}")
-                                if(response.isSuccessful) {
-                                    service.getEstimate(schoolIdx = schoolIdx).enqueue(object : Callback<Estimate> {
-                                        override fun onResponse(call: Call<Estimate>, response: Response<Estimate>) {
-                                            Log.d("Retrofitt","Estimate code = ${response.code()}")
-                                            if (response.isSuccessful) {
-                                                estimate = response.body()?.data!!
-                                                Log.d("Retrofitt","Estimate = ${estimate}")
-                                                estimate = round((estimate!! * 10)) / 10
-
-                                                tvSchooldetailEstimate.text = estimate.toString()
-
-                                                if (estimate!! < 1) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                }
-                                                else if (estimate!! >= 5) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_24)
-                                                }
-                                                else if (estimate!! >= 4) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                }
-                                                else if (estimate!! >= 3) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                }
-                                                else if (estimate!! >= 2) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                }
-                                                else if (estimate!! >= 1) {
-                                                    ivStarOne.setImageResource(R.drawable.ic_baseline_star_24)
-                                                    ivStarTwo.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarThree.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFour.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                    ivStarFive.setImageResource(R.drawable.ic_baseline_star_border_24)
-                                                }
-                                            }
-                                        }
-
-                                        override fun onFailure(call: Call<Estimate>, t: Throwable) {
-                                            Log.d("Retrofitt","Estimate false")
-                                        }
-                                    })
-                                }
-                            }
-
-                            override fun onFailure(call: Call<Any?>, t: Throwable) {
-                                Log.d("Retrofitt","별점 입력 실패")
-                            }
-                        })
-                    }
-                    else {
-                        Toast.makeText(this@SchoolDetailActivity,"별점을 입력 후에 완료를 눌러 주세요",Toast.LENGTH_SHORT).show()
+            service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                    Log.d("retrofitt","review post retrofit code = ${response.code()}")
+                    if (response.isSuccessful) {
+                        editComment.text = null
+                        getReviewList(rvComment)
                     }
 
                 }
+
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    Log.d("retrofitt","review post retrofit false")
+                }
             })
         }
+    }
+
+    fun patchEstimate(estimateScore: Int) {
+        var estimate: Double? = 0.0
+        if (estimateScore != 0) {
+            service.patchEstimate(estimate = estimateScore,schoolIdx = schoolIdx).enqueue(object : Callback<Any?> {
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                    Log.d("Retrofitt","별점 입력 code = ${response.code()}")
+                    if(response.isSuccessful) {
+                        getEstimate()
+                    }
+                }
+
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    Log.d("Retrofitt","별점 입력 실패")
+                }
+            })
+        }
+        else {
+            Toast.makeText(this@SchoolDetailActivity,"별점을 입력 후에 완료를 눌러 주세요",Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    fun schoolDetailDataSettings(rvComment: RecyclerView){
+        getReviewList(rvComment) // 학교 리뷰 불러오기
+
+        getEstimate() // 평점 받아오기
+
+        getPick() // 찜 여부 불러오기
+
+        getSchoolDetailData() // 학교 상세 데이터 가져오기
     }
 
     override fun onBackPressed() {
