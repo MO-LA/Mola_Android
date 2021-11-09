@@ -37,7 +37,7 @@
                 android:padding="20dp"
                 android:text="커뮤니티"
                 android:textColor="#000000"
-                android:textSize="28dp" />
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -100,8 +100,8 @@
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/icon_write"
                 app:backgroundTint="@color/white"
-                app:fabCustomSize="70dp"
-                app:maxImageSize="70dp" />
+                app:fabCustomSize="60dp"
+                app:maxImageSize="60dp" />
 
         </RelativeLayout>
 
