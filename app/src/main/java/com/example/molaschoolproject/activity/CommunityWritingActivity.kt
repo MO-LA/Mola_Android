@@ -5,10 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.molaschoolproject.*
 import com.example.molaschoolproject.data_type.CommunityData
 import com.example.molaschoolproject.data_type.CommunityWrite
@@ -35,6 +32,12 @@ class CommunityWritingActivity : AppCompatActivity() {
         init(this@CommunityWritingActivity)
         communityUser()
 
+        val ivCommunityWritingBack: ImageView = findViewById(R.id.iv_community_writing_back)
+        ivCommunityWritingBack.setOnClickListener {
+            val intent: Intent = Intent(this, CommunityActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
         btnWriteFinish.setOnClickListener {
             communityPost()
         }
@@ -68,7 +71,6 @@ class CommunityWritingActivity : AppCompatActivity() {
     }
 
     fun communityUser() {
-
         val service = CreateRetrofit().hasTokenRetrofit()
         service.getUser().enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -92,5 +94,11 @@ class CommunityWritingActivity : AppCompatActivity() {
         userTitle = activity.findViewById(R.id.edit_title)
         userContent = activity.findViewById(R.id.edit_content)
         btnWriteFinish = activity.findViewById(R.id.btn_writeFinish)
+    }
+
+    override fun onBackPressed() {
+        val intent: Intent = Intent(this, CommunityActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 }

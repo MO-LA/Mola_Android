@@ -49,6 +49,7 @@ class CommunityActivity : AppCompatActivity() {
 
         btnWrite.setOnClickListener {
             val intent = Intent(this@CommunityActivity, CommunityWritingActivity::class.java)
+            finish()
             startActivity(intent)
         }
 

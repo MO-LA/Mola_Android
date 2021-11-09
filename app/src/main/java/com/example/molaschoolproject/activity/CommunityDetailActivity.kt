@@ -126,4 +126,6 @@ class CommunityDetailActivity : AppCompatActivity() {
         imgBtnSend = findViewById(R.id.img_btn_review_send)
         imgBtnBack = findViewById(R.id.img_detail_back)
     }
+
+
 }
