@@ -40,9 +40,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         initView(this@LoginActivity)
-
-
-
+        
         val content = SpannableString(text_signup.text.toString())
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         text_signup.text = content
@@ -59,13 +57,9 @@ class LoginActivity : AppCompatActivity() {
                 val id = userId.text.toString()
                 val pw = userPw.text.toString()
                 val login = Login(id, pw)
-                val retrofit: Retrofit = Retrofit.Builder()
-                    .baseUrl("http://10.80.162.195:8040/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
 
-                val service = retrofit.create(RetrofitService::class.java)
-                service.login(login).enqueue(object : Callback<token> {
+                val service = CreateRetrofit().noHeaderRetrofit()
+                service?.login(login)?.enqueue(object : Callback<token> {
                     override fun onFailure(call: Call<token>, t: Throwable) {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_LONG).show()
                     }
