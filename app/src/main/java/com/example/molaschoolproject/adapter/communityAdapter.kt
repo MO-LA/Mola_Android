@@ -39,8 +39,6 @@ class CommunityAdapter(
             intent.putExtra("idx", communityList.get(position).idx)
             intent.putExtra("content", communityList.get(position).content)
             intent.putExtra("school", communityList.get(position).school)
-//            val activityHolder: Activity = holder.itemView.context as Activity
-//            activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
 

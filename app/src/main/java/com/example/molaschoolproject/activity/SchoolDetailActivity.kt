@@ -7,10 +7,7 @@ import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.molaschoolproject.AuthInterceptor
-import com.example.molaschoolproject.R
-import com.example.molaschoolproject.RetrofitService
-import com.example.molaschoolproject.SchoolAssessmentBottomSheet
+import com.example.molaschoolproject.*
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -45,14 +42,7 @@ class SchoolDetailActivity : AppCompatActivity() {
             }
         }
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
+        val service = CreateRetrofit().hasTokenRetrofit()
 
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)

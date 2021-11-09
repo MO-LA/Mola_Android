@@ -9,6 +9,7 @@ import android.text.InputFilter
 import android.util.Log
 import android.widget.*
 import androidx.core.view.isEmpty
+import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.Overlap
@@ -104,11 +105,8 @@ class SignUpActivity : AppCompatActivity() {
 
     fun overlapID(activity: Activity) { // 아이디 중복체크
         val userId = userId.text.toString()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(RetrofitService::class.java)
+
+        val service = CreateRetrofit().noHeaderRetrofit()
         service.overlapID(Overlap(userId))
             .enqueue(object : Callback<OverlapData> {
                 override fun onResponse(call: Call<OverlapData>, response: Response<OverlapData>) {

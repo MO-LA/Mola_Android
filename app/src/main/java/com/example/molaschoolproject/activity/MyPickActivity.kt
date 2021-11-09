@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.AuthInterceptor
+import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.adapter.ProfileAdapter
@@ -31,14 +32,7 @@ class MyPickActivity : AppCompatActivity() {
         rvMyPick.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMyPick.setHasFixedSize(true)
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
+        val service = CreateRetrofit().hasTokenRetrofit()
 
         service.getMyPicked().enqueue(object : Callback<SchoolData> {
             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {
@@ -50,7 +44,7 @@ class MyPickActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SchoolData>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
         })
     }
