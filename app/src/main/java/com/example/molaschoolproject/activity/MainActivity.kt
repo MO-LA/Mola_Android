@@ -42,13 +42,8 @@ class MainActivity : AppCompatActivity() {
         val schoolCategoryFond: TextView = findViewById(R.id.tv_fond)
         val schoolCategoryFondType: TextView = findViewById(R.id.tv_fondtype)
         val schoolCategoryRegion: TextView = findViewById(R.id.tv_region)
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
+        
+        val service = CreateRetrofit().noHeaderRetrofit()
 
         service.getSchoolData().enqueue(object: retrofit2.Callback<SchoolData>{
             override fun onResponse(call: Call<SchoolData>, response: Response<SchoolData>) {

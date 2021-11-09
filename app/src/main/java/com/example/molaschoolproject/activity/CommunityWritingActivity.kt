@@ -5,14 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import com.example.molaschoolproject.App
-import com.example.molaschoolproject.AuthInterceptor
-import com.example.molaschoolproject.R
-import com.example.molaschoolproject.RetrofitService
+import android.widget.*
+import com.example.molaschoolproject.*
 import com.example.molaschoolproject.data_type.CommunityData
 import com.example.molaschoolproject.data_type.CommunityWrite
 import com.example.molaschoolproject.data_type.User
@@ -38,6 +32,12 @@ class CommunityWritingActivity : AppCompatActivity() {
         init(this@CommunityWritingActivity)
         communityUser()
 
+        val ivCommunityWritingBack: ImageView = findViewById(R.id.iv_community_writing_back)
+        ivCommunityWritingBack.setOnClickListener {
+            val intent: Intent = Intent(this, CommunityActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
         btnWriteFinish.setOnClickListener {
             communityPost()
         }
@@ -50,13 +50,7 @@ class CommunityWritingActivity : AppCompatActivity() {
             val userTitle = userTitle.text.toString()
             val userContent = userContent.text.toString()
 
-            val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-            val retrofit: Retrofit = Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl("http://10.80.162.195:8040/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            val service = retrofit.create(RetrofitService::class.java)
+            val service = CreateRetrofit().hasTokenRetrofit()
             service.postCommunity(CommunityWrite(title = userTitle, content = userContent))
                 .enqueue(object : Callback<CommunityWrite> {
                     override fun onResponse(call: Call<CommunityWrite>, response: Response<CommunityWrite>) {
@@ -77,15 +71,7 @@ class CommunityWritingActivity : AppCompatActivity() {
     }
 
     fun communityUser() {
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
+        val service = CreateRetrofit().hasTokenRetrofit()
         service.getUser().enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if(response.isSuccessful) {
@@ -108,5 +94,11 @@ class CommunityWritingActivity : AppCompatActivity() {
         userTitle = activity.findViewById(R.id.edit_title)
         userContent = activity.findViewById(R.id.edit_content)
         btnWriteFinish = activity.findViewById(R.id.btn_writeFinish)
+    }
+
+    override fun onBackPressed() {
+        val intent: Intent = Intent(this, CommunityActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 }

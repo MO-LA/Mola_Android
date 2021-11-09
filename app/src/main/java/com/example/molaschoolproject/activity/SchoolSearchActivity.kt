@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.adapter.SchoolSearchAdapter
@@ -47,14 +48,8 @@ class SchoolSearchActivity : AppCompatActivity() {
             signUpSchool()
         }
 
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
         schoolName.setOnClickListener {
-            val searchService = retrofit.create(RetrofitService::class.java)
+            val searchService = CreateRetrofit().noHeaderRetrofit()
             var searchSchoolData: String = schoolName.text.toString()
 
             if (searchSchoolData.isEmpty()) searchSchoolData = ""

@@ -1,5 +1,6 @@
 package com.example.molaschoolproject.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
@@ -39,8 +40,8 @@ class CommunityAdapter(
             intent.putExtra("idx", communityList.get(position).idx)
             intent.putExtra("content", communityList.get(position).content)
             intent.putExtra("school", communityList.get(position).school)
-//            val activityHolder: Activity = holder.itemView.context as Activity
-//            activityHolder.finish()
+            val activityHolder: Activity = holder.itemView.context as Activity
+            activityHolder.finish()
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
 

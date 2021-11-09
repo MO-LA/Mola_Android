@@ -7,10 +7,7 @@ import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.molaschoolproject.AuthInterceptor
-import com.example.molaschoolproject.R
-import com.example.molaschoolproject.RetrofitService
-import com.example.molaschoolproject.SchoolAssessmentBottomSheet
+import com.example.molaschoolproject.*
 import com.example.molaschoolproject.adapter.CommentAdapter
 import com.example.molaschoolproject.data_type.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -45,14 +42,7 @@ class SchoolDetailActivity : AppCompatActivity() {
             }
         }
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
-        val retrofit: Retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(RetrofitService::class.java)
+        val service = CreateRetrofit().hasTokenRetrofit()
 
         val rv_comment: RecyclerView = findViewById(R.id.rv_comment)
         rv_comment.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
@@ -245,33 +235,38 @@ class SchoolDetailActivity : AppCompatActivity() {
         val ibtnCommentSend: ImageButton = findViewById(R.id.ibtn_comment_send)
 
         ibtnCommentSend.setOnClickListener{
-            var content = editComment.text.toString()
-            service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                    Log.d("retrofitt","review post retrofit code = ${response.code()}")
-                    if (response.isSuccessful) {
-                        editComment.text = null
-                        service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
-                            override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
-                                Log.d("Retrofitt","reviewlist code = ${response.code()}")
-                                val reviewList = response.body()?.data
-                                Log.d("Retrofitt","reviewList = ${response.body()?.data}")
-                                rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
-                            }
+            if (editComment.text.isEmpty()) {
+                Toast.makeText(this@SchoolDetailActivity,"내용을 작성해 주세요", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                var content = editComment.text.toString()
 
-                            override fun onFailure(call: Call<Review?>, t: Throwable) {
-                                Log.d("Retrofitt","reviewList = false")
-                            }
-                        })
+                service.postReview(SendReview(content, schoolIdx)).enqueue(object : Callback<Any?> {
+                    override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                        Log.d("retrofitt","review post retrofit code = ${response.code()}")
+                        if (response.isSuccessful) {
+                            editComment.text = null
+                            service.getReviewList(schoolIdx).enqueue(object : Callback<Review?> {
+                                override fun onResponse(call: Call<Review?>, response: Response<Review?>) {
+                                    Log.d("Retrofitt","reviewlist code = ${response.code()}")
+                                    val reviewList = response.body()?.data
+                                    Log.d("Retrofitt","reviewList = ${response.body()?.data}")
+                                    rv_comment.adapter = reviewList?.let { CommentAdapter(it) }
+                                }
+
+                                override fun onFailure(call: Call<Review?>, t: Throwable) {
+                                    Log.d("Retrofitt","reviewList = false")
+                                }
+                            })
+                        }
+
                     }
 
-                }
-
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
-                    Log.d("retrofitt","review post retrofit false")
-                }
-            })
-
+                    override fun onFailure(call: Call<Any?>, t: Throwable) {
+                        Log.d("retrofitt","review post retrofit false")
+                    }
+                })
+            }
         }
 
         val fabAssessment: FloatingActionButton = findViewById(R.id.fab_schooldetail)
