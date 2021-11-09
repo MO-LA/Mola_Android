@@ -37,7 +37,7 @@
                 android:padding="20dp"
                 android:text="마이페이지"
                 android:textColor="#000000"
-                android:textSize="28dp" />
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="대구소프트웨어고등학교"
                 android:textColor="#000000"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
                 android:text="조주영"
                 android:textColor="#000000"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                     android:fontFamily="@font/nexon_lv1_gothic_bold"
                     android:text="님"
                     android:textColor="#000000"
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <TextView
@@ -118,7 +118,7 @@
                 android:text="환영합니다."
                 android:layout_marginTop="1dp"
                 android:textColor="#000000"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -145,7 +145,7 @@
             android:padding="10dp"
             android:text="찜"
             android:textColor="#000000"
-            android:textSize="28dp" />
+            android:textSize="24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +177,7 @@
             android:padding="10dp"
             android:text="로그아웃"
             android:textColor="#000000"
-            android:textSize="28dp" />
+            android:textSize="24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

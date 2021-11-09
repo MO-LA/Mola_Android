@@ -30,7 +30,7 @@
             android:text="word"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="28dp" />
+            android:textSize="24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,6 +45,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:ellipsize="end"
+                android:maxLines="2"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="content"
                 android:textColor="@color/black"
