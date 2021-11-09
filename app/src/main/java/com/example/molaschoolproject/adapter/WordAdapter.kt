@@ -1,5 +1,7 @@
 package com.example.molaschoolproject.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
@@ -9,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.data_type.Word
@@ -26,12 +29,11 @@ class WordAdapter(val wordList: ArrayList<Word>) : RecyclerView.Adapter<WordAdap
         holder.wordContents.text = wordList.get(position).wordContents
         holder.wordLink.text = wordList.get(position).wordLink
 
-//        val content = SpannableString(holder.wordLink.text.toString())
-//        val url = "https://namu.wiki/w/%EC%9D%BC%EB%B0%98%EA%B3%84%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90"
-//        content.setSpan(URLSpan(url), 0, content.length, 0)
-//        holder.wordLink.setMovementMethod(LinkMovementMethod.getInstance())
-//        holder.wordLink.text = content
-//        holder.wordLink.text = wordList.get(position).wordLink
+        holder.wordLink.setOnClickListener{
+            val url: String = wordList.get(position).urlLink
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            ContextCompat.startActivity(holder.itemView.context,intent,null)
+        }
     }
 
     override fun getItemCount(): Int {
