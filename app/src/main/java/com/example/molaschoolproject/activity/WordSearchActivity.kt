@@ -3,10 +3,9 @@ package com.example.molaschoolproject.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.method.LinkMovementMethod
-import android.text.style.URLSpan
+import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +15,16 @@ import com.example.molaschoolproject.adapter.WordAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WordSearchActivity : AppCompatActivity() {
+
+    lateinit var rvWordsearch: RecyclerView
+    lateinit var ivWordSearch: ImageView
+    lateinit var editSearchWordSearch: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_search)
+
+        init()
+
 
         val ivWordsearchBack: ImageView = findViewById(R.id.iv_wordsearch_back) // 뒤로가기 뷰
         ivWordsearchBack.setOnClickListener { finish() }
@@ -42,7 +48,36 @@ class WordSearchActivity : AppCompatActivity() {
         }
 
 
+        var wordList = allWordList()
 
+        rvWordsearch.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        rvWordsearch.setHasFixedSize(true)
+        rvWordsearch.adapter = WordAdapter(wordList as ArrayList<Word>)
+
+//        drawWordRecyclerView(wordList)
+
+        ivWordSearch.setOnClickListener {
+            var searchData: String = editSearchWordSearch.text.toString()
+
+            var wordSearchList: ArrayList<Word> = ArrayList()
+
+            for (i: Int in 0..(wordList.size - 1)) {
+                if (wordList.get(i).wordName.toString().contains(searchData)) {
+                    wordSearchList.add(
+                        Word(wordList.get(i).wordName,wordList.get(i).wordContents, wordList.get(i).wordLink,wordList.get(i).urlLink)
+                    )
+                }
+            }
+            rvWordsearch.adapter = WordAdapter(wordSearchList)
+        }
+    }
+
+    fun init() {
+        rvWordsearch = findViewById(R.id.rv_wordsearch)
+        ivWordSearch = findViewById(R.id.iv_wordsearch_search)
+        editSearchWordSearch = findViewById(R.id.edit_search_wordsearch)
+    }
+    fun allWordList(): ArrayList<Word> {
         val wordList = arrayListOf( // 용어 데이터 리스트
             Word("일반고", "다양한 분야에 걸쳐 일반적인 교육을 실시하는 고등학교이다.",
                 "나무위키","https://namu.wiki/w/%EC%9D%BC%EB%B0%98%EA%B3%84%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90"),
@@ -101,12 +136,14 @@ class WordSearchActivity : AppCompatActivity() {
             Word("병설 학교", "교육 지역 실정에 맞추어 초등학교, 중학교, 고등학교의 교육 기관 가운데 두 가지 이상을 아울러 한곳에 세운 학교이다.",
                 "네이버 사전","https://ko.dict.naver.com/#/entry/koko/19a5b5a03ee84cff9495bafb49f842db"),
 
-        )
+            )
 
-        val rv_wordsearch: RecyclerView = findViewById(R.id.rv_wordsearch) // 용어 설명 리사이클러뷰
-        rv_wordsearch.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        rv_wordsearch.setHasFixedSize(true)
-        rv_wordsearch.adapter = WordAdapter(wordList)
+        return wordList
+    }
+
+    fun drawWordRecyclerView(wordList: List<Word>) {
+         // 용어 설명 리사이클러뷰
+
 
     }
 }
