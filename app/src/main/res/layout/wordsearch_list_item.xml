@@ -62,10 +62,8 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/nexon_lv1_gothic"
                 android:text="link"
-                android:textColor="@color/black"
+                android:textColor="#2BC596"
                 android:textSize="17dp"
-                android:linksClickable="true"
-                android:autoLink="web"
                 />
 
         </LinearLayout>
