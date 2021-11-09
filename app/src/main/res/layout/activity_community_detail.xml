@@ -74,13 +74,13 @@
                 android:fontFamily="@font/nexon_lv1_gothic_bold"
                 android:text="제목"
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="28dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:fontFamily="@font/nexon_lv1_gothic"
                     android:text="시간"
                     android:textColor="#8D8D8D"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                     android:fontFamily="@font/nexon_lv1_gothic"
                     android:text=" | "
                     android:textColor="#8D8D8D"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/txt_community_detail_id"
@@ -106,8 +106,11 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nexon_lv1_gothic"
                     android:text="아이디"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginRight="20dp"
                     android:textColor="#8D8D8D"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
