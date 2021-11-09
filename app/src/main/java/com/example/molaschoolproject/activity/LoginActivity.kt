@@ -13,6 +13,7 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -73,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
                                 Intent(this@LoginActivity, MainActivity::class.java)
                             )
                         }
+
                     }
                 })
             }
