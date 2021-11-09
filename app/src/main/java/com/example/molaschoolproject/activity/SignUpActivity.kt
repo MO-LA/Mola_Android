@@ -3,24 +3,23 @@ package com.example.molaschoolproject.activity
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputFilter
 import android.util.Log
+import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
-import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.Overlap
 import com.example.molaschoolproject.data_type.OverlapData
-import com.example.molaschoolproject.data_type.SignUp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.regex.Pattern
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -41,12 +40,10 @@ class SignUpActivity : AppCompatActivity() {
 
         initView(this@SignUpActivity)
 
-//        registerListener() // 회원 가입 버튼 실행 함수
+        signupMinLenth()
 
         btnSignup.setOnClickListener {
-//            registerValidation()
             signUp(this@SignUpActivity)
-//            filter(this@SignUpActivity)
         }
 
         imgBack.setOnClickListener {
@@ -62,24 +59,22 @@ class SignUpActivity : AppCompatActivity() {
             val radioButton = radioGroup.findViewById<RadioButton>(i)
             sex = radioButton.text.toString()
         }
+
     }
 
     // 회원가입 함수
     fun signUp(activity: Activity) {
-
-        if (userId.text.isEmpty() ||
-            userPw.text.isEmpty() ||
-            userPwCheck.text.isEmpty() ||
-            userAge.text.isEmpty() ||
-            userRadiogroup.isEmpty()
-        ) {
+        if (userId.text.isEmpty() || userPw.text.isEmpty() ||
+            userPwCheck.text.isEmpty() || userAge.text.isEmpty() || userRadiogroup.isEmpty()) {
             Toast.makeText(this@SignUpActivity, "빈칸을 채워주세요.", Toast.LENGTH_SHORT).show()
-        } else {
+        }
+        else {
             if (userPw.getText().toString().equals(userPwCheck.getText().toString())) {
                 val userSex = if (sex == "남") "M" else "W"
                 val userId = userId.text.toString()
                 val userPassword = userPw.text.toString()
                 val userAge = userAge.text.toString().toInt()
+
                 if (!Pattern.matches("^[a-zA-Z0-9]*\$", userId)) {
                     Toast.makeText(this, "아이디는 영문 & 숫자만 가능합니다.", Toast.LENGTH_SHORT).show()
                     return
@@ -88,12 +83,15 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this, "비밀번호는 영문 & 숫자만 가능합니다.", Toast.LENGTH_LONG).show()
                     return
                 }
-                else if(userAge == 0 || userAge < 0) {
-                Toast.makeText(this@SignUpActivity, "나이는 0살 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
+                else if(userAge == 0) {
+                    Toast.makeText(this, "나이는 0살 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
+                }
+                else if(userId.length < 6 || userPassword.length < 6){
+                    Toast.makeText(this, "ID 및 비밀번호는 6 ~ 12자 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(this@SignUpActivity, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
+                    Toast.makeText(this, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, SchoolSearchActivity::class.java)
                     intent.putExtra("id", userId)
                     intent.putExtra("pw", userPassword)
                     intent.putExtra("age", userAge)
@@ -126,6 +124,42 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(activity, "서버에 연결이 끊어졌습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    fun signupMinLenth() {
+        userId.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                if (userId.length() < 8) {
+                    var dialog = AlertDialog.Builder(this)
+                    dialog.setMessage("ID는 6 ~ 12자 이상이어야 합니다.")
+
+                    var dialog_listener = object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog?.dismiss()
+                        }
+                    }
+                    dialog.setPositiveButton("ok", dialog_listener)
+                    dialog.show()
+                }
+            }
+        })
+
+        userPw.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                if (userId.length() < 8) {
+                    var dialog = AlertDialog.Builder(this)
+                    dialog.setMessage("PW는 6 ~ 15자 이상이어야 합니다.")
+
+                    var dialog_listener = object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            dialog?.dismiss()
+                        }
+                    }
+                    dialog.setPositiveButton("ok", dialog_listener)
+                    dialog.show()
+                }
+            }
+        })
     }
 
     fun initView(activity: Activity) {
