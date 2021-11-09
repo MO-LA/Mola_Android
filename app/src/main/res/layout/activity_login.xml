@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="20dp">
+        android:paddingTop="15dp">
 
         <EditText
             android:id="@+id/edit_pw"
@@ -60,14 +60,13 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/btn_round_login"
             android:text="로그인"
-            android:fontFamily="@font/nexon_lv1_gothic"
+            android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:textColor="#ffffff"
-            android:textSize="22dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
@@ -77,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="아직 계정이 없으신가요?"
         android:textColor="#000000"
         android:fontFamily="@font/nexon_lv1_gothic"
