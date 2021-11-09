@@ -88,6 +88,9 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this, "비밀번호는 영문 & 숫자만 가능합니다.", Toast.LENGTH_LONG).show()
                     return
                 }
+                else if(userAge == 0 || userAge < 0) {
+                Toast.makeText(this@SignUpActivity, "나이는 0살 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
+                }
                 else {
                     Toast.makeText(this@SignUpActivity, "회원정보가 설정되었습니다!", Toast.LENGTH_LONG).show()
                     val intent = Intent(this@SignUpActivity, SchoolSearchActivity::class.java)
