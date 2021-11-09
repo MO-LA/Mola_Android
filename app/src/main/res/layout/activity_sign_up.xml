@@ -36,7 +36,7 @@
                 android:padding="20dp"
                 android:text="회원가입"
                 android:textColor="#000000"
-                android:textSize="28dp" />
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="아이디"
             android:textColor="#0B0B0B"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,8 +79,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_weight="2"
                 android:maxLines="1"
-                android:maxLength="7"
-                android:hint="댓글을 입력해 주세요" />
+                android:maxLength="12"
+                android:hint="ID를 입력해주세요(6 ~ 12자)" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -91,15 +91,15 @@
 
                 <Button
                     android:id="@+id/btn_overlap"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/btn_round_overlap"
-                    android:fontFamily="@font/nexon_lv1_gothic_bold"
+                    android:fontFamily="@font/nexon_lv1_gothic"
                     android:scaleType="fitCenter"
                     android:text="중복확인"
                     android:layout_marginRight="20dp"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"/>
+                    android:textSize="14dp"/>
 
             </LinearLayout>
 
@@ -120,7 +120,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="비밀번호"
             android:textColor="#0B0B0B"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/signup_edit_pw"
@@ -130,7 +130,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:maxLength="15"
-            android:hint="비밀번호를 적어주세요."
+            android:hint="비밀번호를 적어주세요.(6 ~ 15자)"
             android:inputType="textPassword"
             android:textSize="18dp" />
 
@@ -149,7 +149,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="비밀번호 확인"
             android:textColor="#0B0B0B"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/signup_edit_pw_check"
@@ -178,7 +178,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="나이"
             android:textColor="#0B0B0B"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/signup_edit_age"
@@ -207,7 +207,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="성별"
             android:textColor="#0B0B0B"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -219,6 +219,7 @@
                 android:id="@+id/sign_radiogroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -250,7 +251,7 @@
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="20dp"
@@ -258,7 +259,7 @@
             android:fontFamily="@font/nexon_lv1_gothic_bold"
             android:text="회원가입"
             android:textColor="#ffffff"
-            android:textSize="22dp" />
+            android:textSize="18dp" />
 
     </LinearLayout>
 
