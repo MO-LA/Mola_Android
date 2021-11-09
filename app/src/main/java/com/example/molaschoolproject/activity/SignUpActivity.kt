@@ -117,6 +117,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(activity, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(activity, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show()
+
                     }
                 }
 
