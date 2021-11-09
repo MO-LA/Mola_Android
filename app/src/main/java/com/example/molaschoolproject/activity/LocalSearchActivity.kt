@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.molaschoolproject.CreateRetrofit
 import com.example.molaschoolproject.R
 import com.example.molaschoolproject.RetrofitService
 import com.example.molaschoolproject.data_type.SignUp
@@ -54,11 +55,7 @@ class LocalSearchActivity : AppCompatActivity() {
                 val sex = intent.getStringExtra("sex")
                 val schoolName = intent.getStringExtra("schoolName")
 
-                val retrofit: Retrofit = Retrofit.Builder()
-                    .baseUrl("http://10.80.162.195:8040/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                val service = retrofit.create(RetrofitService::class.java)
+                val service = CreateRetrofit().noHeaderRetrofit()
                 service.signup(SignUp(id = id, password = pw, age = age, sex = sex,residentialArea = localName, school = schoolName))
                     .enqueue(object : Callback<SignUp> {
                         override fun onResponse(call: Call<SignUp>, response: Response<SignUp>) {

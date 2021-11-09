@@ -54,7 +54,7 @@ class SchoolSearchActivity : AppCompatActivity() {
 
             if (searchSchoolData.isEmpty()) searchSchoolData = ""
             searchSchoolData = searchSchoolData.replace(" ", "")
-            searchService?.getMiddleSchoolDataByName(q = searchSchoolData)?.enqueue(object : Callback<MiddleSchoolData> {
+            searchService.getMiddleSchoolDataByName(q = searchSchoolData).enqueue(object : Callback<MiddleSchoolData> {
                     override fun onResponse(call: Call<MiddleSchoolData>, response: Response<MiddleSchoolData>) {
                         Log.d("Retrofitt", "searchByName main code = ${response.code()}")
                         if (response.isSuccessful) {

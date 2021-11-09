@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CreateRetrofit {
 
-    fun hasTokenRetrofit(): RetrofitService? {
+    fun hasTokenRetrofit(): RetrofitService {
 
         val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
@@ -21,7 +21,7 @@ class CreateRetrofit {
         return service
     }
 
-    fun noHeaderRetrofit(): RetrofitService? {
+    fun noHeaderRetrofit(): RetrofitService {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://10.80.162.195:8040/")
             .addConverterFactory(GsonConverterFactory.create())

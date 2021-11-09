@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         initView(this@LoginActivity)
-        
+
         val content = SpannableString(text_signup.text.toString())
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         text_signup.text = content
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 val login = Login(id, pw)
 
                 val service = CreateRetrofit().noHeaderRetrofit()
-                service?.login(login)?.enqueue(object : Callback<token> {
+                service.login(login).enqueue(object : Callback<token> {
                     override fun onFailure(call: Call<token>, t: Throwable) {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_LONG).show()
                     }
