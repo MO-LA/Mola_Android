@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:text=" 홈페이지"
                     android:fontFamily="@font/nexon_lv1_gothic"
-                    android:textColor="#FA4221"
+                    android:textColor="#EDB525"
                     android:textSize="20dp"/>
                 <TextView
                     android:id="@+id/tv_homepage"
