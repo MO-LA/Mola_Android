@@ -12,7 +12,7 @@ class CreateRetrofit {
 
         val retrofit: Retrofit = Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://10.80.162.195:8040/")
+            .baseUrl("http://192.168.0.21:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -23,7 +23,7 @@ class CreateRetrofit {
 
     fun noHeaderRetrofit(): RetrofitService {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://10.80.162.195:8040/")
+            .baseUrl("http://192.168.0.21:8040/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
