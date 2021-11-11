@@ -46,7 +46,6 @@ class CommunityDetailActivity : AppCompatActivity() {
         setText()
 
         val postIdx: Int = intent.getIntExtra("idx", 0)
-        Toast.makeText(this@CommunityDetailActivity, "postIdx = $postIdx", Toast.LENGTH_SHORT).show()
 
         imgBtnBack.setOnClickListener {
             val intent = Intent(this, CommunityActivity::class.java)
