@@ -59,8 +59,9 @@ class CommunityActivity : AppCompatActivity() {
             override fun onResponse(call: Call<CommunityData>, response: Response<CommunityData>) {
                 Log.d("Retrofitt","comm code = ${response.code()}")
                 if (response.isSuccessful) {
-                    val communityList = response.body()?.data
-                    Log.d("Retrofitt", "mainList = ${response.body()?.data}")
+                    var communityList = response.body()?.data
+                    communityList = communityList?.reversed()
+                    Log.d("Retrofitt", "commList = ${communityList?.get(0)?.title}")
                     rvCommunity.adapter = CommunityAdapter(communityList as ArrayList<Community>)
                 }
             }
