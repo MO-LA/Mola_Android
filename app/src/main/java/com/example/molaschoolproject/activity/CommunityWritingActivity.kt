@@ -58,6 +58,7 @@ class CommunityWritingActivity : AppCompatActivity() {
                             Log.d("retrofitt","post = ${App.prefs.token}")
                             Toast.makeText(this@CommunityWritingActivity, "게시물이 올라갔습니다.", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@CommunityWritingActivity, CommunityActivity::class.java)
+                            finish()
                             startActivity(intent)
                         }
                     }

@@ -33,8 +33,6 @@ class SchoolAssessmentBottomSheet() : BottomSheetDialogFragment() {
         var args: Bundle? = arguments
         var schoolIdx: Int = args?.getInt("schoolIdx") ?: 0
 
-        Toast.makeText(context,"schoolIdx = $schoolIdx",Toast.LENGTH_SHORT).show()
-
         var estimateScore: Int = 0
 
         val starOne = view?.findViewById<ImageView>(R.id.assessment_star_one)
