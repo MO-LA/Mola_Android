@@ -73,8 +73,7 @@ class LocalSearchActivity : AppCompatActivity() {
 
                         override fun onFailure(call: Call<SignUp>, t: Throwable) {
                             Toast.makeText(
-                                this@LocalSearchActivity, "지역 등록에 실패하셨습니다.",
-                                Toast.LENGTH_SHORT
+                                this@LocalSearchActivity, "지역 등록에 실패하셨습니다.", Toast.LENGTH_SHORT
                             ).show()
                         }
                     })
